@@ -1,0 +1,228 @@
+{
+  "doc_meta": {
+    "file_name": "601997_贵阳银行_质押展期.pdf",
+    "doc_type": "质押展期公告",
+    "sec_code": "601997",
+    "sec_name": "贵阳银行",
+    "announcement_no": "2026-035",
+    "announcement_date": "2026-09-07",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "展期",
+      "pledgor": "贵阳市国有资产投资管理公司",
+      "is_controller": false,
+      "pledgee": "国泰海通证券股份有限公司",
+      "shares": 37502000,
+      "pct_of_held": 8.003,
+      "pct_of_total": 1.0257,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2023-03-07",
+      "pledge_end_date": "2026-11-16",
+      "original_end_date": "2026-09-04",
+      "release_date": null,
+      "purpose": "营运资金补充",
+      "evidence": "贵阳市国有资产投资管理公司 | 否 | 37,502,000 | 否 | 否 | 2023年3月7日 | 2026年9月4日 | 2026年11月16日 | 国泰海通证券股份有限公司 | 8.0030 | 1.0257 | 营运资金补充"
+    },
+    {
+      "record_type": "展期",
+      "pledgor": "贵阳市国有资产投资管理公司",
+      "is_controller": false,
+      "pledgee": "国泰海通证券股份有限公司",
+      "shares": 46318100,
+      "pct_of_held": 9.8844,
+      "pct_of_total": 1.2668,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2023-03-09",
+      "pledge_end_date": "2026-11-16",
+      "original_end_date": "2026-09-04",
+      "release_date": null,
+      "purpose": "营运资金补充",
+      "evidence": "贵阳市国有资产投资管理公司 | 否 | 46,318,100 | 否 | 否 | 2023年3月9日 | 2026年9月4日 | 2026年11月16日 | 国泰海通证券股份有限公司 | 9.8844 | 1.2668 | 营运资金补充"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "贵阳市国有资产投资管理公司",
+      "holding_shares": 468599066,
+      "holding_pct": 12.8166,
+      "pre_pledge_shares": 233203597,
+      "post_pledge_shares": 233203597,
+      "pct_of_held": 49.7661,
+      "pct_of_total": 6.3783,
+      "evidence": "贵阳市国有资产投资管理公司 | 468,599,066 | 12.8166 | 233,203,597 | 233,203,597 | 49.7661 | 6.3783 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "贵阳市投资控股集团有限公司",
+      "holding_shares": 92707293,
+      "holding_pct": 2.5356,
+      "pre_pledge_shares": 46340000,
+      "post_pledge_shares": 46340000,
+      "pct_of_held": 49.9853,
+      "pct_of_total": 1.2674,
+      "evidence": "贵阳市投资控股集团有限公司 | 92,707,293 | 2.5356 | 46,340,000 | 46,340,000 | 49.9853 | 1.2674 | 0 | 1,481,507 | 0 | 46,367,293"
+    },
+    {
+      "shareholder": "贵阳工商养老产业投资发展有限公司",
+      "holding_shares": 972180,
+      "holding_pct": 0.0266,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "贵阳工商养老产业投资发展有限公司 | 972,180 | 0.0266 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "贵阳市城市建设投资有限责任公司",
+      "holding_shares": 3203700,
+      "holding_pct": 0.0876,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "贵阳市城市建设投资有限责任公司 | 3,203,700 | 0.0876 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "贵阳市教委建筑工程有限责任公司",
+      "holding_shares": 161927,
+      "holding_pct": 0.0044,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "贵阳市教委建筑工程有限责任公司 | 161,927 | 0.0044 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押展期公告'与记录类型{展期}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-贵阳市国有资产投资管理公司",
+      "passed": true,
+      "detail": "233,203,597 − 0(解除) + 0(新增) = 233,203,597，公告披露为 233,203,597",
+      "expected": "233203597",
+      "computed": "233203597"
+    },
+    {
+      "name": "占其所持勾稽-贵阳市国有资产投资管理公司",
+      "passed": true,
+      "detail": "展期 37,502,000股 ÷ 持股 468,599,066股 = 8.0030%，公告披露 8.003%（误差 0.00%）",
+      "expected": "8.003",
+      "computed": "8.0030%"
+    },
+    {
+      "name": "占其所持勾稽-贵阳市国有资产投资管理公司",
+      "passed": true,
+      "detail": "展期 46,318,100股 ÷ 持股 468,599,066股 = 9.8844%，公告披露 9.8844%（误差 0.00%）",
+      "expected": "9.8844",
+      "computed": "9.8844%"
+    },
+    {
+      "name": "占总股本勾稽-贵阳市国有资产投资管理公司",
+      "passed": true,
+      "detail": "展期 37,502,000股 ÷ 总股本 3,656,188,584股（由持股比例反推） = 1.0257%，公告披露 1.0257%",
+      "expected": "1.0257",
+      "computed": "1.0257%"
+    },
+    {
+      "name": "占总股本勾稽-贵阳市国有资产投资管理公司",
+      "passed": true,
+      "detail": "展期 46,318,100股 ÷ 总股本 3,656,188,584股（由持股比例反推） = 1.2668%，公告披露 1.2668%",
+      "expected": "1.2668",
+      "computed": "1.2668%"
+    },
+    {
+      "name": "累计勾稽-贵阳市投资控股集团有限公司",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 46,340,000 == 本次质押后 46,340,000",
+      "expected": "46340000",
+      "computed": "46340000"
+    },
+    {
+      "name": "累计勾稽-贵阳工商养老产业投资发展有限公司",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-贵阳市城市建设投资有限责任公司",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-贵阳市教委建筑工程有限责任公司",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "合计行加总-shares",
+      "passed": true,
+      "detail": "明细加总 83,820,100 vs 合计行 83,820,100",
+      "expected": "83820100",
+      "computed": "83820100"
+    },
+    {
+      "name": "合计行加总-pct_of_held",
+      "passed": true,
+      "detail": "明细加总 17.8874 vs 合计行 17.8874",
+      "expected": "17.8874",
+      "computed": "17.8874"
+    },
+    {
+      "name": "合计行加总-pct_of_total",
+      "passed": true,
+      "detail": "明细加总 2.2925 vs 合计行 2.2925",
+      "expected": "2.2925",
+      "computed": "2.2925"
+    },
+    {
+      "name": "合计行加总-holding_shares",
+      "passed": true,
+      "detail": "明细加总 565,644,166 vs 合计行 565,644,166",
+      "expected": "565644166",
+      "computed": "565644166"
+    },
+    {
+      "name": "合计行加总-pre_pledge_shares",
+      "passed": true,
+      "detail": "明细加总 279,543,597 vs 合计行 279,543,597",
+      "expected": "279543597",
+      "computed": "279543597"
+    },
+    {
+      "name": "合计行加总-post_pledge_shares",
+      "passed": true,
+      "detail": "明细加总 279,543,597 vs 合计行 279,543,597",
+      "expected": "279543597",
+      "computed": "279543597"
+    },
+    {
+      "name": "合计行加权-占其所持比例",
+      "passed": true,
+      "detail": "Σ质押后 279,543,597 ÷ Σ持股 565,644,166 = 49.4204% vs 合计行 49.4204%",
+      "expected": "49.4204",
+      "computed": "49.4204%"
+    },
+    {
+      "name": "合计行加权-占总股本比例",
+      "passed": true,
+      "detail": "Σ质押后 ÷ 总股本（由Σ持股÷持股比例反推 3,656,205,018股） = 7.6457% vs 合计行 7.6457%",
+      "expected": "7.6457",
+      "computed": "7.6457%"
+    }
+  ]
+}
