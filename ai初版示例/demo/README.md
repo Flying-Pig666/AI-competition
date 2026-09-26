@@ -12,17 +12,23 @@ demo/
 ├── parser.py         # 文档解析层：文本层 PDF / 扫描件 OCR
 ├── ocr_tables.py     # 扫描件表格重建（OCR 行框坐标 → 表格结构）
 ├── extractor.py      # 提取层：LLM 提取 + 校验-重试闭环 + 规则兜底
-├── llm_client.py     # LLM 客户端：配置三级回退、端点差异自适应（Kimi/DeepSeek）
+├── llm_client.py     # LLM 客户端：DeepSeek 主力 / Kimi 备用，端点差异自适应
 ├── grounding.py      # 原文溯源：逐字段回原文搜索证据（抗幻觉）
 ├── validator.py      # 校验层：格式规范化 + 勾稽一致性校验
+├── fin_data.py       # 数据层：akshare 双源财报采集（留痕可核验）
+├── fin_analysis.py   # 分析+预警层：红旗规则引擎 R1-R9（驼研·信鉴）
+├── eval_collect.py   # 评测集采集：巨潮公告检索下载（元数据留痕）
+├── eval_run.py       # 批量评测：校验通过率/溯源覆盖率汇总
 ├── tracing.py        # 可追溯日志（JSONL）
 ├── prompts/
 │   └── pledge_extract.md   # LLM 提取 Prompt（比赛要求的 Prompt 模块）
 ├── data/             # 样本数据（真实公告，来自巨潮资讯网）
-│   ├── 000863_三湘印象_质押和解除质押.pdf
-│   ├── 601997_贵阳银行_质押展期.pdf
-│   └── 扫描件_三湘印象/   # 由 PDF 渲染成的扫描件（逐页 PNG）
-└── output/           # 运行产物：<文件名>.result.json + .trace.jsonl
+│   ├── *.pdf                # 工程样本（三湘印象/贵阳银行）
+│   ├── 扫描件_三湘印象/      # 由 PDF 渲染成的扫描件（逐页 PNG）
+│   ├── financials/          # 四家案例公司财报 CSV + 采集元数据
+│   └── eval_set/            # 评测集（10 份未见公告 + eval_meta.jsonl）
+└── output/           # 运行产物：.result.json + .trace.jsonl + risk/ 预警报告
+                      # + eval/ 批量评测汇总
 ```
 
 ## 运行方式
