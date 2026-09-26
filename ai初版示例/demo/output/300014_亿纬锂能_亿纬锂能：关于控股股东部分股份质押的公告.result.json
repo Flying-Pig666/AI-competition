@@ -1,0 +1,145 @@
+{
+  "doc_meta": {
+    "file_name": "300014_亿纬锂能_亿纬锂能：关于控股股东部分股份质押的公告.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "300014",
+    "sec_name": "亿纬锂能",
+    "announcement_no": "2026-120",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "亿纬控股",
+      "is_controller": true,
+      "pledgee": "云南国际信托有限公司",
+      "shares": 1500000,
+      "pct_of_held": 0.23,
+      "pct_of_total": 0.07,
+      "is_restricted": false,
+      "is_supplementary": true,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "以主合同约定的支付义务履行期限为准",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "偿还债务",
+      "evidence": "亿纬控股 | 是 | 1,500,000 | 0.23% | 0.07% | 否 | 是 | 2026年9月23日 | 以主合同约定的支付义务履行期限为准 | 云南国际信托有限公司 | 偿还债务"
+    },
+    {
+      "record_type": "新增质押",
+      "pledgor": "亿纬控股",
+      "is_controller": true,
+      "pledgee": "中国建设银行股份有限公司惠州市分行",
+      "shares": 4100000,
+      "pct_of_held": 0.63,
+      "pct_of_total": 0.19,
+      "is_restricted": false,
+      "is_supplementary": true,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "以主合同约定的支付义务履行期限为准",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "偿还债务",
+      "evidence": "是 | 4,100,000 | 0.63% | 0.19% | 否 | 是 | 2026年9月23日 | 以主合同约定的支付义务履行期限为准 | 中国建设银行股份有限公司惠州市分行 | 偿还债务"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "亿纬控股",
+      "holding_shares": 650287987,
+      "holding_pct": 29.92,
+      "pre_pledge_shares": 256840000,
+      "post_pledge_shares": 262440000,
+      "pct_of_held": 40.36,
+      "pct_of_total": 12.08,
+      "evidence": "亿纬控股 | 650,287,987 | 29.92% | 256,840,000 | 262,440,000 | 40.36% | 12.08% | - | - | - | -"
+    },
+    {
+      "shareholder": "刘金成",
+      "holding_shares": 59430681,
+      "holding_pct": 2.73,
+      "pre_pledge_shares": 18200000,
+      "post_pledge_shares": 18200000,
+      "pct_of_held": 30.62,
+      "pct_of_total": 0.84,
+      "evidence": "刘金成 | 59,430,681 | 2.73% | 18,200,000 | 18,200,000 | 30.62% | 0.84% | - | - | - | -"
+    },
+    {
+      "shareholder": "骆锦红",
+      "holding_shares": 64649082,
+      "holding_pct": 2.97,
+      "pre_pledge_shares": 7500000,
+      "post_pledge_shares": 7500000,
+      "pct_of_held": 11.6,
+      "pct_of_total": 0.35,
+      "evidence": "骆锦红 | 64,649,082 | 2.97% | 7,500,000 | 7,500,000 | 11.60% | 0.35% | - | - | - | -"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-亿纬控股",
+      "passed": true,
+      "detail": "256,840,000 − 0(解除) + 5,600,000(新增) = 262,440,000，公告披露为 262,440,000",
+      "expected": "262440000",
+      "computed": "262440000"
+    },
+    {
+      "name": "占其所持勾稽-亿纬控股",
+      "passed": true,
+      "detail": "新增质押 1,500,000股 ÷ 持股 650,287,987股 = 0.2307%，公告披露 0.23%（误差 0.29%）",
+      "expected": "0.23",
+      "computed": "0.2307%"
+    },
+    {
+      "name": "占其所持勾稽-亿纬控股",
+      "passed": true,
+      "detail": "新增质押 4,100,000股 ÷ 持股 650,287,987股 = 0.6305%，公告披露 0.63%（误差 0.08%）",
+      "expected": "0.63",
+      "computed": "0.6305%"
+    },
+    {
+      "name": "占总股本勾稽-亿纬控股",
+      "passed": false,
+      "detail": "新增质押 1,500,000股 ÷ 总股本 2,173,422,416股（由持股比例反推） = 0.0690%，公告披露 0.07%",
+      "expected": "0.07",
+      "computed": "0.0690%"
+    },
+    {
+      "name": "占总股本勾稽-亿纬控股",
+      "passed": true,
+      "detail": "新增质押 4,100,000股 ÷ 总股本 2,173,422,416股（由持股比例反推） = 0.1886%，公告披露 0.19%",
+      "expected": "0.19",
+      "computed": "0.1886%"
+    },
+    {
+      "name": "累计勾稽-刘金成",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 18,200,000 == 本次质押后 18,200,000",
+      "expected": "18200000",
+      "computed": "18200000"
+    },
+    {
+      "name": "累计勾稽-骆锦红",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 7,500,000 == 本次质押后 7,500,000",
+      "expected": "7500000",
+      "computed": "7500000"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（28 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}

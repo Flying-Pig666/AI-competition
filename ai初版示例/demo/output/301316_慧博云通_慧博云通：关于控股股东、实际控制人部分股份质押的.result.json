@@ -1,0 +1,145 @@
+{
+  "doc_meta": {
+    "file_name": "301316_慧博云通_慧博云通：关于控股股东、实际控制人部分股份质押的.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "301316",
+    "sec_name": "慧博云通",
+    "announcement_no": "2026-071",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "申晖控股",
+      "is_controller": true,
+      "pledgee": "杭州工商信托股份有限公司",
+      "shares": 6670000,
+      "pct_of_held": 7.8,
+      "pct_of_total": 1.65,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-22",
+      "pledge_end_date": "办理解除质押登记手续之日",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "经营需要",
+      "evidence": "申晖控股 | 是 | 6,670,000 | 7.80 | 1.65 | 否，无限售流通股 | 否 | 2026 年 9 月 22 日 | 办理解除质押登记手续之日 | 杭州工商信托股份有限公司 | 经营需要"
+    },
+    {
+      "record_type": "新增质押",
+      "pledgor": "余浩",
+      "is_controller": true,
+      "pledgee": "杭州工商信托股份有限公司",
+      "shares": 4670000,
+      "pct_of_held": 39.06,
+      "pct_of_total": 1.16,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-22",
+      "pledge_end_date": "办理解除质押登记手续之日",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "经营需要",
+      "evidence": "余浩 | 是 | 4,670,000 | 39.06 | 1.16 | 否，无限售流通股 | 否 | 2026 年 9 月 22 日 | 办理解除质押登记手续之日 | 杭州工商信托股份有限公司 | 经营需要"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "申晖控股",
+      "holding_shares": 85500000,
+      "holding_pct": 21.18,
+      "pre_pledge_shares": 45790000,
+      "post_pledge_shares": 52460000,
+      "pct_of_held": 61.36,
+      "pct_of_total": 13.0,
+      "evidence": "申晖控股 | 85,500,000 | 21.18 | 45,790,000 | 52,460,000 | 61.36 | 13.00 | - | - | - | -"
+    },
+    {
+      "shareholder": "舟山慧博创展创业投资合伙企业（有限合伙）",
+      "holding_shares": 60000000,
+      "holding_pct": 14.87,
+      "pre_pledge_shares": 13900000,
+      "post_pledge_shares": 13900000,
+      "pct_of_held": 23.17,
+      "pct_of_total": 3.44,
+      "evidence": "舟山慧博创展创业投资合伙企业（有限合伙） | 60,000,000 | 14.87 | 13,900,000 | 13,900,000 | 23.17 | 3.44 | - | - | - | -"
+    },
+    {
+      "shareholder": "余浩",
+      "holding_shares": 11955597,
+      "holding_pct": 2.96,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 4670000,
+      "pct_of_held": 39.06,
+      "pct_of_total": 1.16,
+      "evidence": "余浩 | 11,955,597 | 2.96 | - | 4,670,000 | 39.06 | 1.16 | - | - | - | -"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-申晖控股",
+      "passed": true,
+      "detail": "45,790,000 − 0(解除) + 6,670,000(新增) = 52,460,000，公告披露为 52,460,000",
+      "expected": "52460000",
+      "computed": "52460000"
+    },
+    {
+      "name": "占其所持勾稽-申晖控股",
+      "passed": true,
+      "detail": "新增质押 6,670,000股 ÷ 持股 85,500,000股 = 7.8012%，公告披露 7.8%（误差 0.01%）",
+      "expected": "7.8",
+      "computed": "7.8012%"
+    },
+    {
+      "name": "占总股本勾稽-申晖控股",
+      "passed": true,
+      "detail": "新增质押 6,670,000股 ÷ 总股本 403,682,720股（由持股比例反推） = 1.6523%，公告披露 1.65%",
+      "expected": "1.65",
+      "computed": "1.6523%"
+    },
+    {
+      "name": "累计勾稽-舟山慧博创展创业投资合伙企业（有限合伙）",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 13,900,000 == 本次质押后 13,900,000",
+      "expected": "13900000",
+      "computed": "13900000"
+    },
+    {
+      "name": "累计勾稽-余浩",
+      "passed": true,
+      "detail": "0 − 0(解除) + 4,670,000(新增) = 4,670,000，公告披露为 4,670,000",
+      "expected": "4670000",
+      "computed": "4670000"
+    },
+    {
+      "name": "占其所持勾稽-余浩",
+      "passed": true,
+      "detail": "新增质押 4,670,000股 ÷ 持股 11,955,597股 = 39.0612%，公告披露 39.06%（误差 0.00%）",
+      "expected": "39.06",
+      "computed": "39.0612%"
+    },
+    {
+      "name": "占总股本勾稽-余浩",
+      "passed": true,
+      "detail": "新增质押 4,670,000股 ÷ 总股本 403,905,304股（由持股比例反推） = 1.1562%，公告披露 1.16%",
+      "expected": "1.16",
+      "computed": "1.1562%"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（27 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}

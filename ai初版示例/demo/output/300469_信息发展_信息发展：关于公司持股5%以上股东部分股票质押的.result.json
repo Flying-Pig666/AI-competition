@@ -1,0 +1,97 @@
+{
+  "doc_meta": {
+    "file_name": "300469_信息发展_信息发展：关于公司持股5%以上股东部分股票质押的.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "300469",
+    "sec_name": "信息发展",
+    "announcement_no": "2026-057",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "中信电子",
+      "is_controller": false,
+      "pledgee": "刘**",
+      "shares": 650000,
+      "pct_of_held": 3.1,
+      "pct_of_total": 0.26,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-22",
+      "pledge_end_date": "2026-12-22",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "补充流动资金",
+      "evidence": "中信电子 否 650,000 3.10 0.26 否 否 2026 年 09 月 22 日 2026 年 12 月 22 日 刘** 补充流动资金"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "中信电子",
+      "holding_shares": 20980945,
+      "holding_pct": 8.45,
+      "pre_pledge_shares": 4900000,
+      "post_pledge_shares": 5550000,
+      "pct_of_held": 26.45,
+      "pct_of_total": 2.24,
+      "evidence": "中信电 子 20,980,945 8.45 4,900,000 5,550,000 26.45 2.24 5,550,000 100.00 0 0.00"
+    },
+    {
+      "shareholder": "张曙华",
+      "holding_shares": 3590379,
+      "holding_pct": 1.45,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "张曙华 3,590,379 1.45 0 0 0.00 0.00 0 0.00 0 0.00"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-中信电子",
+      "passed": true,
+      "detail": "4,900,000 − 0(解除) + 650,000(新增) = 5,550,000，公告披露为 5,550,000",
+      "expected": "5550000",
+      "computed": "5550000"
+    },
+    {
+      "name": "占其所持勾稽-中信电子",
+      "passed": true,
+      "detail": "新增质押 650,000股 ÷ 持股 20,980,945股 = 3.0980%，公告披露 3.1%（误差 0.06%）",
+      "expected": "3.1",
+      "computed": "3.0980%"
+    },
+    {
+      "name": "占总股本勾稽-中信电子",
+      "passed": true,
+      "detail": "新增质押 650,000股 ÷ 总股本 248,295,207股（由持股比例反推） = 0.2618%，公告披露 0.26%",
+      "expected": "0.26",
+      "computed": "0.2618%"
+    },
+    {
+      "name": "累计勾稽-张曙华",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "93% 的已提取字段在原文中找到证据（13 项命中）；未溯源字段: pledge_start_date（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "92.86%"
+    }
+  ]
+}

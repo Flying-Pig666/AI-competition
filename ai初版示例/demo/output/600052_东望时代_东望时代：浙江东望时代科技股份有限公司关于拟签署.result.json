@@ -20,7 +20,7 @@
       "is_restricted": false,
       "is_supplementary": false,
       "pledge_start_date": null,
-      "pledge_end_date": "在债务人履行完毕主合同约定的业绩承诺补偿（如有）、商誉减值补偿（如有）、应收账款回收补偿义务（如有）以及主合同约定的其他义务的前提下，债权人及质权人配合出质人解除出质人在本合同项下的质押证券的质押登记",
+      "pledge_end_date": "质押期限至其办理解除质押登记手续之日止",
       "original_end_date": null,
       "release_date": null,
       "purpose": "用于担保债务人在主合同项下的义务和责任的履行",

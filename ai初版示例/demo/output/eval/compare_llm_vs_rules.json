@@ -1,0 +1,527 @@
+{
+  "summary": {
+    "n_docs": 30,
+    "llm": {
+      "avg_records": 1.67,
+      "avg_cumulative": 2.4,
+      "check_full_pass": 18
+    },
+    "rules": {
+      "avg_records": 0.4,
+      "avg_cumulative": 1.57,
+      "check_full_pass": 6
+    }
+  },
+  "rows": [
+    {
+      "file": "002326_永太科技_永太科技：关于控股股东部分股权质押的公告.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 4,
+        "checks_passed": 8,
+        "checks_total": 8,
+        "grounding": "95.45%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 4,
+        "checks_passed": 4,
+        "checks_total": 5,
+        "grounding": null
+      }
+    },
+    {
+      "file": "002452_长高电气_长高电气：关于实际控制人及一致行动人可转换公司债.pdf",
+      "llm": {
+        "records": 2,
+        "cumulative": 2,
+        "checks_passed": 8,
+        "checks_total": 8,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 0,
+        "checks_passed": 0,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "002625_光启技术_光启技术：控股股东部分股份质押的公告.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 1,
+        "checks_passed": 5,
+        "checks_total": 5,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 1,
+        "checks_passed": 6,
+        "checks_total": 7,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300014_亿纬锂能_亿纬锂能：关于控股股东部分股份质押的公告.pdf",
+      "llm": {
+        "records": 2,
+        "cumulative": 3,
+        "checks_passed": 8,
+        "checks_total": 9,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 3,
+        "checks_passed": 8,
+        "checks_total": 9,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300054_鼎龙股份_鼎龙股份：关于控股股东部分股份质押及解除质押的公.pdf",
+      "llm": {
+        "records": 2,
+        "cumulative": 2,
+        "checks_passed": 7,
+        "checks_total": 8,
+        "grounding": "86.96%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 0,
+        "checks_passed": 0,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300302_同有科技_同有科技：关于持股5%以上股东部分股权提前解除质.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 1,
+        "checks_passed": 4,
+        "checks_total": 5,
+        "grounding": "72.73%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 0,
+        "checks_passed": 0,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300397_天和防务_天和防务：关于控股股东、实际控制人部分股份办理质.pdf",
+      "llm": {
+        "records": 7,
+        "cumulative": 2,
+        "checks_passed": 19,
+        "checks_total": 20,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 0,
+        "checks_passed": 1,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300469_信息发展_信息发展：关于公司持股5%以上股东部分股票质押的.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 2,
+        "checks_passed": 6,
+        "checks_total": 6,
+        "grounding": "92.86%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 2,
+        "checks_passed": 7,
+        "checks_total": 8,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300552_万集科技_万集科技：关于控股股东、实际控制人部分股份质押的.pdf",
+      "llm": {
+        "records": 3,
+        "cumulative": 2,
+        "checks_passed": 11,
+        "checks_total": 12,
+        "grounding": "82.35%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 2,
+        "checks_passed": 2,
+        "checks_total": 3,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300588_熙菱信息_熙菱信息：关于控股股东部分股份质押的公告.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 1,
+        "checks_passed": 4,
+        "checks_total": 5,
+        "grounding": "72.73%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 1,
+        "checks_passed": 6,
+        "checks_total": 7,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300740_水羊股份_水羊股份：关于公司控股股东及其一致行动人部分股份.pdf",
+      "llm": {
+        "records": 3,
+        "cumulative": 3,
+        "checks_passed": 7,
+        "checks_total": 8,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 2,
+        "cumulative": 0,
+        "checks_passed": 0,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300758_七彩化学_七彩化学：关于公司实际控制人部分股份质押延期购回.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 3,
+        "checks_passed": 7,
+        "checks_total": 7,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 3,
+        "checks_passed": 9,
+        "checks_total": 9,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300775_三角防务_三角防务：西安三角防务股份有限公司关于持股5%以.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 3,
+        "checks_passed": 7,
+        "checks_total": 7,
+        "grounding": "87.50%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 3,
+        "checks_passed": 8,
+        "checks_total": 9,
+        "grounding": null
+      }
+    },
+    {
+      "file": "300806_斯迪克_斯迪克：关于控股股东部分股份质押的公告.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 2,
+        "checks_passed": 6,
+        "checks_total": 6,
+        "grounding": "93.75%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 2,
+        "checks_passed": 7,
+        "checks_total": 8,
+        "grounding": null
+      }
+    },
+    {
+      "file": "301093_华兰股份_华兰股份：关于控股股东部分股份解除质押的公告.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 7,
+        "checks_passed": 11,
+        "checks_total": 11,
+        "grounding": "86.96%"
+      },
+      "rules": {
+        "records": 1,
+        "cumulative": 0,
+        "checks_passed": 0,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "301316_慧博云通_慧博云通：关于控股股东、实际控制人部分股份质押的.pdf",
+      "llm": {
+        "records": 2,
+        "cumulative": 3,
+        "checks_passed": 9,
+        "checks_total": 9,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 3,
+        "checks_passed": 7,
+        "checks_total": 8,
+        "grounding": null
+      }
+    },
+    {
+      "file": "301358_湖南裕能_湖南裕能：关于股东部分股份解除质押的公告.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 1,
+        "checks_passed": 5,
+        "checks_total": 5,
+        "grounding": "90.91%"
+      },
+      "rules": {
+        "records": 1,
+        "cumulative": 0,
+        "checks_passed": 0,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "600052_东望时代_东望时代：浙江东望时代科技股份有限公司关于拟签署.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 0,
+        "checks_passed": 3,
+        "checks_total": 3,
+        "grounding": "80.00%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 0,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "grounding": null
+      }
+    },
+    {
+      "file": "600246_万通发展_万通发展：关于控股股东股份解质押的公告.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 1,
+        "checks_passed": 3,
+        "checks_total": 5,
+        "grounding": "77.78%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 0,
+        "checks_passed": 1,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "600255_鑫科材料_鑫科材料：鑫科材料关于质押控股子公司股权向银行申.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 0,
+        "checks_passed": 3,
+        "checks_total": 3,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 0,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "grounding": null
+      }
+    },
+    {
+      "file": "600350_山东高速_山东高速：山东高速股份有限公司关于控股股东股份解.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 1,
+        "checks_passed": 5,
+        "checks_total": 5,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 0,
+        "checks_passed": 0,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "600381__ST春天__ST春天：青海春天关于控股股东部分股份质押的公.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 2,
+        "checks_passed": 5,
+        "checks_total": 7,
+        "grounding": "61.11%"
+      },
+      "rules": {
+        "records": 1,
+        "cumulative": 1,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "grounding": null
+      }
+    },
+    {
+      "file": "600588_用友网络_用友网络：用友网络关于控股股东一致行动人部分股份.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 3,
+        "checks_passed": 7,
+        "checks_total": 7,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 3,
+        "checks_passed": 8,
+        "checks_total": 9,
+        "grounding": null
+      }
+    },
+    {
+      "file": "600885_宏发股份_宏发股份：宏发股份：关于控股股东部分股份质押及解.pdf",
+      "llm": {
+        "records": 4,
+        "cumulative": 1,
+        "checks_passed": 6,
+        "checks_total": 7,
+        "grounding": "96.43%"
+      },
+      "rules": {
+        "records": 2,
+        "cumulative": 0,
+        "checks_passed": 1,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "603261_立航科技_立航科技：成都立航科技股份有限公司关于控股股东部.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 2,
+        "checks_passed": 6,
+        "checks_total": 6,
+        "grounding": "92.86%"
+      },
+      "rules": {
+        "records": 1,
+        "cumulative": 2,
+        "checks_passed": 10,
+        "checks_total": 10,
+        "grounding": null
+      }
+    },
+    {
+      "file": "603499_翔港科技_翔港科技：关于控股股东、实际控制人及其一致行动人.pdf",
+      "llm": {
+        "records": 3,
+        "cumulative": 3,
+        "checks_passed": 10,
+        "checks_total": 11,
+        "grounding": "86.67%"
+      },
+      "rules": {
+        "records": 1,
+        "cumulative": 3,
+        "checks_passed": 9,
+        "checks_total": 10,
+        "grounding": null
+      }
+    },
+    {
+      "file": "603536_惠发食品_惠发食品：惠发食品关于控股股东部分股份解除质押并.pdf",
+      "llm": {
+        "records": 2,
+        "cumulative": 3,
+        "checks_passed": 9,
+        "checks_total": 11,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 1,
+        "cumulative": 3,
+        "checks_passed": 9,
+        "checks_total": 11,
+        "grounding": null
+      }
+    },
+    {
+      "file": "603826_坤彩科技_坤彩科技：关于控股股东部分股份质押的公告.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 9,
+        "checks_passed": 13,
+        "checks_total": 13,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 1,
+        "cumulative": 9,
+        "checks_passed": 20,
+        "checks_total": 20,
+        "grounding": null
+      }
+    },
+    {
+      "file": "603880_南卫股份_南卫股份：南卫股份关于控股股东部分股份解除质押的.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 3,
+        "checks_passed": 9,
+        "checks_total": 9,
+        "grounding": "88.24%"
+      },
+      "rules": {
+        "records": 0,
+        "cumulative": 0,
+        "checks_passed": 1,
+        "checks_total": 4,
+        "grounding": null
+      }
+    },
+    {
+      "file": "605376_博迁新材_博迁新材：江苏博迁新材料股份有限公司关于控股股东.pdf",
+      "llm": {
+        "records": 1,
+        "cumulative": 2,
+        "checks_passed": 6,
+        "checks_total": 6,
+        "grounding": "100.00%"
+      },
+      "rules": {
+        "records": 1,
+        "cumulative": 2,
+        "checks_passed": 12,
+        "checks_total": 13,
+        "grounding": null
+      }
+    }
+  ]
+}

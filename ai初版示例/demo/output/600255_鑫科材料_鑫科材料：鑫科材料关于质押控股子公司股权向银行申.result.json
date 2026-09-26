@@ -1,0 +1,55 @@
+{
+  "doc_meta": {
+    "file_name": "600255_鑫科材料_鑫科材料：鑫科材料关于质押控股子公司股权向银行申.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "600255",
+    "sec_name": "鑫科材料",
+    "announcement_no": "临 2026-064",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "安徽鑫科新材料股份有限公司",
+      "is_controller": false,
+      "pledgee": "交通银行股份有限公司芜湖分行",
+      "shares": null,
+      "pct_of_held": null,
+      "pct_of_total": null,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "",
+      "pledge_end_date": "",
+      "original_end_date": null,
+      "release_date": "",
+      "purpose": "为公司向交通银行股份有限公司芜湖分行申请不超过人民币 21,000 万元的并购贷款提供质押担保，款项用于支付鑫科铜业 20%少数股权交易对价及相关税费",
+      "evidence": "同意以持有的公司控股子公司安徽鑫科铜业有限公司（以下简称“鑫科铜业”）20%股权，为公司向交通银行股份有限公司芜湖分行申请不超过人民币 21,000 万元的并购贷款提供质押担保"
+    }
+  ],
+  "cumulative": [],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽",
+      "passed": true,
+      "detail": "该公告未披露累计质押情况(预告/拟签署类),勾稽校验不适用",
+      "expected": "N/A",
+      "computed": "N/A"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（3 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}

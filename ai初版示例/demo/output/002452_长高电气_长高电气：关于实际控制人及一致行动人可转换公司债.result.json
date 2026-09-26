@@ -1,0 +1,128 @@
+{
+  "doc_meta": {
+    "file_name": "002452_长高电气_长高电气：关于实际控制人及一致行动人可转换公司债.pdf",
+    "doc_type": "解除质押公告",
+    "sec_code": "002452",
+    "sec_name": "长高电气",
+    "announcement_no": "2026-57",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "解除质押",
+      "pledgor": "马孝武",
+      "is_controller": true,
+      "pledgee": "云南国际信托有限公司",
+      "shares": 1025910,
+      "pct_of_held": 100.0,
+      "pct_of_total": 13.52,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-04-03",
+      "pledge_end_date": "2026-09-22",
+      "original_end_date": null,
+      "release_date": "",
+      "purpose": "",
+      "evidence": "马孝武 是 1,025,910 100 13.52 2026 年 4 月 3 日 2026 年 9 月 22 日 云南国际信托有限公司"
+    },
+    {
+      "record_type": "解除质押",
+      "pledgor": "马晓",
+      "is_controller": true,
+      "pledgee": "云南国际信托有限公司",
+      "shares": 175716,
+      "pct_of_held": 100.0,
+      "pct_of_total": 2.32,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-04-02",
+      "pledge_end_date": "2026-09-22",
+      "original_end_date": null,
+      "release_date": "",
+      "purpose": "",
+      "evidence": "马晓 是 175,716 100 2.32 2026 年 4 月 2 日 2026 年 9 月 22 日 云南国际信托有限公司"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "马孝武",
+      "holding_shares": 1025910,
+      "holding_pct": 13.52,
+      "pre_pledge_shares": 1025910,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "马孝武 1,025,910 13.52 1,025,910 0 0 0"
+    },
+    {
+      "shareholder": "马晓",
+      "holding_shares": 175716,
+      "holding_pct": 2.32,
+      "pre_pledge_shares": 175716,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "马晓 175,716 2.32 175,716 0 0 0"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'解除质押公告'与记录类型{解除质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-马孝武",
+      "passed": true,
+      "detail": "1,025,910 − 1,025,910(解除) + 0(新增) = 0，公告披露为 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "占其所持勾稽-马孝武",
+      "passed": true,
+      "detail": "解除质押 1,025,910股 ÷ 持股 1,025,910股 = 100.0000%，公告披露 100.0%（误差 0.00%）",
+      "expected": "100.0",
+      "computed": "100.0000%"
+    },
+    {
+      "name": "占总股本勾稽-马孝武",
+      "passed": true,
+      "detail": "解除质押 1,025,910股 ÷ 总股本 7,588,092股（由持股比例反推） = 13.5200%，公告披露 13.52%",
+      "expected": "13.52",
+      "computed": "13.5200%"
+    },
+    {
+      "name": "累计勾稽-马晓",
+      "passed": true,
+      "detail": "175,716 − 175,716(解除) + 0(新增) = 0，公告披露为 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "占其所持勾稽-马晓",
+      "passed": true,
+      "detail": "解除质押 175,716股 ÷ 持股 175,716股 = 100.0000%，公告披露 100.0%（误差 0.00%）",
+      "expected": "100.0",
+      "computed": "100.0000%"
+    },
+    {
+      "name": "占总股本勾稽-马晓",
+      "passed": true,
+      "detail": "解除质押 175,716股 ÷ 总股本 7,573,966股（由持股比例反推） = 2.3200%，公告披露 2.32%",
+      "expected": "2.32",
+      "computed": "2.3200%"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（20 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}

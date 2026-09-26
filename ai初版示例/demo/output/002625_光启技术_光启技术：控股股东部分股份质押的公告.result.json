@@ -1,0 +1,80 @@
+{
+  "doc_meta": {
+    "file_name": "002625_光启技术_光启技术：控股股东部分股份质押的公告.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "002625",
+    "sec_name": "光启技术",
+    "announcement_no": "2026-073",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "西藏映邦实业发展有限公司",
+      "is_controller": true,
+      "pledgee": "中原信托有限公司",
+      "shares": 36791800,
+      "pct_of_held": 7.42,
+      "pct_of_total": 1.71,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-22",
+      "pledge_end_date": "2027-09-23",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "融资",
+      "evidence": "西藏映邦 | 是 | 36,791,800 | 7.42% | 1.71% | 否 | 否 | 2026 年 9 月 22 日 | 2027 年 9 月 23 日 | 中原信托有限公司 | 融资"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "西藏映邦",
+      "holding_shares": 495770667,
+      "holding_pct": 23.01,
+      "pre_pledge_shares": 30346000,
+      "post_pledge_shares": 67137800,
+      "pct_of_held": 13.54,
+      "pct_of_total": 3.12,
+      "evidence": "西藏映邦 | 495,770,667 | 23.01% | 30,346,000 | 67,137,800 | 13.54% | 3.12% | 0 | 0% | 0 | 0%"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-西藏映邦",
+      "passed": true,
+      "detail": "30,346,000 − 0(解除) + 36,791,800(新增) = 67,137,800，公告披露为 67,137,800",
+      "expected": "67137800",
+      "computed": "67137800"
+    },
+    {
+      "name": "占其所持勾稽-西藏映邦",
+      "passed": true,
+      "detail": "新增质押 36,791,800股 ÷ 持股 495,770,667股 = 7.4211%，公告披露 7.42%（误差 0.02%）",
+      "expected": "7.42",
+      "computed": "7.4211%"
+    },
+    {
+      "name": "占总股本勾稽-西藏映邦",
+      "passed": true,
+      "detail": "新增质押 36,791,800股 ÷ 总股本 2,154,587,862股（由持股比例反推） = 1.7076%，公告披露 1.71%",
+      "expected": "1.71",
+      "computed": "1.7076%"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（12 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}

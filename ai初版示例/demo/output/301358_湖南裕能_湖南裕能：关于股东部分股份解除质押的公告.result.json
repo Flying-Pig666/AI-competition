@@ -1,0 +1,80 @@
+{
+  "doc_meta": {
+    "file_name": "301358_湖南裕能_湖南裕能：关于股东部分股份解除质押的公告.pdf",
+    "doc_type": "解除质押公告",
+    "sec_code": "301358",
+    "sec_name": "湖南裕能",
+    "announcement_no": "2026-079",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "解除质押",
+      "pledgor": "上海津晟新材料科技有限公司",
+      "is_controller": false,
+      "pledgee": "中原信托有限公司",
+      "shares": 5000000,
+      "pct_of_held": 11.7962,
+      "pct_of_total": 0.5898,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2025-01-14",
+      "pledge_end_date": "",
+      "original_end_date": null,
+      "release_date": "2026-09-23",
+      "purpose": "",
+      "evidence": "津晟新材料 | 否 | 5,000,000 | 11.7962 | 0.5898 | 2025 年 1 月 14 日 | 2026 年 9 月 23 日 | 中原信托有限公司"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "津晟新材料",
+      "holding_shares": 42386494,
+      "holding_pct": 4.9999,
+      "pre_pledge_shares": 7800000,
+      "post_pledge_shares": 2800000,
+      "pct_of_held": 6.6059,
+      "pct_of_total": 0.3303,
+      "evidence": "津晟新材料 | 42,386,494 | 4.9999 | 2,800,000 | 6.6059 | 0.3303 | 0 | - | 0 | -"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'解除质押公告'与记录类型{解除质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-津晟新材料",
+      "passed": true,
+      "detail": "7,800,000 − 5,000,000(解除) + 0(新增) = 2,800,000，公告披露为 2,800,000",
+      "expected": "2800000",
+      "computed": "2800000"
+    },
+    {
+      "name": "占其所持勾稽-津晟新材料",
+      "passed": true,
+      "detail": "解除质押 5,000,000股 ÷ 持股 42,386,494股 = 11.7962%，公告披露 11.7962%（误差 0.00%）",
+      "expected": "11.7962",
+      "computed": "11.7962%"
+    },
+    {
+      "name": "占总股本勾稽-津晟新材料",
+      "passed": true,
+      "detail": "解除质押 5,000,000股 ÷ 总股本 847,746,835股（由持股比例反推） = 0.5898%，公告披露 0.5898%",
+      "expected": "0.5898",
+      "computed": "0.5898%"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "91% 的已提取字段在原文中找到证据（10 项命中）；未溯源字段: pre_pledge_shares（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "90.91%"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "doc_meta": {
+    "file_name": "603261_立航科技_立航科技：成都立航科技股份有限公司关于控股股东部.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "603261",
+    "sec_name": "立航科技",
+    "announcement_no": "2026-054",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "刘随阳",
+      "is_controller": true,
+      "pledgee": "李奔",
+      "shares": 3875260,
+      "pct_of_held": 7.85,
+      "pct_of_total": 5.0,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "办理完股份解除质押登记之日",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "履行股份协议转让交易约定，为协议转让项下标的股份进行质押。",
+      "evidence": "刘随阳 是 3,875,260 否 否 2026.09.23 办理完股份解除质押登记之日 李奔 7.85% 5.00% 履行股份协议转让交易约定，为协议转让项下标的股份进行质押。"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "刘随阳",
+      "holding_shares": 49355164,
+      "holding_pct": 63.68,
+      "pre_pledge_shares": 15659260,
+      "post_pledge_shares": 19534520,
+      "pct_of_held": 39.58,
+      "pct_of_total": 25.2,
+      "evidence": "刘随阳 49,355,164 63.68 15,659,260 19,534,520 39.58 25.20 0 0 0 0"
+    },
+    {
+      "shareholder": "瑞联嘉信",
+      "holding_shares": 1800000,
+      "holding_pct": 2.32,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "瑞联嘉信 1,800,000 2.32 0 0 0 0 0 0 0 0"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-刘随阳",
+      "passed": true,
+      "detail": "15,659,260 − 0(解除) + 3,875,260(新增) = 19,534,520，公告披露为 19,534,520",
+      "expected": "19534520",
+      "computed": "19534520"
+    },
+    {
+      "name": "占其所持勾稽-刘随阳",
+      "passed": true,
+      "detail": "新增质押 3,875,260股 ÷ 持股 49,355,164股 = 7.8518%，公告披露 7.85%（误差 0.02%）",
+      "expected": "7.85",
+      "computed": "7.8518%"
+    },
+    {
+      "name": "占总股本勾稽-刘随阳",
+      "passed": true,
+      "detail": "新增质押 3,875,260股 ÷ 总股本 77,504,969股（由持股比例反推） = 5.0000%，公告披露 5.0%",
+      "expected": "5.0",
+      "computed": "5.0000%"
+    },
+    {
+      "name": "累计勾稽-瑞联嘉信",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "93% 的已提取字段在原文中找到证据（13 项命中）；未溯源字段: pledge_start_date（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "92.86%"
+    }
+  ]
+}

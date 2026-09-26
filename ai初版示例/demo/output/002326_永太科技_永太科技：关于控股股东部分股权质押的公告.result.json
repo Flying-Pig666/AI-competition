@@ -1,0 +1,131 @@
+{
+  "doc_meta": {
+    "file_name": "002326_永太科技_永太科技：关于控股股东部分股权质押的公告.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "002326",
+    "sec_name": "永太科技",
+    "announcement_no": "2026-070",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "王莺妹",
+      "is_controller": true,
+      "pledgee": "重庆国际信托股份有限公司",
+      "shares": 16553551,
+      "pct_of_held": 11.48,
+      "pct_of_total": 1.79,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-21",
+      "pledge_end_date": "至质权人申请解除质押之日止",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "个人资金需求",
+      "evidence": "王莺妹 是 16,553,551 11.48 1.79 否 否 2026-09-21 至质权人申请解除质押之日止 重庆国际信托股份有限公司 个人资金需求"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "王莺妹",
+      "holding_shares": 144248400,
+      "holding_pct": 15.59,
+      "pre_pledge_shares": 37000000,
+      "post_pledge_shares": 53553551,
+      "pct_of_held": 37.13,
+      "pct_of_total": 5.79,
+      "evidence": "王莺妹 144,248,400 15.59 37,000,000 53,553,551 37.13 5.79 0 0 0 0"
+    },
+    {
+      "shareholder": "何人宝",
+      "holding_shares": 111400000,
+      "holding_pct": 12.04,
+      "pre_pledge_shares": 40000000,
+      "post_pledge_shares": 40000000,
+      "pct_of_held": 35.91,
+      "pct_of_total": 4.32,
+      "evidence": "何人宝 111,400,000 12.04 40,000,000 40,000,000 35.91 4.32 0 0 0 0"
+    },
+    {
+      "shareholder": "浙江永太控股有限公司",
+      "holding_shares": 12887500,
+      "holding_pct": 1.39,
+      "pre_pledge_shares": 12887500,
+      "post_pledge_shares": 12887500,
+      "pct_of_held": 100.0,
+      "pct_of_total": 1.39,
+      "evidence": "浙江永太控股有限公司 12,887,500 1.39 12,887,500 12,887,500 100.00 1.39 0 0 0 0"
+    },
+    {
+      "shareholder": "上海阿杏投资管理有限公司-阿杏格致12号私募证券投资基金",
+      "holding_shares": 4530000,
+      "holding_pct": 0.49,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "上海阿杏投资管理有限公司-阿杏格致12号私募证券投资基金 4,530,000 0.49 0 0 0 0 0 0 0 0"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-王莺妹",
+      "passed": true,
+      "detail": "37,000,000 − 0(解除) + 16,553,551(新增) = 53,553,551，公告披露为 53,553,551",
+      "expected": "53553551",
+      "computed": "53553551"
+    },
+    {
+      "name": "占其所持勾稽-王莺妹",
+      "passed": true,
+      "detail": "新增质押 16,553,551股 ÷ 持股 144,248,400股 = 11.4757%，公告披露 11.48%（误差 0.04%）",
+      "expected": "11.48",
+      "computed": "11.4757%"
+    },
+    {
+      "name": "占总股本勾稽-王莺妹",
+      "passed": true,
+      "detail": "新增质押 16,553,551股 ÷ 总股本 925,262,348股（由持股比例反推） = 1.7891%，公告披露 1.79%",
+      "expected": "1.79",
+      "computed": "1.7891%"
+    },
+    {
+      "name": "累计勾稽-何人宝",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 40,000,000 == 本次质押后 40,000,000",
+      "expected": "40000000",
+      "computed": "40000000"
+    },
+    {
+      "name": "累计勾稽-浙江永太控股有限公司",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 12,887,500 == 本次质押后 12,887,500",
+      "expected": "12887500",
+      "computed": "12887500"
+    },
+    {
+      "name": "累计勾稽-上海阿杏投资管理有限公司-阿杏格致12号私募证券投资基金",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "95% 的已提取字段在原文中找到证据（21 项命中）；未溯源字段: shareholder（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "95.45%"
+    }
+  ]
+}

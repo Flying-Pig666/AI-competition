@@ -1,0 +1,114 @@
+{
+  "doc_meta": {
+    "file_name": "300775_三角防务_三角防务：西安三角防务股份有限公司关于持股5%以.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "300775",
+    "sec_name": "三角防务",
+    "announcement_no": "2026-071",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "三森实业投资湖北有限公司",
+      "is_controller": true,
+      "pledgee": "中国中金财富证券有限公司",
+      "shares": 9400000,
+      "pct_of_held": 26.08,
+      "pct_of_total": 1.72,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "2027-09-23",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "用于原质押合约的资金置换",
+      "evidence": "三森实业投资湖北有限公司 | 是 | 9,400,000 | 26.08% | 1.72% | 否 | 否 | 2026年09月23日 | 2027年09月23日 | 中国中金财富证券有限公司 | 用于原质押合约的资金置换"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "严建亚",
+      "holding_shares": 20000000,
+      "holding_pct": 3.65,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "严建亚 | 20,000,000 | 3.65% | 0 | 0 | 0.00% | 0.00% | 0 | 0.00% | 0 | 0.00%"
+    },
+    {
+      "shareholder": "三森实业投资湖北有限公司",
+      "holding_shares": 36042500,
+      "holding_pct": 6.58,
+      "pre_pledge_shares": 14930000,
+      "post_pledge_shares": 24330000,
+      "pct_of_held": 67.5,
+      "pct_of_total": 4.44,
+      "evidence": "三森实业投资湖北有限公司 | 36,042,500 | 6.58% | 14,930,000 | 24,330,000 | 67.50% | 4.44% | 0 | 0.00% | 0 | 0.00%"
+    },
+    {
+      "shareholder": "西安鹏辉企业形象策划合伙企业（有限合伙）",
+      "holding_shares": 27070871,
+      "holding_pct": 4.94,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "西安鹏辉企业形象策划合伙企业（有限合伙） | 27,070,871 | 4.94% | 0 | 0 | 0.00% | 0.00% | 0 | 0.00% | 0 | 0.00%"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-严建亚",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-三森实业投资湖北有限公司",
+      "passed": true,
+      "detail": "14,930,000 − 0(解除) + 9,400,000(新增) = 24,330,000，公告披露为 24,330,000",
+      "expected": "24330000",
+      "computed": "24330000"
+    },
+    {
+      "name": "占其所持勾稽-三森实业投资湖北有限公司",
+      "passed": true,
+      "detail": "新增质押 9,400,000股 ÷ 持股 36,042,500股 = 26.0803%，公告披露 26.08%（误差 0.00%）",
+      "expected": "26.08",
+      "computed": "26.0803%"
+    },
+    {
+      "name": "占总股本勾稽-三森实业投资湖北有限公司",
+      "passed": true,
+      "detail": "新增质押 9,400,000股 ÷ 总股本 547,758,359股（由持股比例反推） = 1.7161%，公告披露 1.72%",
+      "expected": "1.72",
+      "computed": "1.7161%"
+    },
+    {
+      "name": "累计勾稽-西安鹏辉企业形象策划合伙企业（有限合伙）",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "88% 的已提取字段在原文中找到证据（14 项命中）；未溯源字段: pledge_start_date、pledge_end_date（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "87.50%"
+    }
+  ]
+}

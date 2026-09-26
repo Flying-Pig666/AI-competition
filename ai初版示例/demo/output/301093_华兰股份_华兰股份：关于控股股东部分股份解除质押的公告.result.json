@@ -1,0 +1,182 @@
+{
+  "doc_meta": {
+    "file_name": "301093_华兰股份_华兰股份：关于控股股东部分股份解除质押的公告.pdf",
+    "doc_type": "解除质押公告",
+    "sec_code": "301093",
+    "sec_name": "华兰股份",
+    "announcement_no": "2026-079",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "解除质押",
+      "pledgor": "江阴华兰机电科技有限公司",
+      "is_controller": true,
+      "pledgee": "中国农业银行股份有限公司江阴分行",
+      "shares": 2210000,
+      "pct_of_held": 4.57,
+      "pct_of_total": 1.04,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-01-29",
+      "pledge_end_date": "",
+      "original_end_date": null,
+      "release_date": "2026-09-23",
+      "purpose": "",
+      "evidence": "江阴华兰机电科技有限公司 | 是 | 2,210,000 | 4.57% | 1.04% | 2026.01.29 | 2026.09.23 | 中国农业银行股份有限公司江阴分行"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "江阴华兰机电科技有限公司",
+      "holding_shares": 48307350,
+      "holding_pct": 22.67,
+      "pre_pledge_shares": 6110000,
+      "post_pledge_shares": 3900000,
+      "pct_of_held": 8.07,
+      "pct_of_total": 1.83,
+      "evidence": "江阴华兰机电科技有限公司 | 48,307,350 | 22.67% | 3,900,000 | 8.07% | 1.83% | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "江阴华恒投资有限公司",
+      "holding_shares": 2740499,
+      "holding_pct": 1.29,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "江阴华恒投资有限公司 | 2,740,499 | 1.29% | 0 | 0 | 0 | - | - | 0 | 0"
+    },
+    {
+      "shareholder": "江阴华聚赢投资企业（有限合伙）",
+      "holding_shares": 1352000,
+      "holding_pct": 0.63,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "江阴华聚赢投资企业（有限合伙） | 1,352,000 | 0.63% | 0 | 0 | 0 | - | - | 0 | 0"
+    },
+    {
+      "shareholder": "华一敏",
+      "holding_shares": 12195591,
+      "holding_pct": 5.72,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "华一敏 | 12,195,591 | 5.72% | 0 | 0 | 0 | - | - | 9,146,693 | 75.00%"
+    },
+    {
+      "shareholder": "华国平",
+      "holding_shares": 86190,
+      "holding_pct": 0.04,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "华国平 | 86,190 | 0.04% | 0 | 0 | 0 | - | - | 64,642 | 75.00%"
+    },
+    {
+      "shareholder": "杨菊兰",
+      "holding_shares": 169000,
+      "holding_pct": 0.08,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "杨菊兰 | 169,000 | 0.08% | 0 | 0 | 0 | - | - | 0 | 0"
+    },
+    {
+      "shareholder": "华智敏",
+      "holding_shares": 76050,
+      "holding_pct": 0.04,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "华智敏 | 76,050 | 0.04% | 0 | 0 | 0 | - | - | 57,037 | 75.00%"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'解除质押公告'与记录类型{解除质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-江阴华兰机电科技有限公司",
+      "passed": true,
+      "detail": "6,110,000 − 2,210,000(解除) + 0(新增) = 3,900,000，公告披露为 3,900,000",
+      "expected": "3900000",
+      "computed": "3900000"
+    },
+    {
+      "name": "占其所持勾稽-江阴华兰机电科技有限公司",
+      "passed": true,
+      "detail": "解除质押 2,210,000股 ÷ 持股 48,307,350股 = 4.5749%，公告披露 4.57%（误差 0.11%）",
+      "expected": "4.57",
+      "computed": "4.5749%"
+    },
+    {
+      "name": "占总股本勾稽-江阴华兰机电科技有限公司",
+      "passed": true,
+      "detail": "解除质押 2,210,000股 ÷ 总股本 213,089,325股（由持股比例反推） = 1.0371%，公告披露 1.04%",
+      "expected": "1.04",
+      "computed": "1.0371%"
+    },
+    {
+      "name": "累计勾稽-江阴华恒投资有限公司",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-江阴华聚赢投资企业（有限合伙）",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-华一敏",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-华国平",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-杨菊兰",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-华智敏",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "87% 的已提取字段在原文中找到证据（20 项命中）；未溯源字段: pledge_start_date、release_date、pre_pledge_shares（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "86.96%"
+    }
+  ]
+}

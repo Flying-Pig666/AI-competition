@@ -1,0 +1,111 @@
+{
+  "doc_meta": {
+    "file_name": "600381__ST春天__ST春天：青海春天关于控股股东部分股份质押的公.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "600381",
+    "sec_name": "*ST 春天",
+    "announcement_no": "2026-068",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "西藏荣恩",
+      "is_controller": true,
+      "pledgee": "上海浦东发展银行股份有限公司成都分行",
+      "shares": 3750000,
+      "pct_of_held": 1.99,
+      "pct_of_total": 0.64,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-22",
+      "pledge_end_date": "2029-09-18",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "提供担保",
+      "evidence": "西藏荣恩 | 是 | 375 万股 | 否 | 否 | 2026-09-22 | 2029-09-18 | 上海浦东发展银行股份有限公司成都分行 | 1.99% | 0.64% | 提供担保"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "西藏荣恩",
+      "holding_shares": 188615194,
+      "holding_pct": 32.13,
+      "pre_pledge_shares": 114060000,
+      "post_pledge_shares": 117810000,
+      "pct_of_held": 62.46,
+      "pct_of_total": 20.07,
+      "evidence": "西藏荣恩 188,615,194 股 32.13% 11,406 万股 11,781 万股 62.46% 20.07% 16,888,889 股"
+    },
+    {
+      "shareholder": "肖融",
+      "holding_shares": 56762789,
+      "holding_pct": 9.67,
+      "pre_pledge_shares": 30140000,
+      "post_pledge_shares": 30140000,
+      "pct_of_held": 53.1,
+      "pct_of_total": 5.13,
+      "evidence": "肖融 56,762,789 股 9.67% 3,014 万股 3,014 万股 53.10% 5.13% 12,373,231 股"
+    }
+  ],
+  "risk_items": [
+    {
+      "horizon": "未来一年内",
+      "shares": 5500000,
+      "finance_balance": 15000000,
+      "evidence": "西藏荣恩 550 2.92% 0.94% 1500 2027-03-17"
+    }
+  ],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-西藏荣恩",
+      "passed": true,
+      "detail": "114,060,000 − 0(解除) + 3,750,000(新增) = 117,810,000，公告披露为 117,810,000",
+      "expected": "117810000",
+      "computed": "117810000"
+    },
+    {
+      "name": "占其所持勾稽-西藏荣恩",
+      "passed": true,
+      "detail": "新增质押 3,750,000股 ÷ 持股 188,615,194股 = 1.9882%，公告披露 1.99%（误差 0.09%）",
+      "expected": "1.99",
+      "computed": "1.9882%"
+    },
+    {
+      "name": "占总股本勾稽-西藏荣恩",
+      "passed": true,
+      "detail": "新增质押 3,750,000股 ÷ 总股本 587,037,641股（由持股比例反推） = 0.6388%，公告披露 0.64%",
+      "expected": "0.64",
+      "computed": "0.6388%"
+    },
+    {
+      "name": "累计勾稽-肖融",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 30,140,000 == 本次质押后 30,140,000",
+      "expected": "30140000",
+      "computed": "30140000"
+    },
+    {
+      "name": "风险提示勾稽-未来一年内",
+      "passed": false,
+      "detail": "未来一年内到期 5,500,000股 未在任何股东累计质押中匹配到",
+      "expected": "5500000",
+      "computed": "无匹配"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": false,
+      "detail": "61% 的已提取字段在原文中找到证据（11 项命中）；未溯源字段: shares、pre_pledge_shares、post_pledge_shares、pre_pledge_shares、post_pledge_shares、shares（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "61.11%"
+    }
+  ]
+}

@@ -1,7 +1,55 @@
 {
-  "eval_time": "2026-09-27T01:03:57.140882",
-  "total_docs": 10,
+  "eval_time": "2026-09-27T01:18:10.168648",
+  "total_docs": 30,
   "results": [
+    {
+      "file": "002326_永太科技_永太科技：关于控股股东部分股权质押的公告.pdf",
+      "sec_code": "002326",
+      "sec_name": "永太科技",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 8,
+      "checks_total": 8,
+      "grounding_coverage": "95.45%",
+      "records": 1
+    },
+    {
+      "file": "002452_长高电气_长高电气：关于实际控制人及一致行动人可转换公司债.pdf",
+      "sec_code": "002452",
+      "sec_name": "长高电气",
+      "doc_type": "解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 8,
+      "checks_total": 8,
+      "grounding_coverage": "100.00%",
+      "records": 2
+    },
+    {
+      "file": "002625_光启技术_光启技术：控股股东部分股份质押的公告.pdf",
+      "sec_code": "002625",
+      "sec_name": "光启技术",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "grounding_coverage": "100.00%",
+      "records": 1
+    },
+    {
+      "file": "300014_亿纬锂能_亿纬锂能：关于控股股东部分股份质押的公告.pdf",
+      "sec_code": "300014",
+      "sec_name": "亿纬锂能",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 8,
+      "checks_total": 9,
+      "grounding_coverage": "100.00%",
+      "records": 2
+    },
     {
       "file": "300054_鼎龙股份_鼎龙股份：关于控股股东部分股份质押及解除质押的公.pdf",
       "sec_code": "300054",
@@ -13,6 +61,42 @@
       "checks_total": 8,
       "grounding_coverage": "86.96%",
       "records": 2
+    },
+    {
+      "file": "300302_同有科技_同有科技：关于持股5%以上股东部分股权提前解除质.pdf",
+      "sec_code": "300302",
+      "sec_name": "同有科技",
+      "doc_type": "解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 4,
+      "checks_total": 5,
+      "grounding_coverage": "72.73%",
+      "records": 1
+    },
+    {
+      "file": "300397_天和防务_天和防务：关于控股股东、实际控制人部分股份办理质.pdf",
+      "sec_code": "300397",
+      "sec_name": "天和防务",
+      "doc_type": "质押展期公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 19,
+      "checks_total": 20,
+      "grounding_coverage": "100.00%",
+      "records": 7
+    },
+    {
+      "file": "300469_信息发展_信息发展：关于公司持股5%以上股东部分股票质押的.pdf",
+      "sec_code": "300469",
+      "sec_name": "信息发展",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "grounding_coverage": "92.86%",
+      "records": 1
     },
     {
       "file": "300552_万集科技_万集科技：关于控股股东、实际控制人部分股份质押的.pdf",
@@ -27,15 +111,111 @@
       "records": 3
     },
     {
+      "file": "300588_熙菱信息_熙菱信息：关于控股股东部分股份质押的公告.pdf",
+      "sec_code": "300588",
+      "sec_name": "熙菱信息",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 4,
+      "checks_total": 5,
+      "grounding_coverage": "72.73%",
+      "records": 1
+    },
+    {
+      "file": "300740_水羊股份_水羊股份：关于公司控股股东及其一致行动人部分股份.pdf",
+      "sec_code": "300740",
+      "sec_name": "水羊股份",
+      "doc_type": "质押及解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 7,
+      "checks_total": 8,
+      "grounding_coverage": "100.00%",
+      "records": 3
+    },
+    {
+      "file": "300758_七彩化学_七彩化学：关于公司实际控制人部分股份质押延期购回.pdf",
+      "sec_code": "300758",
+      "sec_name": "七彩化学",
+      "doc_type": "质押展期公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 7,
+      "checks_total": 7,
+      "grounding_coverage": "100.00%",
+      "records": 1
+    },
+    {
+      "file": "300775_三角防务_三角防务：西安三角防务股份有限公司关于持股5%以.pdf",
+      "sec_code": "300775",
+      "sec_name": "三角防务",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 7,
+      "checks_total": 7,
+      "grounding_coverage": "87.50%",
+      "records": 1
+    },
+    {
+      "file": "300806_斯迪克_斯迪克：关于控股股东部分股份质押的公告.pdf",
+      "sec_code": "300806",
+      "sec_name": "斯迪克",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "grounding_coverage": "93.75%",
+      "records": 1
+    },
+    {
+      "file": "301093_华兰股份_华兰股份：关于控股股东部分股份解除质押的公告.pdf",
+      "sec_code": "301093",
+      "sec_name": "华兰股份",
+      "doc_type": "解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 11,
+      "checks_total": 11,
+      "grounding_coverage": "86.96%",
+      "records": 1
+    },
+    {
+      "file": "301316_慧博云通_慧博云通：关于控股股东、实际控制人部分股份质押的.pdf",
+      "sec_code": "301316",
+      "sec_name": "慧博云通",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 9,
+      "checks_total": 9,
+      "grounding_coverage": "100.00%",
+      "records": 2
+    },
+    {
+      "file": "301358_湖南裕能_湖南裕能：关于股东部分股份解除质押的公告.pdf",
+      "sec_code": "301358",
+      "sec_name": "湖南裕能",
+      "doc_type": "解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "grounding_coverage": "90.91%",
+      "records": 1
+    },
+    {
       "file": "600052_东望时代_东望时代：浙江东望时代科技股份有限公司关于拟签署.pdf",
       "sec_code": "600052",
       "sec_name": "东望时代",
       "doc_type": "质押公告",
       "parse_method": "text_layer",
       "extract_source": "llm",
-      "checks_passed": 1,
-      "checks_total": 5,
-      "grounding_coverage": "60.00%",
+      "checks_passed": 3,
+      "checks_total": 3,
+      "grounding_coverage": "80.00%",
       "records": 1
     },
     {
@@ -51,6 +231,18 @@
       "records": 1
     },
     {
+      "file": "600255_鑫科材料_鑫科材料：鑫科材料关于质押控股子公司股权向银行申.pdf",
+      "sec_code": "600255",
+      "sec_name": "鑫科材料",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 3,
+      "checks_total": 3,
+      "grounding_coverage": "100.00%",
+      "records": 1
+    },
+    {
       "file": "600350_山东高速_山东高速：山东高速股份有限公司关于控股股东股份解.pdf",
       "sec_code": "600350",
       "sec_name": "山东高速",
@@ -59,6 +251,30 @@
       "extract_source": "llm",
       "checks_passed": 5,
       "checks_total": 5,
+      "grounding_coverage": "100.00%",
+      "records": 1
+    },
+    {
+      "file": "600381__ST春天__ST春天：青海春天关于控股股东部分股份质押的公.pdf",
+      "sec_code": "600381",
+      "sec_name": "*ST 春天",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 5,
+      "checks_total": 7,
+      "grounding_coverage": "61.11%",
+      "records": 1
+    },
+    {
+      "file": "600588_用友网络_用友网络：用友网络关于控股股东一致行动人部分股份.pdf",
+      "sec_code": "600588",
+      "sec_name": "用友网络",
+      "doc_type": "质押公告",
+      "parse_method": "mixed",
+      "extract_source": "llm",
+      "checks_passed": 7,
+      "checks_total": 7,
       "grounding_coverage": "100.00%",
       "records": 1
     },
@@ -73,6 +289,18 @@
       "checks_total": 7,
       "grounding_coverage": "96.43%",
       "records": 4
+    },
+    {
+      "file": "603261_立航科技_立航科技：成都立航科技股份有限公司关于控股股东部.pdf",
+      "sec_code": "603261",
+      "sec_name": "立航科技",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "grounding_coverage": "92.86%",
+      "records": 1
     },
     {
       "file": "603499_翔港科技_翔港科技：关于控股股东、实际控制人及其一致行动人.pdf",
@@ -121,11 +349,23 @@
       "checks_total": 9,
       "grounding_coverage": "88.24%",
       "records": 1
+    },
+    {
+      "file": "605376_博迁新材_博迁新材：江苏博迁新材料股份有限公司关于控股股东.pdf",
+      "sec_code": "605376",
+      "sec_name": "博迁新材",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "grounding_coverage": "100.00%",
+      "records": 1
     }
   ],
   "stats": {
-    "ran_ok": 10,
-    "llm_source": 10,
-    "full_checks_pass": 3
+    "ran_ok": 30,
+    "llm_source": 30,
+    "full_checks_pass": 18
   }
 }

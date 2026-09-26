@@ -1,0 +1,80 @@
+{
+  "doc_meta": {
+    "file_name": "300588_熙菱信息_熙菱信息：关于控股股东部分股份质押的公告.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "300588",
+    "sec_name": "熙菱信息",
+    "announcement_no": "2026-053",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "上海盛讯",
+      "is_controller": true,
+      "pledgee": "何岳",
+      "shares": 16000000,
+      "pct_of_held": 43.98,
+      "pct_of_total": 8.36,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-22",
+      "pledge_end_date": "履约完成",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "履约担保",
+      "evidence": "上海盛讯 | 是 | 1,600.00 | 43.98% | 8.36% | 否 | 否 | 2026年9月22日 | 履约完成 | 何岳 | 履约担保"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "上海盛讯",
+      "holding_shares": 36380000,
+      "holding_pct": 19.0,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 16000000,
+      "pct_of_held": 43.98,
+      "pct_of_total": 8.36,
+      "evidence": "上海盛讯 | 3,638.00 | 19.00% | 0 | 1,600.00 | 43.98% | 8.36% | 0 | 0 | 0 | 0"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-上海盛讯",
+      "passed": true,
+      "detail": "0 − 0(解除) + 16,000,000(新增) = 16,000,000，公告披露为 16,000,000",
+      "expected": "16000000",
+      "computed": "16000000"
+    },
+    {
+      "name": "占其所持勾稽-上海盛讯",
+      "passed": true,
+      "detail": "新增质押 16,000,000股 ÷ 持股 36,380,000股 = 43.9802%，公告披露 43.98%（误差 0.00%）",
+      "expected": "43.98",
+      "computed": "43.9802%"
+    },
+    {
+      "name": "占总股本勾稽-上海盛讯",
+      "passed": true,
+      "detail": "新增质押 16,000,000股 ÷ 总股本 191,473,684股（由持股比例反推） = 8.3562%，公告披露 8.36%",
+      "expected": "8.36",
+      "computed": "8.3562%"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": false,
+      "detail": "73% 的已提取字段在原文中找到证据（8 项命中）；未溯源字段: shares、holding_shares、post_pledge_shares（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "72.73%"
+    }
+  ]
+}

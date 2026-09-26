@@ -1,0 +1,114 @@
+{
+  "doc_meta": {
+    "file_name": "300758_七彩化学_七彩化学：关于公司实际控制人部分股份质押延期购回.pdf",
+    "doc_type": "质押展期公告",
+    "sec_code": "300758",
+    "sec_name": "七彩化学",
+    "announcement_no": "2026-072",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "展期",
+      "pledgor": "徐惠祥",
+      "is_controller": true,
+      "pledgee": "浙商证券",
+      "shares": 6730000,
+      "pct_of_held": 14.63,
+      "pct_of_total": 1.69,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2025-09-23",
+      "pledge_end_date": "2027-09-23",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "融资",
+      "evidence": "徐惠祥 | 是 | 6,730,000 | 14.63 | 1.69 | 否 | 否 | 2025年9月23日 | 2026年9月23日 | 2027年9月23日 | 浙商证券 | 融资"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "惠丰投资",
+      "holding_shares": 78650580,
+      "holding_pct": 19.71,
+      "pre_pledge_shares": 40920000,
+      "post_pledge_shares": 40920000,
+      "pct_of_held": 52.03,
+      "pct_of_total": 10.25,
+      "evidence": "惠丰投资 | 78,650,580 | 19.71 | 40,920,000 | 40,920,000 | 52.03 | 10.25 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "徐惠祥",
+      "holding_shares": 45996762,
+      "holding_pct": 11.52,
+      "pre_pledge_shares": 13600000,
+      "post_pledge_shares": 13600000,
+      "pct_of_held": 29.57,
+      "pct_of_total": 3.41,
+      "evidence": "徐惠祥 | 45,996,762 | 11.52 | 13,600,000 | 13,600,000 | 29.57 | 3.41 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "臧婕",
+      "holding_shares": 29825208,
+      "holding_pct": 7.47,
+      "pre_pledge_shares": 15370000,
+      "post_pledge_shares": 15370000,
+      "pct_of_held": 51.53,
+      "pct_of_total": 3.85,
+      "evidence": "臧婕 | 29,825,208 | 7.47 | 15,370,000 | 15,370,000 | 51.53 | 3.85 | 0 | 0 | 0 | 0"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押展期公告'与记录类型{展期}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-惠丰投资",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 40,920,000 == 本次质押后 40,920,000",
+      "expected": "40920000",
+      "computed": "40920000"
+    },
+    {
+      "name": "累计勾稽-徐惠祥",
+      "passed": true,
+      "detail": "13,600,000 − 0(解除) + 0(新增) = 13,600,000，公告披露为 13,600,000",
+      "expected": "13600000",
+      "computed": "13600000"
+    },
+    {
+      "name": "占其所持勾稽-徐惠祥",
+      "passed": true,
+      "detail": "展期 6,730,000股 ÷ 持股 45,996,762股 = 14.6315%，公告披露 14.63%（误差 0.01%）",
+      "expected": "14.63",
+      "computed": "14.6315%"
+    },
+    {
+      "name": "占总股本勾稽-徐惠祥",
+      "passed": true,
+      "detail": "展期 6,730,000股 ÷ 总股本 399,277,448股（由持股比例反推） = 1.6855%，公告披露 1.69%",
+      "expected": "1.69",
+      "computed": "1.6855%"
+    },
+    {
+      "name": "累计勾稽-臧婕",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 15,370,000 == 本次质押后 15,370,000",
+      "expected": "15370000",
+      "computed": "15370000"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（20 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}

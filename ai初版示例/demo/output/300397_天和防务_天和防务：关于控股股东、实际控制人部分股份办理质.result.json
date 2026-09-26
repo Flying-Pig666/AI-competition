@@ -1,0 +1,310 @@
+{
+  "doc_meta": {
+    "file_name": "300397_天和防务_天和防务：关于控股股东、实际控制人部分股份办理质.pdf",
+    "doc_type": "质押展期公告",
+    "sec_code": "300397",
+    "sec_name": "天和防务",
+    "announcement_no": "2026-049",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "展期",
+      "pledgor": "贺增林",
+      "is_controller": true,
+      "pledgee": "华龙证券股份有限公司",
+      "shares": 10919850,
+      "pct_of_held": 8.4,
+      "pct_of_total": 2.11,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2024-06-26",
+      "pledge_end_date": "2026-12-24",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "个人资金需求",
+      "evidence": "贺增林 是 10,919,850 8.40 2.11 否 否 2024-06-26 2026-12-24 华龙证券股份有限公司 个人资金需求"
+    },
+    {
+      "record_type": "展期",
+      "pledgor": "贺增林",
+      "is_controller": true,
+      "pledgee": "华龙证券股份有限公司",
+      "shares": 8356000,
+      "pct_of_held": 6.43,
+      "pct_of_total": 1.61,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2024-07-02",
+      "pledge_end_date": "2026-12-24",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "个人资金需求",
+      "evidence": "贺增林 是 8,356,000 6.43 1.61 否 否 2024-07-02 2026-12-24 华龙证券股份有限公司 个人资金需求"
+    },
+    {
+      "record_type": "展期",
+      "pledgor": "贺增林",
+      "is_controller": true,
+      "pledgee": "华龙证券股份有限公司",
+      "shares": 11769900,
+      "pct_of_held": 9.06,
+      "pct_of_total": 2.27,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2024-09-24",
+      "pledge_end_date": "2027-02-24",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "个人资金需求",
+      "evidence": "贺增林 是 11,769,900 9.06 2.27 否 否 2024-09-24 2027-02-24 华龙证券股份有限公司 个人资金需求"
+    },
+    {
+      "record_type": "展期",
+      "pledgor": "贺增林",
+      "is_controller": true,
+      "pledgee": "华龙证券股份有限公司",
+      "shares": 4630100,
+      "pct_of_held": 3.56,
+      "pct_of_total": 0.89,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2024-09-24",
+      "pledge_end_date": "2027-02-24",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "个人资金需求",
+      "evidence": "贺增林 是 4,630,100 3.56 0.89 否 否 2024-09-24 2027-02-24 华龙证券股份有限公司 个人资金需求"
+    },
+    {
+      "record_type": "展期",
+      "pledgor": "贺增林",
+      "is_controller": true,
+      "pledgee": "华龙证券股份有限公司",
+      "shares": 13177000,
+      "pct_of_held": 10.14,
+      "pct_of_total": 2.55,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2024-10-08",
+      "pledge_end_date": "2027-03-08",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "个人资金需求",
+      "evidence": "贺增林 是 13,177,000 10.14 2.55 否 否 2024-10-08 2027-03-08 华龙证券股份有限公司 个人资金需求"
+    },
+    {
+      "record_type": "展期",
+      "pledgor": "贺增林",
+      "is_controller": true,
+      "pledgee": "华龙证券股份有限公司",
+      "shares": 3323000,
+      "pct_of_held": 2.56,
+      "pct_of_total": 0.64,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2024-10-08",
+      "pledge_end_date": "2027-03-08",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "个人资金需求",
+      "evidence": "贺增林 是 3,323,000 2.56 0.64 否 否 2024-10-08 2027-03-08 华龙证券股份有限公司 个人资金需求"
+    },
+    {
+      "record_type": "展期",
+      "pledgor": "贺增林",
+      "is_controller": true,
+      "pledgee": "华龙证券股份有限公司",
+      "shares": 9840000,
+      "pct_of_held": 7.57,
+      "pct_of_total": 1.9,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2024-10-14",
+      "pledge_end_date": "2027-03-14",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "个人资金需求",
+      "evidence": "贺增林 是 9,840,000 7.57 1.90 否 否 2024-10-14 2027-03-14 华龙证券股份有限公司 个人资金需求"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "贺增林",
+      "holding_shares": 129971700,
+      "holding_pct": 25.11,
+      "pre_pledge_shares": 72975850,
+      "post_pledge_shares": 72975850,
+      "pct_of_held": 56.15,
+      "pct_of_total": 14.1,
+      "evidence": "贺增林 129,971,700 25.11 72,975,850 72,975,850 56.15 14.10 0 0 0 0"
+    },
+    {
+      "shareholder": "刘丹英",
+      "holding_shares": 15747300,
+      "holding_pct": 3.04,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "刘丹英 15,747,300 3.04 0 0 0.00 0.00 0 0 0 0"
+    }
+  ],
+  "risk_items": [
+    {
+      "horizon": "未来半年内",
+      "shares": 62015850,
+      "finance_balance": 178000000,
+      "evidence": "贺增林 未来半年 62,015,850.00 47.71 11.98 178,000,000"
+    },
+    {
+      "horizon": "未来一年内",
+      "shares": 62015850,
+      "finance_balance": 178000000,
+      "evidence": "贺增林 未来一年 62,015,850.00 47.71 11.98 178,000,000"
+    }
+  ],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押展期公告'与记录类型{展期}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-贺增林",
+      "passed": true,
+      "detail": "72,975,850 − 0(解除) + 0(新增) = 72,975,850，公告披露为 72,975,850",
+      "expected": "72975850",
+      "computed": "72975850"
+    },
+    {
+      "name": "占其所持勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 10,919,850股 ÷ 持股 129,971,700股 = 8.4017%，公告披露 8.4%（误差 0.02%）",
+      "expected": "8.4",
+      "computed": "8.4017%"
+    },
+    {
+      "name": "占其所持勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 8,356,000股 ÷ 持股 129,971,700股 = 6.4291%，公告披露 6.43%（误差 0.01%）",
+      "expected": "6.43",
+      "computed": "6.4291%"
+    },
+    {
+      "name": "占其所持勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 11,769,900股 ÷ 持股 129,971,700股 = 9.0557%，公告披露 9.06%（误差 0.05%）",
+      "expected": "9.06",
+      "computed": "9.0557%"
+    },
+    {
+      "name": "占其所持勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 4,630,100股 ÷ 持股 129,971,700股 = 3.5624%，公告披露 3.56%（误差 0.07%）",
+      "expected": "3.56",
+      "computed": "3.5624%"
+    },
+    {
+      "name": "占其所持勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 13,177,000股 ÷ 持股 129,971,700股 = 10.1384%，公告披露 10.14%（误差 0.02%）",
+      "expected": "10.14",
+      "computed": "10.1384%"
+    },
+    {
+      "name": "占其所持勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 3,323,000股 ÷ 持股 129,971,700股 = 2.5567%，公告披露 2.56%（误差 0.13%）",
+      "expected": "2.56",
+      "computed": "2.5567%"
+    },
+    {
+      "name": "占其所持勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 9,840,000股 ÷ 持股 129,971,700股 = 7.5709%，公告披露 7.57%（误差 0.01%）",
+      "expected": "7.57",
+      "computed": "7.5709%"
+    },
+    {
+      "name": "占总股本勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 10,919,850股 ÷ 总股本 517,609,319股（由持股比例反推） = 2.1097%，公告披露 2.11%",
+      "expected": "2.11",
+      "computed": "2.1097%"
+    },
+    {
+      "name": "占总股本勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 8,356,000股 ÷ 总股本 517,609,319股（由持股比例反推） = 1.6143%，公告披露 1.61%",
+      "expected": "1.61",
+      "computed": "1.6143%"
+    },
+    {
+      "name": "占总股本勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 11,769,900股 ÷ 总股本 517,609,319股（由持股比例反推） = 2.2739%，公告披露 2.27%",
+      "expected": "2.27",
+      "computed": "2.2739%"
+    },
+    {
+      "name": "占总股本勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 4,630,100股 ÷ 总股本 517,609,319股（由持股比例反推） = 0.8945%，公告披露 0.89%",
+      "expected": "0.89",
+      "computed": "0.8945%"
+    },
+    {
+      "name": "占总股本勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 13,177,000股 ÷ 总股本 517,609,319股（由持股比例反推） = 2.5457%，公告披露 2.55%",
+      "expected": "2.55",
+      "computed": "2.5457%"
+    },
+    {
+      "name": "占总股本勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 3,323,000股 ÷ 总股本 517,609,319股（由持股比例反推） = 0.6420%，公告披露 0.64%",
+      "expected": "0.64",
+      "computed": "0.6420%"
+    },
+    {
+      "name": "占总股本勾稽-贺增林",
+      "passed": true,
+      "detail": "展期 9,840,000股 ÷ 总股本 517,609,319股（由持股比例反推） = 1.9010%，公告披露 1.9%",
+      "expected": "1.9",
+      "computed": "1.9010%"
+    },
+    {
+      "name": "累计勾稽-刘丹英",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "风险提示勾稽-未来半年内",
+      "passed": true,
+      "detail": "未来半年内到期 62,015,850股 ≤ 累计质押后最大值 72,975,850股（半年到期应为累计质押的子集）",
+      "expected": "≤72,975,850",
+      "computed": "62015850"
+    },
+    {
+      "name": "风险提示勾稽-未来一年内",
+      "passed": false,
+      "detail": "未来一年内到期 62,015,850股 未在任何股东累计质押中匹配到",
+      "expected": "62015850",
+      "computed": "无匹配"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（66 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}

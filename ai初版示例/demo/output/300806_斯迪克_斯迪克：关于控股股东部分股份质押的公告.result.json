@@ -1,0 +1,97 @@
+{
+  "doc_meta": {
+    "file_name": "300806_斯迪克_斯迪克：关于控股股东部分股份质押的公告.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "300806",
+    "sec_name": "斯迪克",
+    "announcement_no": "2026-085",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "施蓉",
+      "is_controller": true,
+      "pledgee": "南京证券股份有限公司",
+      "shares": 6000000,
+      "pct_of_held": 18.03,
+      "pct_of_total": 0.95,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-22",
+      "pledge_end_date": "办理解除质押登记手续之日",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "投资、置换存量债务、个人消费。",
+      "evidence": "施蓉 是 6,000,000 18.03% 0.95% 否 否 2026 年 09 月 22 日 办理解除质押登记手续之日 南京证券股份有限公司 投资、置换存量债务、个人消费。"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "金闯",
+      "holding_shares": 197420296,
+      "holding_pct": 31.15,
+      "pre_pledge_shares": 56046000,
+      "post_pledge_shares": 56046000,
+      "pct_of_held": 28.39,
+      "pct_of_total": 8.84,
+      "evidence": "金闯 197,420,296 31.15% 56,046,000 56,046,000 28.39% 8.84% 0 0.00% 0 0.00%"
+    },
+    {
+      "shareholder": "施蓉",
+      "holding_shares": 33285253,
+      "holding_pct": 5.25,
+      "pre_pledge_shares": 3500000,
+      "post_pledge_shares": 9500000,
+      "pct_of_held": 28.54,
+      "pct_of_total": 1.5,
+      "evidence": "施蓉 33,285,253 5.25% 3,500,000 9,500,000 28.54% 1.50% 0 0.00% 0 0.00%"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-金闯",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 56,046,000 == 本次质押后 56,046,000",
+      "expected": "56046000",
+      "computed": "56046000"
+    },
+    {
+      "name": "累计勾稽-施蓉",
+      "passed": true,
+      "detail": "3,500,000 − 0(解除) + 6,000,000(新增) = 9,500,000，公告披露为 9,500,000",
+      "expected": "9500000",
+      "computed": "9500000"
+    },
+    {
+      "name": "占其所持勾稽-施蓉",
+      "passed": true,
+      "detail": "新增质押 6,000,000股 ÷ 持股 33,285,253股 = 18.0260%，公告披露 18.03%（误差 0.02%）",
+      "expected": "18.03",
+      "computed": "18.0260%"
+    },
+    {
+      "name": "占总股本勾稽-施蓉",
+      "passed": true,
+      "detail": "新增质押 6,000,000股 ÷ 总股本 634,004,819股（由持股比例反推） = 0.9464%，公告披露 0.95%",
+      "expected": "0.95",
+      "computed": "0.9464%"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "94% 的已提取字段在原文中找到证据（15 项命中）；未溯源字段: pledge_start_date（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "93.75%"
+    }
+  ]
+}

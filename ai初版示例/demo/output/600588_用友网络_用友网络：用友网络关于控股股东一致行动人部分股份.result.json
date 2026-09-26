@@ -1,0 +1,114 @@
+{
+  "doc_meta": {
+    "file_name": "600588_用友网络_用友网络：用友网络关于控股股东一致行动人部分股份.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "600588",
+    "sec_name": "用友网络",
+    "announcement_no": "临 2026-047",
+    "announcement_date": "2026-09-24",
+    "parse_method": "mixed"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "上海用友科技咨询有限公司",
+      "is_controller": false,
+      "pledgee": "国民信托有限公司",
+      "shares": 10000000,
+      "pct_of_held": 2.55,
+      "pct_of_total": 0.29,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-22",
+      "pledge_end_date": "办理解除质押登记手续为止",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "偿还债务",
+      "evidence": "上海用友科技 | 否 | 10,000,000 | 否 | 否 | 2026 年 9 月 22 日 | 办理解除质押登记手续为止 | 国民信托有限公司 | 2.55 | 0.29 | 偿还债务"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "北京用友科技有限公司",
+      "holding_shares": 921161630,
+      "holding_pct": 26.96,
+      "pre_pledge_shares": 456370000,
+      "post_pledge_shares": 456370000,
+      "pct_of_held": 49.54,
+      "pct_of_total": 13.36,
+      "evidence": "北京用友科技有限公司 | 921,161,630 | 26.96 | 456,370,000 | 456,370,000 | 49.54 | 13.36 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "上海用友科技咨询有限公司",
+      "holding_shares": 392069275,
+      "holding_pct": 11.47,
+      "pre_pledge_shares": 97220000,
+      "post_pledge_shares": 107220000,
+      "pct_of_held": 27.35,
+      "pct_of_total": 3.14,
+      "evidence": "上海用友科技咨询有限公司 | 392,069,275 | 11.47 | 97,220,000 | 107,220,000 | 27.35 | 3.14 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "北京用友企业管理研究所有限公司",
+      "holding_shares": 107848606,
+      "holding_pct": 3.16,
+      "pre_pledge_shares": 20000000,
+      "post_pledge_shares": 20000000,
+      "pct_of_held": 18.54,
+      "pct_of_total": 0.59,
+      "evidence": "北京用友企业管理研究所有限公司 | 107,848,606 | 3.16 | 20,000,000 | 20,000,000 | 18.54 | 0.59 | 0 | 0 | 0 | 0"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-北京用友科技有限公司",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 456,370,000 == 本次质押后 456,370,000",
+      "expected": "456370000",
+      "computed": "456370000"
+    },
+    {
+      "name": "累计勾稽-上海用友科技咨询有限公司",
+      "passed": true,
+      "detail": "97,220,000 − 0(解除) + 10,000,000(新增) = 107,220,000，公告披露为 107,220,000",
+      "expected": "107220000",
+      "computed": "107220000"
+    },
+    {
+      "name": "占其所持勾稽-上海用友科技咨询有限公司",
+      "passed": true,
+      "detail": "新增质押 10,000,000股 ÷ 持股 392,069,275股 = 2.5506%，公告披露 2.55%（误差 0.02%）",
+      "expected": "2.55",
+      "computed": "2.5506%"
+    },
+    {
+      "name": "占总股本勾稽-上海用友科技咨询有限公司",
+      "passed": true,
+      "detail": "新增质押 10,000,000股 ÷ 总股本 3,418,215,126股（由持股比例反推） = 0.2926%，公告披露 0.29%",
+      "expected": "0.29",
+      "computed": "0.2926%"
+    },
+    {
+      "name": "累计勾稽-北京用友企业管理研究所有限公司",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 20,000,000 == 本次质押后 20,000,000",
+      "expected": "20000000",
+      "computed": "20000000"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（20 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}
