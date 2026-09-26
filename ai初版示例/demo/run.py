@@ -17,8 +17,10 @@ import sys
 sys.stdout.reconfigure(encoding="utf-8")
 
 import extractor
+import grounding
 import parser as docparser
 import validator
+from schema import CheckResult
 from tracing import Trace
 
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
@@ -40,10 +42,10 @@ def run_document(path, trace):
         tables = docparser.extract_tables(path, trace)
     full_text = "\n".join(parsed["pages"])
 
-    # 提取：LLM 优先，失败自动回退规则路径
+    # 提取：LLM 优先（含校验-重试闭环），失败自动回退规则路径
     try:
         raw = extractor.extract_with_llm(full_text, tables, trace)
-        source = "llm(deepseek)"
+        source = "llm"
     except Exception as e:
         trace.log("llm_fallback", reason=str(e)[:200])
         raw = extractor.extract_by_rules(full_text, tables, trace,
@@ -53,6 +55,18 @@ def run_document(path, trace):
     result = extractor.build_result(raw, os.path.basename(path),
                                     parsed["method"])
     validator.run_checks(result, tables, trace)
+
+    # 原文溯源（对应"结果一致性"）：逐字段回原文搜索证据，幻觉字段无所遁形
+    report = grounding.run_grounding(result, parsed["pages"], trace)
+    cov = report["coverage"]
+    miss = [list(m.keys())[0] for it in report["items"] for m in it["missing"]]
+    result.checks.append(CheckResult(
+        name="原文溯源覆盖率",
+        passed=cov >= 0.8,
+        detail=(f"{cov:.0%} 的已提取字段在原文中找到证据（{report['found']} 项命中）"
+                + (f"；未溯源字段: {'、'.join(miss[:6])}（多为单位换算或表述差异，需人工复核）"
+                   if miss else "")),
+        expected="≥80%", computed=f"{cov:.2%}"))
 
     os.makedirs(OUT_DIR, exist_ok=True)
     out_json = os.path.join(OUT_DIR, stem + ".result.json")
@@ -116,9 +130,10 @@ def main():
         trace_path = os.path.join(OUT_DIR, stem + ".trace.jsonl")
         os.makedirs(OUT_DIR, exist_ok=True)
         trace = Trace(trace_path)
+        from llm_client import get_config
+        _key, _base, _model = get_config()
         trace.log("run_start", input=path, env={
-            "llm_enabled": bool(os.environ.get("DEEPSEEK_API_KEY")),
-            "model": os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")})
+            "llm_enabled": bool(_key), "model": _model, "base_url": _base})
         result, source, out_json = run_document(path, trace)
         print_report(result, source, out_json, trace_path)
         print()

@@ -2,9 +2,10 @@
 """
 extractor.py —— 提取层（对应竞赛要求的 Tool / Prompt 模块）
 两条提取路径：
-1) LLM 提取（优先）：调用国产大模型 DeepSeek（OpenAI 兼容协议），
-   Prompt 见 prompts/pledge_extract.md，输出受 JSON 结构约束；
-2) 规则兜底：未配置 DEEPSEEK_API_KEY 或 LLM 调用失败时，
+1) LLM 提取（优先）：调用国产大模型（DeepSeek / Kimi 等 OpenAI 兼容端点），
+   Prompt 见 prompts/pledge_extract.md，输出受 JSON 结构约束，
+   并经"校验-重试闭环"保证格式规范（详见 llm_client.py 与 validate_llm_output）；
+2) 规则兜底：未配置 API Key 或 LLM 调用失败时，
    用正则 + 表格结构解析完成提取，保证管线任何时候都可运行、可复现。
 """
 import json
@@ -19,31 +20,83 @@ PROMPT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 # ------------------------------------------------------------------ LLM 路径
+MAX_ATTEMPTS = 3  # 校验-重试闭环的最大轮数
+
+
 def extract_with_llm(full_text: str, tables: list, trace=None) -> dict:
-    """调用 DeepSeek（OpenAI 兼容协议）按 Prompt 完成结构化提取，返回 dict"""
-    import requests
-    api_key = os.environ.get("DEEPSEEK_API_KEY", "")
-    base = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
-    model = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
-    if not api_key:
-        raise RuntimeError("未配置 DEEPSEEK_API_KEY，自动回退规则提取")
+    """LLM 提取 + 校验-重试闭环（对应竞赛"格式规范性"考察点）：
+    每轮输出先过 schema 校验 + 业务规则校验，不过审就把问题清单回灌给模型，
+    让它修正后重新输出（最多 MAX_ATTEMPTS 轮），全程 trace 留痕。"""
+    from llm_client import chat_json, get_config
+    key, base, model = get_config()
+    if not key:
+        raise RuntimeError("未配置 LLM API Key，自动回退规则提取")
     prompt = open(PROMPT_PATH, encoding="utf-8").read().replace("{{TEXT}}", full_text)
+    messages = [{"role": "user", "content": prompt}]
     if trace:
         trace.log("tool_call", tool="extract_with_llm", model=model,
                   api=base, prompt_chars=len(prompt))
-    resp = requests.post(
-        f"{base}/chat/completions",
-        headers={"Authorization": f"Bearer {api_key}"},
-        json={"model": model,
-              "messages": [{"role": "user", "content": prompt}],
-              "temperature": 0,
-              "response_format": {"type": "json_object"}},
-        timeout=180)
-    resp.raise_for_status()
-    content = resp.json()["choices"][0]["message"]["content"]
-    if trace:
-        trace.log("llm_response", chars=len(content), preview=content[:200])
-    return _parse_json_lenient(content)
+    last_errors = None
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        content = chat_json(messages, trace)
+        try:
+            raw = _parse_json_lenient(content)
+            errors = validate_llm_output(raw)
+        except Exception as e:
+            raw, errors = None, [f"JSON 解析失败: {str(e)[:200]}"]
+        if not errors:
+            if trace:
+                trace.log("llm_extract_ok", attempt=attempt)
+            return raw
+        last_errors = errors
+        if trace:
+            trace.log("llm_extract_retry", attempt=attempt, errors=errors)
+        # 错误回灌：附上模型的上次输出与问题清单，要求修正后重出完整 JSON
+        messages.append({"role": "assistant", "content": content})
+        messages.append({"role": "user", "content": _retry_prompt(errors)})
+    raise RuntimeError(f"LLM 提取连续 {MAX_ATTEMPTS} 轮未通过校验: {last_errors}")
+
+
+def _retry_prompt(errors: list) -> str:
+    items = "\n".join(f"{i + 1}. {e}" for i, e in enumerate(errors))
+    return ("你上次输出的 JSON 未通过校验，问题如下：\n" + items +
+            "\n请逐条修正后，重新输出完整的 JSON 对象"
+            "（只输出 JSON，不要任何解释文字或 markdown 围栏）。")
+
+
+def validate_llm_output(raw) -> list:
+    """对 LLM 输出做 schema 级 + 业务规则校验，返回问题清单（空 = 通过）"""
+    errors = []
+    if not isinstance(raw, dict):
+        return ["输出不是 JSON 对象"]
+    meta = raw.get("doc_meta") or {}
+    code = meta.get("sec_code")
+    if code and not re.fullmatch(r"\d{6}", str(code)):
+        errors.append(f"doc_meta.sec_code 应为 6 位数字，实际为 {code!r}")
+    doc_type = meta.get("doc_type") or ""
+    records = raw.get("records") or []
+    if doc_type and "质押" in doc_type and not records:
+        errors.append(f"公告类型为'{doc_type}'但 records 为空，请检查是否遗漏了表格中的记录")
+    for i, r in enumerate(records):
+        pre = f"records[{i}]"
+        if r.get("record_type") not in ("新增质押", "解除质押", "展期"):
+            errors.append(f"{pre}.record_type 非法: {r.get('record_type')!r}"
+                          "（只能是 新增质押/解除质押/展期）")
+        shares = r.get("shares")
+        if shares is not None and (not isinstance(shares, int) or shares <= 0):
+            errors.append(f"{pre}.shares 应为正整数（去掉千分位逗号），实际为 {shares!r}")
+        for f in ("pct_of_held", "pct_of_total"):
+            v = r.get(f)
+            if v is not None and not (0 <= v <= 100):
+                errors.append(f"{pre}.{f} 超出合理范围 [0,100]: {v}")
+    for i, c in enumerate(raw.get("cumulative") or []):
+        if not (c.get("shareholder") or "").strip():
+            errors.append(f"cumulative[{i}].shareholder 为空")
+    try:
+        build_result(raw, "llm_input", "llm")  # pydantic 强校验兜底
+    except Exception as e:
+        errors.append(f"schema 结构校验失败: {str(e)[:200]}")
+    return errors
 
 
 def _parse_json_lenient(content: str) -> dict:

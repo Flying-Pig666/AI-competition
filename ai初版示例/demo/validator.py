@@ -111,9 +111,19 @@ def run_checks(result, tables=None, trace=None):
                            f"（由持股比例反推） = {computed:.4f}%，公告披露 {r.pct_of_total}%",
                            expected=str(r.pct_of_total), computed=f"{computed:.4f}%")
 
-    # 5. 风险提示勾稽：未来一年内到期股数 == 累计质押后股数
+    # 5. 风险提示勾稽：
+    #    "未来一年内"到期股数 == 某股东累计质押后股数（全部质押一年内到期的常见情形）
+    #    "未来半年内"到期股数 <= 累计质押后最大值（半年到期是一年内的子集）
     for item in result.risk_items:
-        if not item.shares:
+        if item.shares is None:
+            continue
+        if "半年" in item.horizon:
+            max_post = max((c.post_pledge_shares or 0 for c in cums), default=0)
+            ok = item.shares <= max_post
+            _check(checks, f"风险提示勾稽-{item.horizon}", ok,
+                   f"{item.horizon}到期 {item.shares:,}股 {'≤' if ok else '>'} "
+                   f"累计质押后最大值 {max_post:,}股（半年到期应为累计质押的子集）",
+                   expected=f"≤{max_post:,}", computed=str(item.shares))
             continue
         matched = next((c for c in cums if c.post_pledge_shares == item.shares), None)
         if matched:

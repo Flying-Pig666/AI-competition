@@ -21,10 +21,10 @@
       "is_supplementary": false,
       "pledge_start_date": "2023-03-07",
       "pledge_end_date": "2026-11-16",
-      "original_end_date": "2026-09-04",
-      "release_date": null,
+      "original_end_date": null,
+      "release_date": "",
       "purpose": "营运资金补充",
-      "evidence": "贵阳市国有资产投资管理公司 | 否 | 37,502,000 | 否 | 否 | 2023年3月7日 | 2026年9月4日 | 2026年11月16日 | 国泰海通证券股份有限公司 | 8.0030 | 1.0257 | 营运资金补充"
+      "evidence": "贵阳市国有资产投资管理公司 | 否 | 37,502,000 | 否 | 否 | 2023 年 3 月 7 日 | 2026 年 9 月 4 日 | 2026 年 11 月 16 日 | 国泰海通证券股份有限公司 | 8.0030 | 1.0257 | 营运资金补充"
     },
     {
       "record_type": "展期",
@@ -38,10 +38,10 @@
       "is_supplementary": false,
       "pledge_start_date": "2023-03-09",
       "pledge_end_date": "2026-11-16",
-      "original_end_date": "2026-09-04",
-      "release_date": null,
+      "original_end_date": null,
+      "release_date": "",
       "purpose": "营运资金补充",
-      "evidence": "贵阳市国有资产投资管理公司 | 否 | 46,318,100 | 否 | 否 | 2023年3月9日 | 2026年9月4日 | 2026年11月16日 | 国泰海通证券股份有限公司 | 9.8844 | 1.2668 | 营运资金补充"
+      "evidence": "贵阳市国有资产投资管理公司 | 否 | 46,318,100 | 否 | 否 | 2023 年 3 月 9 日 | 2026 年 9 月 4 日 | 2026 年 11 月 16 日 | 国泰海通证券股份有限公司 | 9.8844 | 1.2668 | 营运资金补充"
     }
   ],
   "cumulative": [
@@ -169,60 +169,11 @@
       "computed": "0"
     },
     {
-      "name": "合计行加总-shares",
+      "name": "原文溯源覆盖率",
       "passed": true,
-      "detail": "明细加总 83,820,100 vs 合计行 83,820,100",
-      "expected": "83820100",
-      "computed": "83820100"
-    },
-    {
-      "name": "合计行加总-pct_of_held",
-      "passed": true,
-      "detail": "明细加总 17.8874 vs 合计行 17.8874",
-      "expected": "17.8874",
-      "computed": "17.8874"
-    },
-    {
-      "name": "合计行加总-pct_of_total",
-      "passed": true,
-      "detail": "明细加总 2.2925 vs 合计行 2.2925",
-      "expected": "2.2925",
-      "computed": "2.2925"
-    },
-    {
-      "name": "合计行加总-holding_shares",
-      "passed": true,
-      "detail": "明细加总 565,644,166 vs 合计行 565,644,166",
-      "expected": "565644166",
-      "computed": "565644166"
-    },
-    {
-      "name": "合计行加总-pre_pledge_shares",
-      "passed": true,
-      "detail": "明细加总 279,543,597 vs 合计行 279,543,597",
-      "expected": "279543597",
-      "computed": "279543597"
-    },
-    {
-      "name": "合计行加总-post_pledge_shares",
-      "passed": true,
-      "detail": "明细加总 279,543,597 vs 合计行 279,543,597",
-      "expected": "279543597",
-      "computed": "279543597"
-    },
-    {
-      "name": "合计行加权-占其所持比例",
-      "passed": true,
-      "detail": "Σ质押后 279,543,597 ÷ Σ持股 565,644,166 = 49.4204% vs 合计行 49.4204%",
-      "expected": "49.4204",
-      "computed": "49.4204%"
-    },
-    {
-      "name": "合计行加权-占总股本比例",
-      "passed": true,
-      "detail": "Σ质押后 ÷ 总股本（由Σ持股÷持股比例反推 3,656,205,018股） = 7.6457% vs 合计行 7.6457%",
-      "expected": "7.6457",
-      "computed": "7.6457%"
+      "detail": "100% 的已提取字段在原文中找到证据（30 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
     }
   ]
 }
