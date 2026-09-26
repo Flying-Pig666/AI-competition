@@ -1,0 +1,552 @@
+{
+  "code": "000863",
+  "name": "三湘印象",
+  "industry": "地产文化",
+  "analysis_time": "2026-09-27T00:54:19.509992+08:00",
+  "verdict": "高风险",
+  "red_count": 24,
+  "orange_count": 18,
+  "red_flags": [
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "1998年报",
+      "evidence": {
+        "基本每股收益": 0.334,
+        "每股经营现金流": 0.05,
+        "比值": "0.15"
+      },
+      "explanation": "1998 年每股经营现金流仅为每股收益的 0.15 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "1999年报",
+      "evidence": {
+        "净利润": 17020100.0,
+        "每股经营现金流": -0.12
+      },
+      "explanation": "1999 年账面净利润 1702.01 万，但每股经营现金流 -0.12 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "1999年报",
+      "evidence": {
+        "基本每股收益": 0.297,
+        "每股经营现金流": -0.12,
+        "比值": "-0.40"
+      },
+      "explanation": "1999 年每股经营现金流仅为每股收益的 -0.40 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2000年报",
+      "evidence": {
+        "净利润": 33557500.0,
+        "每股经营现金流": -0.05
+      },
+      "explanation": "2000 年账面净利润 3355.75 万，但每股经营现金流 -0.05 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2000年报",
+      "evidence": {
+        "基本每股收益": 0.247,
+        "每股经营现金流": -0.05,
+        "比值": "-0.20"
+      },
+      "explanation": "2000 年每股经营现金流仅为每股收益的 -0.20 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2001年报",
+      "evidence": {
+        "净利润": 31892300.0,
+        "每股经营现金流": -0.74
+      },
+      "explanation": "2001 年账面净利润 3189.23 万，但每股经营现金流 -0.74 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2001年报",
+      "evidence": {
+        "基本每股收益": 0.235,
+        "每股经营现金流": -0.74,
+        "比值": "-3.15"
+      },
+      "explanation": "2001 年每股经营现金流仅为每股收益的 -3.15 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "orange",
+      "period": "2002年报",
+      "evidence": {
+        "上年净利润": 31892300.0,
+        "本年净利润": 17265300.0,
+        "同比": "-46%"
+      },
+      "explanation": "2002 年净利润同比 -46%(上年 3189.23 万 → 本年 1726.53 万)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2004年报",
+      "evidence": {
+        "上年净利润": 18929300.0,
+        "本年净利润": -182000000.0,
+        "同比": "-1061%"
+      },
+      "explanation": "2004 年净利润同比 -1061%(上年 1892.93 万 → 本年 -1.82 亿)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "orange",
+      "period": "2006年报",
+      "evidence": {
+        "净利润": -769000000.0,
+        "扣非净利润": -459999999.99999994,
+        "差异率": "40%"
+      },
+      "explanation": "2006 年净利润与扣非净利润差异率达 40%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2008年报",
+      "evidence": {
+        "基本每股收益": 0.03,
+        "每股经营现金流": -0.02,
+        "比值": "-0.67"
+      },
+      "explanation": "2008 年每股经营现金流仅为每股收益的 -0.67 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2008年报",
+      "evidence": {
+        "上年净利润": 30373400.0,
+        "本年净利润": 4895800.0,
+        "同比": "-84%"
+      },
+      "explanation": "2008 年净利润同比 -84%(上年 3037.34 万 → 本年 489.58 万)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2009年报",
+      "evidence": {
+        "基本每股收益": 0.05,
+        "每股经营现金流": -0.0017,
+        "比值": "-0.03"
+      },
+      "explanation": "2009 年每股经营现金流仅为每股收益的 -0.03 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R3",
+      "rule": "营收与利润背离",
+      "severity": "orange",
+      "period": "2009年报",
+      "evidence": {
+        "营收同比": "-92%",
+        "净利润同比": "63%"
+      },
+      "explanation": "2009 年营收下降 -92% 但净利润增长 63%，利润增长缺乏收入支撑",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2010年报",
+      "evidence": {
+        "净利润": 189000000.0,
+        "扣非净利润": -25779800.0,
+        "差异率": "114%"
+      },
+      "explanation": "2010 年净利润与扣非净利润差异率达 114%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2011年报",
+      "evidence": {
+        "净利润": 235000000.0,
+        "每股经营现金流": -0.43
+      },
+      "explanation": "2011 年账面净利润 2.35 亿，但每股经营现金流 -0.43 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2011年报",
+      "evidence": {
+        "基本每股收益": 0.42,
+        "每股经营现金流": -0.43,
+        "比值": "-1.02"
+      },
+      "explanation": "2011 年每股经营现金流仅为每股收益的 -1.02 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R3",
+      "rule": "营收与利润背离",
+      "severity": "orange",
+      "period": "2011年报",
+      "evidence": {
+        "营收同比": "-18%",
+        "净利润同比": "24%"
+      },
+      "explanation": "2011 年营收下降 -18% 但净利润增长 24%，利润增长缺乏收入支撑",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2013年报",
+      "evidence": {
+        "净利润": 480000000.0,
+        "每股经营现金流": -0.28
+      },
+      "explanation": "2013 年账面净利润 4.80 亿，但每股经营现金流 -0.28 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2013年报",
+      "evidence": {
+        "基本每股收益": 0.65,
+        "每股经营现金流": -0.28,
+        "比值": "-0.43"
+      },
+      "explanation": "2013 年每股经营现金流仅为每股收益的 -0.43 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2014年报",
+      "evidence": {
+        "净利润": 146000000.0,
+        "每股经营现金流": -1.54
+      },
+      "explanation": "2014 年账面净利润 1.46 亿，但每股经营现金流 -1.54 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2014年报",
+      "evidence": {
+        "净利润": 146000000.0,
+        "扣非净利润": 39378400.0,
+        "差异率": "73%"
+      },
+      "explanation": "2014 年净利润与扣非净利润差异率达 73%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2014年报",
+      "evidence": {
+        "基本每股收益": 0.19,
+        "每股经营现金流": -1.54,
+        "比值": "-8.11"
+      },
+      "explanation": "2014 年每股经营现金流仅为每股收益的 -8.11 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2014年报",
+      "evidence": {
+        "上年净利润": 480000000.0,
+        "本年净利润": 146000000.0,
+        "同比": "-70%"
+      },
+      "explanation": "2014 年净利润同比 -70%(上年 4.80 亿 → 本年 1.46 亿)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2015年报",
+      "evidence": {
+        "净利润": 105000000.0,
+        "每股经营现金流": -0.8
+      },
+      "explanation": "2015 年账面净利润 1.05 亿，但每股经营现金流 -0.80 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2015年报",
+      "evidence": {
+        "净利润": 105000000.0,
+        "扣非净利润": -248000000.0,
+        "差异率": "336%"
+      },
+      "explanation": "2015 年净利润与扣非净利润差异率达 336%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2015年报",
+      "evidence": {
+        "基本每股收益": 0.11,
+        "每股经营现金流": -0.8,
+        "比值": "-7.27"
+      },
+      "explanation": "2015 年每股经营现金流仅为每股收益的 -7.27 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2017年报",
+      "evidence": {
+        "净利润": 265000000.0,
+        "每股经营现金流": -1.84
+      },
+      "explanation": "2017 年账面净利润 2.65 亿，但每股经营现金流 -1.84 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2017年报",
+      "evidence": {
+        "基本每股收益": 0.19,
+        "每股经营现金流": -1.84,
+        "比值": "-9.68"
+      },
+      "explanation": "2017 年每股经营现金流仅为每股收益的 -9.68 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2017年报",
+      "evidence": {
+        "上年净利润": 705000000.0,
+        "本年净利润": 265000000.0,
+        "同比": "-62%"
+      },
+      "explanation": "2017 年净利润同比 -62%(上年 7.05 亿 → 本年 2.65 亿)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2018年报",
+      "evidence": {
+        "净利润": -455999999.99999994,
+        "扣非净利润": -1035000000.0,
+        "差异率": "127%"
+      },
+      "explanation": "2018 年净利润与扣非净利润差异率达 127%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2018年报",
+      "evidence": {
+        "上年净利润": 265000000.0,
+        "本年净利润": -455999999.99999994,
+        "同比": "-272%"
+      },
+      "explanation": "2018 年净利润同比 -272%(上年 2.65 亿 → 本年 -4.56 亿)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "orange",
+      "period": "2019年报",
+      "evidence": {
+        "净利润": 282000000.0,
+        "扣非净利润": 166000000.0,
+        "差异率": "41%"
+      },
+      "explanation": "2019 年净利润与扣非净利润差异率达 41%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "orange",
+      "period": "2020年报",
+      "evidence": {
+        "净利润": 300000000.0,
+        "扣非净利润": 184000000.0,
+        "差异率": "39%"
+      },
+      "explanation": "2020 年净利润与扣非净利润差异率达 39%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2021年报",
+      "evidence": {
+        "净利润": 112999999.99999999,
+        "扣非净利润": -45509900.0,
+        "差异率": "140%"
+      },
+      "explanation": "2021 年净利润与扣非净利润差异率达 140%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2021年报",
+      "evidence": {
+        "上年净利润": 300000000.0,
+        "本年净利润": 112999999.99999999,
+        "同比": "-62%"
+      },
+      "explanation": "2021 年净利润同比 -62%(上年 3.00 亿 → 本年 1.13 亿)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2022年报",
+      "evidence": {
+        "上年净利润": 112999999.99999999,
+        "本年净利润": 29943700.0,
+        "同比": "-74%"
+      },
+      "explanation": "2022 年净利润同比 -74%(上年 1.13 亿 → 本年 2994.37 万)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2023年报",
+      "evidence": {
+        "上年净利润": 29943700.0,
+        "本年净利润": 1235800.0,
+        "同比": "-96%"
+      },
+      "explanation": "2023 年净利润同比 -96%(上年 2994.37 万 → 本年 123.58 万)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2025年报",
+      "evidence": {
+        "上年净利润": 19277900.0,
+        "本年净利润": -134000000.00000001,
+        "同比": "-795%"
+      },
+      "explanation": "2025 年净利润同比 -795%(上年 1927.79 万 → 本年 -1.34 亿)",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R5",
+      "rule": "持续亏损",
+      "severity": "red",
+      "period": "2004-2005年报",
+      "evidence": {
+        "前两年净利润": -182000000.0,
+        "前一年净利润": -443000000.0
+      },
+      "explanation": "连续两年亏损(-1.82 亿、-4.43 亿)，存在 ST 风险",
+      "source": "data/financials/000863_三湘印象/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R8",
+      "rule": "股东高比例质押",
+      "severity": "red",
+      "period": "2026-09-08",
+      "evidence": {
+        "股东": "黄辉",
+        "质押占其所持": "76.38%",
+        "质押后股数": 127000000
+      },
+      "explanation": "黄辉 已质押其所持股份的 76.38%，股价下跌时存在平仓/控制权变动风险(质押公告提取结果直接驱动本预警)",
+      "source": "output/000863_三湘印象_质押和解除质押.result.json"
+    },
+    {
+      "rule_id": "R9",
+      "rule": "质押到期压力",
+      "severity": "orange",
+      "period": "2026-09-08",
+      "evidence": {
+        "期间": "未来半年内",
+        "到期股数": 39500000,
+        "融资余额": 40000000
+      },
+      "explanation": "未来半年内到期质押 39,500,000 股，对应融资余额 4000.00 万，短期偿付压力需关注",
+      "source": "output/000863_三湘印象_质押和解除质押.result.json"
+    }
+  ],
+  "data_sources": [
+    "abstract_ths.csv(同花顺)",
+    "indicators_sina.csv(新浪)",
+    "output/*.result.json(选题一提取结果)"
+  ],
+  "note": "全部指标由代码对落盘数据计算,未经 LLM 口算;银行业现金流/杠杆口径特殊已豁免 R1/R6/R7"
+}

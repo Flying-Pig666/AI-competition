@@ -1,0 +1,16 @@
+{
+  "code": "601997",
+  "name": "贵阳银行",
+  "industry": "银行",
+  "analysis_time": "2026-09-27T00:54:19.518085+08:00",
+  "verdict": "稳健",
+  "red_count": 0,
+  "orange_count": 0,
+  "red_flags": [],
+  "data_sources": [
+    "abstract_ths.csv(同花顺)",
+    "indicators_sina.csv(新浪)",
+    "output/*.result.json(选题一提取结果)"
+  ],
+  "note": "全部指标由代码对落盘数据计算,未经 LLM 口算;银行业现金流/杠杆口径特殊已豁免 R1/R6/R7"
+}

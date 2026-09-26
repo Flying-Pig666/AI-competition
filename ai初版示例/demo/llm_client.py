@@ -37,15 +37,22 @@ def _load_env_file() -> dict:
 
 
 def get_config():
-    """返回 (api_key, base_url, model)；未配置时 api_key 为空串"""
+    """返回 (api_key, base_url, model)；未配置时 api_key 为空串。
+    优先级：环境变量 DEEPSEEK_* > .env 的 DEEPSEEK_*（DeepSeek 主力，
+    temperature=0 可复现）> .env 的 DS_*（Kimi 等备用线路）"""
     key = os.environ.get("DEEPSEEK_API_KEY", "")
     base = os.environ.get("DEEPSEEK_BASE_URL", "")
     model = os.environ.get("DEEPSEEK_MODEL", "")
     if not key:
         cfg = _load_env_file()
-        key = cfg.get("DS_API_KEY", "")
-        base = base or cfg.get("DS_BASE_URL", "")
-        model = model or cfg.get("DS_MODEL_NAME", "")
+        if cfg.get("DEEPSEEK_API_KEY"):
+            key = cfg["DEEPSEEK_API_KEY"]
+            base = base or cfg.get("DEEPSEEK_BASE_URL", "")
+            model = model or cfg.get("DEEPSEEK_MODEL", "")
+        else:
+            key = cfg.get("DS_API_KEY", "")
+            base = base or cfg.get("DS_BASE_URL", "")
+            model = model or cfg.get("DS_MODEL_NAME", "")
     return key, base or "https://api.deepseek.com", model or "deepseek-chat"
 
 

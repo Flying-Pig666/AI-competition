@@ -1,0 +1,308 @@
+{
+  "code": "600518",
+  "name": "康美药业",
+  "industry": "医药",
+  "analysis_time": "2026-09-27T00:54:19.526423+08:00",
+  "verdict": "高风险",
+  "red_count": 12,
+  "orange_count": 11,
+  "red_flags": [
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2008年报",
+      "evidence": {
+        "基本每股收益": 0.193,
+        "每股经营现金流": 0.004,
+        "比值": "0.02"
+      },
+      "explanation": "2008 年每股经营现金流仅为每股收益的 0.02 倍(<0.3)，利润含金量低",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2009年报",
+      "evidence": {
+        "基本每股收益": 0.309,
+        "每股经营现金流": 0.07,
+        "比值": "0.23"
+      },
+      "explanation": "2009 年每股经营现金流仅为每股收益的 0.23 倍(<0.3)，利润含金量低",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2015年报",
+      "evidence": {
+        "基本每股收益": 0.623,
+        "每股经营现金流": 0.12,
+        "比值": "0.19"
+      },
+      "explanation": "2015 年每股经营现金流仅为每股收益的 0.19 倍(<0.3)，利润含金量低",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2017年报",
+      "evidence": {
+        "净利润": 2150000000.0,
+        "扣非净利润": 4028000000.0,
+        "差异率": "87%"
+      },
+      "explanation": "2017 年净利润与扣非净利润差异率达 87%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "orange",
+      "period": "2017年报",
+      "evidence": {
+        "上年净利润": 3340000000.0,
+        "本年净利润": 2150000000.0,
+        "同比": "-36%"
+      },
+      "explanation": "2017 年净利润同比 -36%(上年 33.40 亿 → 本年 21.50 亿)",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2018年报",
+      "evidence": {
+        "净利润": 374000000.0,
+        "每股经营现金流": -0.64
+      },
+      "explanation": "2018 年账面净利润 3.74 亿，但每股经营现金流 -0.64 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2018年报",
+      "evidence": {
+        "净利润": 374000000.0,
+        "扣非净利润": 1021000000.0000001,
+        "差异率": "173%"
+      },
+      "explanation": "2018 年净利润与扣非净利润差异率达 173%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2018年报",
+      "evidence": {
+        "基本每股收益": 0.0302,
+        "每股经营现金流": -0.64,
+        "比值": "-21.19"
+      },
+      "explanation": "2018 年每股经营现金流仅为每股收益的 -21.19 倍(<0.3)，利润含金量低",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2018年报",
+      "evidence": {
+        "上年净利润": 2150000000.0,
+        "本年净利润": 374000000.0,
+        "同比": "-83%"
+      },
+      "explanation": "2018 年净利润同比 -83%(上年 21.50 亿 → 本年 3.74 亿)",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2019年报",
+      "evidence": {
+        "上年净利润": 374000000.0,
+        "本年净利润": -4661000000.0,
+        "同比": "-1346%"
+      },
+      "explanation": "2019 年净利润同比 -1346%(上年 3.74 亿 → 本年 -46.61 亿)",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2021年报",
+      "evidence": {
+        "净利润": 7918000000.000001,
+        "扣非净利润": -7968000000.000001,
+        "差异率": "201%"
+      },
+      "explanation": "2021 年净利润与扣非净利润差异率达 201%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2021年报",
+      "evidence": {
+        "基本每股收益": 0.57,
+        "每股经营现金流": 0.02,
+        "比值": "0.04"
+      },
+      "explanation": "2021 年每股经营现金流仅为每股收益的 0.04 倍(<0.3)，利润含金量低",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R3",
+      "rule": "营收与利润背离",
+      "severity": "orange",
+      "period": "2021年报",
+      "evidence": {
+        "营收同比": "-23%",
+        "净利润同比": "125%"
+      },
+      "explanation": "2021 年营收下降 -23% 但净利润增长 125%，利润增长缺乏收入支撑",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "orange",
+      "period": "2022年报",
+      "evidence": {
+        "净利润": -2688000000.0,
+        "扣非净利润": -1509000000.0,
+        "差异率": "44%"
+      },
+      "explanation": "2022 年净利润与扣非净利润差异率达 44%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2022年报",
+      "evidence": {
+        "上年净利润": 7918000000.000001,
+        "本年净利润": -2688000000.0,
+        "同比": "-134%"
+      },
+      "explanation": "2022 年净利润同比 -134%(上年 79.18 亿 → 本年 -26.88 亿)",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2023年报",
+      "evidence": {
+        "净利润": 103000000.0,
+        "每股经营现金流": -0.02
+      },
+      "explanation": "2023 年账面净利润 1.03 亿，但每股经营现金流 -0.02 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2023年报",
+      "evidence": {
+        "净利润": 103000000.0,
+        "扣非净利润": -753000000.0,
+        "差异率": "831%"
+      },
+      "explanation": "2023 年净利润与扣非净利润差异率达 831%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2023年报",
+      "evidence": {
+        "基本每股收益": 0.01,
+        "每股经营现金流": -0.02,
+        "比值": "-2.00"
+      },
+      "explanation": "2023 年每股经营现金流仅为每股收益的 -2.00 倍(<0.3)，利润含金量低",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2024年报",
+      "evidence": {
+        "基本每股收益": 0.0006,
+        "每股经营现金流": -0.03,
+        "比值": "-50.00"
+      },
+      "explanation": "2024 年每股经营现金流仅为每股收益的 -50.00 倍(<0.3)，利润含金量低",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2024年报",
+      "evidence": {
+        "上年净利润": 103000000.0,
+        "本年净利润": 8573700.0,
+        "同比": "-92%"
+      },
+      "explanation": "2024 年净利润同比 -92%(上年 1.03 亿 → 本年 857.37 万)",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R5",
+      "rule": "持续亏损",
+      "severity": "red",
+      "period": "2019-2020年报",
+      "evidence": {
+        "前两年净利润": -4661000000.0,
+        "前一年净利润": -31085000000.000004
+      },
+      "explanation": "连续两年亏损(-46.61 亿、-310.85 亿)，存在 ST 风险",
+      "source": "data/financials/600518_康美药业/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "orange",
+      "period": "2019年报",
+      "evidence": {
+        "资产负债率": "66.5%"
+      },
+      "explanation": "2019 年资产负债率 66.5%",
+      "source": "data/financials/600518_康美药业/indicators_sina.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "red",
+      "period": "2020年报",
+      "evidence": {
+        "资产负债率": "119.5%"
+      },
+      "explanation": "2020 年资产负债率 119.5%，已超 100% 资不抵债",
+      "source": "data/financials/600518_康美药业/indicators_sina.csv"
+    }
+  ],
+  "data_sources": [
+    "abstract_ths.csv(同花顺)",
+    "indicators_sina.csv(新浪)",
+    "output/*.result.json(选题一提取结果)"
+  ],
+  "note": "全部指标由代码对落盘数据计算,未经 LLM 口算;银行业现金流/杠杆口径特殊已豁免 R1/R6/R7"
+}
