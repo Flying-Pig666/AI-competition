@@ -1,0 +1,80 @@
+{
+  "doc_meta": {
+    "file_name": "600246_万通发展_万通发展：关于控股股东股份解质押的公告.pdf",
+    "doc_type": "解除质押公告",
+    "sec_code": "600246",
+    "sec_name": "万通发展",
+    "announcement_no": "2026-057",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "解除质押",
+      "pledgor": "嘉华东方控股（集团）有限公司",
+      "is_controller": true,
+      "pledgee": "",
+      "shares": 135584770,
+      "pct_of_held": 100.0,
+      "pct_of_total": 6.93,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "",
+      "pledge_end_date": "",
+      "original_end_date": null,
+      "release_date": "2026-09-23",
+      "purpose": "",
+      "evidence": "股东名称 嘉华东方控股（集团）有限公司 本次解质押股份（股） 135,584,770 占其所持股份比例 100% 占公司总股本比例 6.93% 解质时间 2026 年 9 月 23 日 持股数量（股） 135,584,770 持股比例 6.93% 剩余被质押股份数量（股） 0 剩余被质押股份数量占其所持股份比例 0% 剩余被质押股份数量占公司总股本比例 0%"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "嘉华东方控股（集团）有限公司及其一致行动人万通投资控股股份有限公司",
+      "holding_shares": 330326959,
+      "holding_pct": 16.89,
+      "pre_pledge_shares": 310110560,
+      "post_pledge_shares": 174525790,
+      "pct_of_held": 52.83,
+      "pct_of_total": 8.92,
+      "evidence": "截至本公告披露日，嘉华控股及其一致行动人万通投资控股股份有限公司（以下简称“万通控股”）合计持有公司股份 330,326,959 股，占公司总股本的 16.89%，累计质押股份数为 174,525,790 股，占其合计持股数的 52.83%，占公司总股本的 8.92%。"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'解除质押公告'与记录类型{解除质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-嘉华东方控股（集团）有限公司及其一致行动人万通投资控股股份有限公司",
+      "passed": true,
+      "detail": "310,110,560 − 135,584,770(解除) + 0(新增) = 174,525,790，公告披露为 174,525,790",
+      "expected": "174525790",
+      "computed": "174525790"
+    },
+    {
+      "name": "占其所持勾稽-嘉华东方控股（集团）有限公司及其一致行动人万通投资控股股份有限公司",
+      "passed": false,
+      "detail": "解除质押 135,584,770股 ÷ 持股 330,326,959股 = 41.0456%，公告披露 100.0%（误差 58.95%）",
+      "expected": "100.0",
+      "computed": "41.0456%"
+    },
+    {
+      "name": "占总股本勾稽-嘉华东方控股（集团）有限公司及其一致行动人万通投资控股股份有限公司",
+      "passed": true,
+      "detail": "解除质押 135,584,770股 ÷ 总股本 1,955,754,642股（由持股比例反推） = 6.9326%，公告披露 6.93%",
+      "expected": "6.93",
+      "computed": "6.9326%"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": false,
+      "detail": "78% 的已提取字段在原文中找到证据（7 项命中）；未溯源字段: shareholder、pre_pledge_shares（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "77.78%"
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "doc_meta": {
+    "file_name": "603499_翔港科技_翔港科技：关于控股股东、实际控制人及其一致行动人.pdf",
+    "doc_type": "质押及解除质押公告",
+    "sec_code": "603499",
+    "sec_name": "翔港科技",
+    "announcement_no": "2026-039",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "董建军",
+      "is_controller": true,
+      "pledgee": "中国银河证券",
+      "shares": 7125000,
+      "pct_of_held": 6.44,
+      "pct_of_total": 1.68,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "2028-09-22",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "偿还债务",
+      "evidence": "董建军 | 是 | 7,125,000 | 否 | 否 | 2026/9/23 | 2028/9/22 | 中国银河证券 | 6.44% | 1.68% | 偿还债务"
+    },
+    {
+      "record_type": "新增质押",
+      "pledgor": "上海翔湾投资咨询有限公司",
+      "is_controller": false,
+      "pledgee": "国泰海通证券股份有限公司",
+      "shares": 12000000,
+      "pct_of_held": 14.36,
+      "pct_of_total": 2.83,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "2027-09-23",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "偿还债务",
+      "evidence": "上海翔湾投资咨询有限公司 | 否 | 12,000,000 | 否 | 否 | 2026/9/23 | 2027/9/23 | 国泰海通证券股份有限公司 | 14.36% | 2.83% | 偿还债务"
+    },
+    {
+      "record_type": "解除质押",
+      "pledgor": "上海翔湾投资咨询有限公司",
+      "is_controller": false,
+      "pledgee": null,
+      "shares": 23520000,
+      "pct_of_held": 28.14,
+      "pct_of_total": 5.55,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": null,
+      "pledge_end_date": null,
+      "original_end_date": null,
+      "release_date": "2026-09-24",
+      "purpose": null,
+      "evidence": "股东名称 上海翔湾投资咨询有限公司；本次解除质押股份 23,520,000 股；占其持股份额比例 28.14%；占公司总股本比例 5.55%；解除质押时间 2026 年 9 月 24 日；持股数量 83,570,576 股；持股比例 19.73%；剩余被质押股份数量 12,000,000 股；剩余被质押股份数量占其所持股份比例 14.36%；剩余被质押股份数量占公司总股本比例 2.83%"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "董建军",
+      "holding_shares": 110655823,
+      "holding_pct": 26.12,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 7125000,
+      "pct_of_held": 6.44,
+      "pct_of_total": 1.68,
+      "evidence": "董建军 | 110,655,823 | 26.12% | 0 | 7,125,000 | 6.44% | 1.68% | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "翔湾投资",
+      "holding_shares": 83570676,
+      "holding_pct": 19.73,
+      "pre_pledge_shares": 23520000,
+      "post_pledge_shares": 35520000,
+      "pct_of_held": 42.5,
+      "pct_of_total": 8.38,
+      "evidence": "翔湾投资 | 83,570,676 | 19.73% | 23,520,000 | 35,520,000 | 42.50% | 8.38% | 0 | 0 | 0 | 0（注：正文称本次质押及解除质押后翔湾投资累计质押 12,000,000 股，占其持股 14.36%，占公司总股本 2.83%，与表格冲突，以表格为准）"
+    },
+    {
+      "shareholder": "董婷婷",
+      "holding_shares": 34496000,
+      "holding_pct": 8.14,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "董婷婷 | 34,496,000 | 8.14% | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押及解除质押公告'与记录类型{新增质押、解除质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-董建军",
+      "passed": true,
+      "detail": "0 − 0(解除) + 7,125,000(新增) = 7,125,000，公告披露为 7,125,000",
+      "expected": "7125000",
+      "computed": "7125000"
+    },
+    {
+      "name": "占其所持勾稽-董建军",
+      "passed": true,
+      "detail": "新增质押 7,125,000股 ÷ 持股 110,655,823股 = 6.4389%，公告披露 6.44%（误差 0.02%）",
+      "expected": "6.44",
+      "computed": "6.4389%"
+    },
+    {
+      "name": "占总股本勾稽-董建军",
+      "passed": true,
+      "detail": "新增质押 7,125,000股 ÷ 总股本 423,644,039股（由持股比例反推） = 1.6818%，公告披露 1.68%",
+      "expected": "1.68",
+      "computed": "1.6818%"
+    },
+    {
+      "name": "累计勾稽-翔湾投资",
+      "passed": false,
+      "detail": "23,520,000 − 23,520,000(解除) + 12,000,000(新增) = 12,000,000，公告披露为 35,520,000",
+      "expected": "35520000",
+      "computed": "12000000"
+    },
+    {
+      "name": "占其所持勾稽-翔湾投资",
+      "passed": true,
+      "detail": "新增质押 12,000,000股 ÷ 持股 83,570,676股 = 14.3591%，公告披露 14.36%（误差 0.01%）",
+      "expected": "14.36",
+      "computed": "14.3591%"
+    },
+    {
+      "name": "占其所持勾稽-翔湾投资",
+      "passed": true,
+      "detail": "解除质押 23,520,000股 ÷ 持股 83,570,676股 = 28.1438%，公告披露 28.14%（误差 0.01%）",
+      "expected": "28.14",
+      "computed": "28.1438%"
+    },
+    {
+      "name": "占总股本勾稽-翔湾投资",
+      "passed": true,
+      "detail": "新增质押 12,000,000股 ÷ 总股本 423,571,597股（由持股比例反推） = 2.8331%，公告披露 2.83%",
+      "expected": "2.83",
+      "computed": "2.8331%"
+    },
+    {
+      "name": "占总股本勾稽-翔湾投资",
+      "passed": true,
+      "detail": "解除质押 23,520,000股 ÷ 总股本 423,571,597股（由持股比例反推） = 5.5528%，公告披露 5.55%",
+      "expected": "5.55",
+      "computed": "5.5528%"
+    },
+    {
+      "name": "累计勾稽-董婷婷",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "87% 的已提取字段在原文中找到证据（26 项命中）；未溯源字段: pledge_start_date、pledge_end_date、pledge_start_date、pledge_end_date（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "86.67%"
+    }
+  ]
+}

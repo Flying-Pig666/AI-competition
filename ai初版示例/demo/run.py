@@ -54,7 +54,7 @@ def run_document(path, trace):
 
     result = extractor.build_result(raw, os.path.basename(path),
                                     parsed["method"])
-    validator.run_checks(result, tables, trace)
+    validator.run_checks(result, tables, trace, full_text=full_text)
 
     # 原文溯源（对应"结果一致性"）：逐字段回原文搜索证据，幻觉字段无所遁形
     report = grounding.run_grounding(result, parsed["pages"], trace)

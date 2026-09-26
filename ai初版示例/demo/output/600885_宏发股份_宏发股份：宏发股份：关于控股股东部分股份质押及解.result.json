@@ -1,0 +1,145 @@
+{
+  "doc_meta": {
+    "file_name": "600885_宏发股份_宏发股份：宏发股份：关于控股股东部分股份质押及解.pdf",
+    "doc_type": "质押及解除质押公告",
+    "sec_code": "600885",
+    "sec_name": "宏发股份",
+    "announcement_no": "临 2026-035",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "有格创业投资有限公司",
+      "is_controller": true,
+      "pledgee": "中国银河证券股份有限公司",
+      "shares": 11750000,
+      "pct_of_held": 3.65,
+      "pct_of_total": 0.76,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-22",
+      "pledge_end_date": "2028-09-21",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "补充流动资金",
+      "evidence": "有格投资 | 是 | 11,750,000 | 否 | 否 | 2026/9/22 | 2028/9/21 | 中国银河证券股份有限公司 | 3.65 | 0.76 | 补充流动资金"
+    },
+    {
+      "record_type": "展期",
+      "pledgor": "有格创业投资有限公司",
+      "is_controller": true,
+      "pledgee": "光大证券股份有限公司",
+      "shares": 1460000,
+      "pct_of_held": 0.45,
+      "pct_of_total": 0.09,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "2027-09-23",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "补充流动资金",
+      "evidence": "有格投资 | 是 | 1,460,000 | 否 | 否 | 2026/9/23 | 2027/9/23 | 光大证券股份有限公司 | 0.45 | 0.09 | 补充流动资金"
+    },
+    {
+      "record_type": "解除质押",
+      "pledgor": "有格创业投资有限公司",
+      "is_controller": true,
+      "pledgee": "中国银河证券股份有限公司",
+      "shares": 18564000,
+      "pct_of_held": null,
+      "pct_of_total": null,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": null,
+      "pledge_end_date": null,
+      "original_end_date": null,
+      "release_date": "2026-09-23",
+      "purpose": null,
+      "evidence": "本次原质押给中国银河证券股份有限公司的18,564,000 股已解除质押，相关手续已于2026年9月23日办理完毕。"
+    },
+    {
+      "record_type": "解除质押",
+      "pledgor": "有格创业投资有限公司",
+      "is_controller": true,
+      "pledgee": "光大证券股份有限公司",
+      "shares": 690000,
+      "pct_of_held": null,
+      "pct_of_total": null,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": null,
+      "pledge_end_date": null,
+      "original_end_date": null,
+      "release_date": "2026-09-22",
+      "purpose": null,
+      "evidence": "有格投资于2026年9月22日办理了其中 69 万股质押解除手续"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "有格创业投资有限公司",
+      "holding_shares": 321836292,
+      "holding_pct": 20.8,
+      "pre_pledge_shares": 40848000,
+      "post_pledge_shares": 33344000,
+      "pct_of_held": 10.36,
+      "pct_of_total": 2.15,
+      "evidence": "有格投资 | 321,836,292 | 20.80 | 40,848,000 | 33,344,000 | 10.36 | 2.15 | 0 | 0 | 0 | 0"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押及解除质押公告'与记录类型{展期、新增质押、解除质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-有格创业投资有限公司",
+      "passed": true,
+      "detail": "40,848,000 − 19,254,000(解除) + 11,750,000(新增) = 33,344,000，公告披露为 33,344,000",
+      "expected": "33344000",
+      "computed": "33344000"
+    },
+    {
+      "name": "占其所持勾稽-有格创业投资有限公司",
+      "passed": true,
+      "detail": "新增质押 11,750,000股 ÷ 持股 321,836,292股 = 3.6509%，公告披露 3.65%（误差 0.03%）",
+      "expected": "3.65",
+      "computed": "3.6509%"
+    },
+    {
+      "name": "占其所持勾稽-有格创业投资有限公司",
+      "passed": true,
+      "detail": "展期 1,460,000股 ÷ 持股 321,836,292股 = 0.4536%，公告披露 0.45%（误差 0.81%）",
+      "expected": "0.45",
+      "computed": "0.4536%"
+    },
+    {
+      "name": "占总股本勾稽-有格创业投资有限公司",
+      "passed": true,
+      "detail": "新增质押 11,750,000股 ÷ 总股本 1,547,289,865股（由持股比例反推） = 0.7594%，公告披露 0.76%",
+      "expected": "0.76",
+      "computed": "0.7594%"
+    },
+    {
+      "name": "占总股本勾稽-有格创业投资有限公司",
+      "passed": false,
+      "detail": "展期 1,460,000股 ÷ 总股本 1,547,289,865股（由持股比例反推） = 0.0944%，公告披露 0.09%",
+      "expected": "0.09",
+      "computed": "0.0944%"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "96% 的已提取字段在原文中找到证据（27 项命中）；未溯源字段: shares（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "96.43%"
+    }
+  ]
+}

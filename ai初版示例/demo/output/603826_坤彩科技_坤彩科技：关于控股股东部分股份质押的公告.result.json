@@ -1,0 +1,216 @@
+{
+  "doc_meta": {
+    "file_name": "603826_坤彩科技_坤彩科技：关于控股股东部分股份质押的公告.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "603826",
+    "sec_name": "坤彩科技",
+    "announcement_no": "2026-053",
+    "announcement_date": "2026-09-24",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "谢秉昆",
+      "is_controller": true,
+      "pledgee": "国开新型政策性金融工具有限公司",
+      "shares": 15050000,
+      "pct_of_held": 3.6097,
+      "pct_of_total": 1.7669,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-24",
+      "pledge_end_date": "办理解除质押登记手续之日",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "为上市公司融资提供增信措施",
+      "evidence": "谢秉昆 | 是 | 15,050,000 | 否 | 否 | 2026-9-24 | 办理解除质押登记手续之日 | 国开新型政策性金融工具有限公司 | 3.6097% | 1.7669% | 为上市公司融资提供增信措施"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "谢秉昆",
+      "holding_shares": 416931675,
+      "holding_pct": 48.9494,
+      "pre_pledge_shares": 150590550,
+      "post_pledge_shares": 165640550,
+      "pct_of_held": 39.7285,
+      "pct_of_total": 19.4469,
+      "evidence": "谢秉昆 | 416,931,675 | 48.9494% | 150,590,550 | 165,640,550 | 39.7285% | 19.4469% | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "榕坤投资",
+      "holding_shares": 35221996,
+      "holding_pct": 4.1352,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "榕坤投资 | 35,221,996 | 4.1352% | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "邓巧蓉",
+      "holding_shares": 29037272,
+      "holding_pct": 3.4091,
+      "pre_pledge_shares": 7540000,
+      "post_pledge_shares": 7540000,
+      "pct_of_held": 25.9666,
+      "pct_of_total": 0.8852,
+      "evidence": "邓巧蓉 | 29,037,272 | 3.4091% | 7,540,000 | 7,540,000 | 25.9666% | 0.8852% | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "谢良",
+      "holding_shares": 32090439,
+      "holding_pct": 3.7675,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "谢良 | 32,090,439 | 3.7675% | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "谢秉启",
+      "holding_shares": 2903728,
+      "holding_pct": 0.3409,
+      "pre_pledge_shares": 2899000,
+      "post_pledge_shares": 2899000,
+      "pct_of_held": 99.8372,
+      "pct_of_total": 0.3404,
+      "evidence": "谢秉启 | 2,903,728 | 0.3409% | 2,899,000 | 2,899,000 | 99.8372% | 0.3404% | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "邓玉红",
+      "holding_shares": 1203142,
+      "holding_pct": 0.1413,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "邓玉红 | 1,203,142 | 0.1413% | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "邓碧容",
+      "holding_shares": 289926,
+      "holding_pct": 0.034,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "邓碧容 | 289,926 | 0.0340% | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "郑松",
+      "holding_shares": 77740,
+      "holding_pct": 0.0091,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "郑松 | 77,740 | 0.0091% | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0"
+    },
+    {
+      "shareholder": "王太海",
+      "holding_shares": 32396,
+      "holding_pct": 0.0038,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "王太海 | 32,396 | 0.0038% | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-谢秉昆",
+      "passed": true,
+      "detail": "150,590,550 − 0(解除) + 15,050,000(新增) = 165,640,550，公告披露为 165,640,550",
+      "expected": "165640550",
+      "computed": "165640550"
+    },
+    {
+      "name": "占其所持勾稽-谢秉昆",
+      "passed": true,
+      "detail": "新增质押 15,050,000股 ÷ 持股 416,931,675股 = 3.6097%，公告披露 3.6097%（误差 0.00%）",
+      "expected": "3.6097",
+      "computed": "3.6097%"
+    },
+    {
+      "name": "占总股本勾稽-谢秉昆",
+      "passed": true,
+      "detail": "新增质押 15,050,000股 ÷ 总股本 851,760,543股（由持股比例反推） = 1.7669%，公告披露 1.7669%",
+      "expected": "1.7669",
+      "computed": "1.7669%"
+    },
+    {
+      "name": "累计勾稽-榕坤投资",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-邓巧蓉",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 7,540,000 == 本次质押后 7,540,000",
+      "expected": "7540000",
+      "computed": "7540000"
+    },
+    {
+      "name": "累计勾稽-谢良",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-谢秉启",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 2,899,000 == 本次质押后 2,899,000",
+      "expected": "2899000",
+      "computed": "2899000"
+    },
+    {
+      "name": "累计勾稽-邓玉红",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-邓碧容",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-郑松",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-王太海",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（32 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}

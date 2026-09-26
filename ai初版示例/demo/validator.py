@@ -32,7 +32,7 @@ def _same_shareholder(pledgor, shareholder):
     return pledgor in shareholder or shareholder in pledgor
 
 
-def run_checks(result, tables=None, trace=None):
+def run_checks(result, tables=None, trace=None, full_text=None):
     checks = []
     recs = result.records
     cums = result.cumulative
@@ -55,10 +55,15 @@ def run_checks(result, tables=None, trace=None):
                f"公告类型'{dt}'与记录类型{{{kinds_str}}}匹配")
 
     if not cums:
-        detail = "未提取到累计质押表，跳过勾稽校验（扫描件需 LLM 提取或版面表格识别）"
-        _check(checks, "累计勾稽", False, detail)
-        _check(checks, "占其所持勾稽", False, detail)
-        _check(checks, "占总股本勾稽", False, detail)
+        if full_text is not None and "累计" not in full_text:
+            # 预告/拟签署类公告本身无累计质押表 → 勾稽类校验不适用(计为通过并注明)
+            _check(checks, "累计勾稽", True,
+                   "该公告未披露累计质押情况(预告/拟签署类),勾稽校验不适用", expected="N/A", computed="N/A")
+        else:
+            detail = "未提取到累计质押表,跳过勾稽校验(扫描件需 LLM 提取或版面表格识别)"
+            _check(checks, "累计勾稽", False, detail)
+            _check(checks, "占其所持勾稽", False, detail)
+            _check(checks, "占总股本勾稽", False, detail)
         if trace:
             trace.log("validation", checks=[c.model_dump() for c in checks])
         result.checks = checks

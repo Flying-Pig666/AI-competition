@@ -1,0 +1,186 @@
+{
+  "doc_meta": {
+    "file_name": "300552_万集科技_万集科技：关于控股股东、实际控制人部分股份质押的.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "300552",
+    "sec_name": "万集科技",
+    "announcement_no": "2026-046",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "翟军",
+      "is_controller": true,
+      "pledgee": "建德市新安小额贷款股份有限公司",
+      "shares": 2100000,
+      "pct_of_held": 2.4,
+      "pct_of_total": 0.99,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "申请解除质押登记日",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "融资",
+      "evidence": "翟军 | 是 | 2,100,000 | 2.40% | 0.99% | 否 | 否 | 2026 年 09 月 23 日 | 申请解除质押登记日 | 建德市新安小额贷款股份有限公司 | 融资"
+    },
+    {
+      "record_type": "新增质押",
+      "pledgor": "翟军",
+      "is_controller": true,
+      "pledgee": "海宁鸿丰小额贷款股份有限公司",
+      "shares": 2650000,
+      "pct_of_held": 3.03,
+      "pct_of_total": 1.24,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "申请解除质押登记日",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "融资",
+      "evidence": "是 | 2,650,000 | 3.03% | 1.24% | 否 | 否 | 2026 年 09 月 23 日 | 申请解除质押登记日 | 海宁鸿丰小额贷款股份有限公司 | 融资"
+    },
+    {
+      "record_type": "新增质押",
+      "pledgor": "翟军",
+      "is_controller": true,
+      "pledgee": "苏州市吴中典当有限责任公司",
+      "shares": 3050000,
+      "pct_of_held": 3.49,
+      "pct_of_total": 1.43,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "申请解除质押登记日",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "融资",
+      "evidence": "是 | 3,050,000 | 3.49% | 1.43% | 否 | 否 | 2026 年 09 月 23 日 | 申请解除质押登记日 | 苏州市吴中典当有限责任公司 | 融资"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "翟军",
+      "holding_shares": 87437136,
+      "holding_pct": 41.02,
+      "pre_pledge_shares": 42550000,
+      "post_pledge_shares": 50350000,
+      "pct_of_held": 57.58,
+      "pct_of_total": 23.62,
+      "evidence": "翟军 | 87,437,136 | 41.02% | 42,550,000 | 50,350,000 | 57.58% | 23.62% | 50,350,000 | 100.00% | 15,227,852 | 41.06%"
+    },
+    {
+      "shareholder": "山东省国际信托股份有限公司－山东信托·传字6364号财富传承财产信托",
+      "holding_shares": 4058200,
+      "holding_pct": 1.9,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "山东省国际信托股份有限公司－山东信托·传字6364号财富传承财产信托 | 4,058,200 | 1.90% | 0 | 0 | 0.00% | 0.00% | 0 | 0.00% | 0 | 0.00%"
+    }
+  ],
+  "risk_items": [
+    {
+      "horizon": "未来半年内",
+      "shares": 39530000,
+      "finance_balance": 300000000,
+      "evidence": "控股股东翟军及其一致行动人未来半年内到期的质押股份累计数量为 39,530,000 股，占其所持股份比例 43.20%，占公司总股本的 18.55%，对应融资余额为人民币 30,000 万元。"
+    },
+    {
+      "horizon": "未来一年内",
+      "shares": 41630000,
+      "finance_balance": 315000000,
+      "evidence": "截至本公告披露日，控股股东翟军先生及其一致行动人未来一年内到期的质押股份累计数量为 41,630,000 股，占其所持股份比例 45.50%，占公司总股本的 19.53%，对应融资余额为人民币 31,500 万元。"
+    }
+  ],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-翟军",
+      "passed": true,
+      "detail": "42,550,000 − 0(解除) + 7,800,000(新增) = 50,350,000，公告披露为 50,350,000",
+      "expected": "50350000",
+      "computed": "50350000"
+    },
+    {
+      "name": "占其所持勾稽-翟军",
+      "passed": true,
+      "detail": "新增质押 2,100,000股 ÷ 持股 87,437,136股 = 2.4017%，公告披露 2.4%（误差 0.07%）",
+      "expected": "2.4",
+      "computed": "2.4017%"
+    },
+    {
+      "name": "占其所持勾稽-翟军",
+      "passed": true,
+      "detail": "新增质押 2,650,000股 ÷ 持股 87,437,136股 = 3.0307%，公告披露 3.03%（误差 0.02%）",
+      "expected": "3.03",
+      "computed": "3.0307%"
+    },
+    {
+      "name": "占其所持勾稽-翟军",
+      "passed": true,
+      "detail": "新增质押 3,050,000股 ÷ 持股 87,437,136股 = 3.4882%，公告披露 3.49%（误差 0.05%）",
+      "expected": "3.49",
+      "computed": "3.4882%"
+    },
+    {
+      "name": "占总股本勾稽-翟军",
+      "passed": true,
+      "detail": "新增质押 2,100,000股 ÷ 总股本 213,157,328股（由持股比例反推） = 0.9852%，公告披露 0.99%",
+      "expected": "0.99",
+      "computed": "0.9852%"
+    },
+    {
+      "name": "占总股本勾稽-翟军",
+      "passed": true,
+      "detail": "新增质押 2,650,000股 ÷ 总股本 213,157,328股（由持股比例反推） = 1.2432%，公告披露 1.24%",
+      "expected": "1.24",
+      "computed": "1.2432%"
+    },
+    {
+      "name": "占总股本勾稽-翟军",
+      "passed": true,
+      "detail": "新增质押 3,050,000股 ÷ 总股本 213,157,328股（由持股比例反推） = 1.4309%，公告披露 1.43%",
+      "expected": "1.43",
+      "computed": "1.4309%"
+    },
+    {
+      "name": "累计勾稽-山东省国际信托股份有限公司－山东信托·传字6364号财富传承财产信托",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "风险提示勾稽-未来半年内",
+      "passed": true,
+      "detail": "未来半年内到期 39,530,000股 ≤ 累计质押后最大值 50,350,000股（半年到期应为累计质押的子集）",
+      "expected": "≤50,350,000",
+      "computed": "39530000"
+    },
+    {
+      "name": "风险提示勾稽-未来一年内",
+      "passed": false,
+      "detail": "未来一年内到期 41,630,000股 未在任何股东累计质押中匹配到",
+      "expected": "41630000",
+      "computed": "无匹配"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "82% 的已提取字段在原文中找到证据（28 项命中）；未溯源字段: pledge_start_date、pledge_start_date、pledge_start_date、shareholder、finance_balance、finance_balance（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "82.35%"
+    }
+  ]
+}

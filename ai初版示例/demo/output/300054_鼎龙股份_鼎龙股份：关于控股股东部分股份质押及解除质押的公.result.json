@@ -1,0 +1,128 @@
+{
+  "doc_meta": {
+    "file_name": "300054_鼎龙股份_鼎龙股份：关于控股股东部分股份质押及解除质押的公.pdf",
+    "doc_type": "质押及解除质押公告",
+    "sec_code": "300054",
+    "sec_name": "鼎龙股份",
+    "announcement_no": "2026-086",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "朱顺全",
+      "is_controller": true,
+      "pledgee": "华泰证券股份有限公司",
+      "shares": 1580000,
+      "pct_of_held": 1.14,
+      "pct_of_total": 0.17,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "2027-09-23",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "个人融资",
+      "evidence": "朱顺全 是 1,580,000 1.14% 0.17% 否 否 2026-9-23 2027-9-23 华泰证券股份有限公司 个人融资"
+    },
+    {
+      "record_type": "解除质押",
+      "pledgor": "朱顺全",
+      "is_controller": true,
+      "pledgee": "华泰证券股份有限公司",
+      "shares": 3800000,
+      "pct_of_held": 2.75,
+      "pct_of_total": 0.4,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2025-09-24",
+      "pledge_end_date": null,
+      "original_end_date": null,
+      "release_date": "2026-09-24",
+      "purpose": null,
+      "evidence": "朱顺全 是 3,800,000 2.75% 0.40% 2025-9-24 2026-9-24 华泰证券股份有限公司"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "朱顺全",
+      "holding_shares": 138031414,
+      "holding_pct": 14.46,
+      "pre_pledge_shares": 11200000,
+      "post_pledge_shares": 8980000,
+      "pct_of_held": 6.51,
+      "pct_of_total": 0.94,
+      "evidence": "朱顺全 138,031,414 14.46% 11,200,000 8,980,000 6.51% 0.94% 8,980,000 100% 103,523,560 80.22%"
+    },
+    {
+      "shareholder": "朱双全",
+      "holding_shares": 139249514,
+      "holding_pct": 14.59,
+      "pre_pledge_shares": 16830000,
+      "post_pledge_shares": 16830000,
+      "pct_of_held": 12.09,
+      "pct_of_total": 1.76,
+      "evidence": "朱双全 139,249,514 14.59% 16,830,000 16,830,000 12.09% 1.76% 16,830,000 100% 104,437,135 85.31%"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押及解除质押公告'与记录类型{新增质押、解除质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-朱顺全",
+      "passed": true,
+      "detail": "11,200,000 − 3,800,000(解除) + 1,580,000(新增) = 8,980,000，公告披露为 8,980,000",
+      "expected": "8980000",
+      "computed": "8980000"
+    },
+    {
+      "name": "占其所持勾稽-朱顺全",
+      "passed": true,
+      "detail": "新增质押 1,580,000股 ÷ 持股 138,031,414股 = 1.1447%，公告披露 1.14%（误差 0.41%）",
+      "expected": "1.14",
+      "computed": "1.1447%"
+    },
+    {
+      "name": "占其所持勾稽-朱顺全",
+      "passed": true,
+      "detail": "解除质押 3,800,000股 ÷ 持股 138,031,414股 = 2.7530%，公告披露 2.75%（误差 0.11%）",
+      "expected": "2.75",
+      "computed": "2.7530%"
+    },
+    {
+      "name": "占总股本勾稽-朱顺全",
+      "passed": false,
+      "detail": "新增质押 1,580,000股 ÷ 总股本 954,574,094股（由持股比例反推） = 0.1655%，公告披露 0.17%",
+      "expected": "0.17",
+      "computed": "0.1655%"
+    },
+    {
+      "name": "占总股本勾稽-朱顺全",
+      "passed": true,
+      "detail": "解除质押 3,800,000股 ÷ 总股本 954,574,094股（由持股比例反推） = 0.3981%，公告披露 0.4%",
+      "expected": "0.4",
+      "computed": "0.3981%"
+    },
+    {
+      "name": "累计勾稽-朱双全",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 16,830,000 == 本次质押后 16,830,000",
+      "expected": "16830000",
+      "computed": "16830000"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "87% 的已提取字段在原文中找到证据（20 项命中）；未溯源字段: pledge_end_date、pledge_start_date、release_date（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "86.96%"
+    }
+  ]
+}

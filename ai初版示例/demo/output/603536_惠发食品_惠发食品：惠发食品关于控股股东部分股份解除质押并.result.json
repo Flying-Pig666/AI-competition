@@ -1,0 +1,172 @@
+{
+  "doc_meta": {
+    "file_name": "603536_惠发食品_惠发食品：惠发食品关于控股股东部分股份解除质押并.pdf",
+    "doc_type": "质押及解除质押公告",
+    "sec_code": "603536",
+    "sec_name": "惠发食品",
+    "announcement_no": "临2026-045",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "解除质押",
+      "pledgor": "惠发投资",
+      "is_controller": true,
+      "pledgee": "山东省新动能投资管理有限公司",
+      "shares": 35000000,
+      "pct_of_held": 50.35,
+      "pct_of_total": 14.55,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "",
+      "pledge_end_date": "",
+      "original_end_date": null,
+      "release_date": "2026-09-23",
+      "purpose": "",
+      "evidence": "2026年9月23日公司控股股东惠发投资将原质押给山东省新动能投资管理有限公司的 35,000,000 股无限售条件流通股解除质押，相关手续已在中国证券登记结算有限责任公司办理完毕；股东名称 惠发投资 本次解除质押股份 35,000,000 股 占其所持股份比例 50.35% 占公司总股本比例 14.55% 解除质押时间 2026 年 9月 23日"
+    },
+    {
+      "record_type": "新增质押",
+      "pledgor": "惠发投资",
+      "is_controller": true,
+      "pledgee": "山东省新动能投资管理有限公司",
+      "shares": 36000000,
+      "pct_of_held": 51.79,
+      "pct_of_total": 14.97,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "2026-09-23",
+      "pledge_end_date": "2027-09-22",
+      "original_end_date": null,
+      "release_date": "",
+      "purpose": "公司经营需求",
+      "evidence": "惠发投资 是 36,000,000 否 否 2026 年 9 月 23 日 2027 年 9 月 22 日 山东省新动能投资管理有限公司 51.79% 14.97% 公司经营需求"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "惠发投资",
+      "holding_shares": 69507573,
+      "holding_pct": 28.9,
+      "pre_pledge_shares": 15700000,
+      "post_pledge_shares": 51700000,
+      "pct_of_held": 74.38,
+      "pct_of_total": 21.49,
+      "evidence": "惠发投资 69,507,573 28.90% 15,700,000 51,700,000 74.38% 21.49% 0 0 0 0"
+    },
+    {
+      "shareholder": "惠增玉",
+      "holding_shares": 50884963,
+      "holding_pct": 21.16,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": null,
+      "pct_of_total": null,
+      "evidence": "惠增玉 50,884,963 21.16% 0 0 不适用 不适用 不适用 不适用 0 0"
+    },
+    {
+      "shareholder": "惠希平",
+      "holding_shares": 13443471,
+      "holding_pct": 5.59,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": null,
+      "pct_of_total": null,
+      "evidence": "惠希平 13,443,471 5.59% 0 0 不适用 不适用 不适用 不适用 0 0"
+    }
+  ],
+  "risk_items": [
+    {
+      "horizon": "未来半年内",
+      "shares": 15700000,
+      "finance_balance": null,
+      "evidence": "控股股东惠发投资未来半年内存在 15,700,000 股将到期的质押股份，具体内容详见公司在上海证券交易所网站(www.sse.com.cn)于 2025 年 11 月 7 日披露的《关于控股股东部分股份质押的公告》（公告编号：临 2025-036）"
+    },
+    {
+      "horizon": "未来一年内",
+      "shares": 36000000,
+      "finance_balance": null,
+      "evidence": "除本次质押 36,000,000 股股份外，未来一年内暂无将到期的质押股份"
+    }
+  ],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押及解除质押公告'与记录类型{新增质押、解除质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-惠发投资",
+      "passed": false,
+      "detail": "15,700,000 − 35,000,000(解除) + 36,000,000(新增) = 16,700,000，公告披露为 51,700,000",
+      "expected": "51700000",
+      "computed": "16700000"
+    },
+    {
+      "name": "占其所持勾稽-惠发投资",
+      "passed": true,
+      "detail": "解除质押 35,000,000股 ÷ 持股 69,507,573股 = 50.3542%，公告披露 50.35%（误差 0.01%）",
+      "expected": "50.35",
+      "computed": "50.3542%"
+    },
+    {
+      "name": "占其所持勾稽-惠发投资",
+      "passed": true,
+      "detail": "新增质押 36,000,000股 ÷ 持股 69,507,573股 = 51.7929%，公告披露 51.79%（误差 0.01%）",
+      "expected": "51.79",
+      "computed": "51.7929%"
+    },
+    {
+      "name": "占总股本勾稽-惠发投资",
+      "passed": true,
+      "detail": "解除质押 35,000,000股 ÷ 总股本 240,510,633股（由持股比例反推） = 14.5524%，公告披露 14.55%",
+      "expected": "14.55",
+      "computed": "14.5524%"
+    },
+    {
+      "name": "占总股本勾稽-惠发投资",
+      "passed": true,
+      "detail": "新增质押 36,000,000股 ÷ 总股本 240,510,633股（由持股比例反推） = 14.9682%，公告披露 14.97%",
+      "expected": "14.97",
+      "computed": "14.9682%"
+    },
+    {
+      "name": "累计勾稽-惠增玉",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "累计勾稽-惠希平",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "风险提示勾稽-未来半年内",
+      "passed": true,
+      "detail": "未来半年内到期 15,700,000股 ≤ 累计质押后最大值 51,700,000股（半年到期应为累计质押的子集）",
+      "expected": "≤51,700,000",
+      "computed": "15700000"
+    },
+    {
+      "name": "风险提示勾稽-未来一年内",
+      "passed": false,
+      "detail": "未来一年内到期 36,000,000股 未在任何股东累计质押中匹配到",
+      "expected": "36000000",
+      "computed": "无匹配"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（24 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}

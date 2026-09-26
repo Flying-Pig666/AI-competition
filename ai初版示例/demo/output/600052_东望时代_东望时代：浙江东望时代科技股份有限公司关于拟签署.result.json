@@ -1,0 +1,55 @@
+{
+  "doc_meta": {
+    "file_name": "600052_东望时代_东望时代：浙江东望时代科技股份有限公司关于拟签署.pdf",
+    "doc_type": "质押公告",
+    "sec_code": "600052",
+    "sec_name": "东望时代",
+    "announcement_no": "临 2026-061",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "新增质押",
+      "pledgor": "东阳复创信息技术有限公司",
+      "is_controller": false,
+      "pledgee": "东阳市东科数字科技有限公司",
+      "shares": 12823344,
+      "pct_of_held": null,
+      "pct_of_total": null,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": null,
+      "pledge_end_date": "在债务人履行完毕主合同约定的业绩承诺补偿（如有）、商誉减值补偿（如有）、应收账款回收补偿义务（如有）以及主合同约定的其他义务的前提下，债权人及质权人配合出质人解除出质人在本合同项下的质押证券的质押登记",
+      "original_end_date": null,
+      "release_date": null,
+      "purpose": "用于担保债务人在主合同项下的义务和责任的履行",
+      "evidence": "复创信息同意将其于 2026 年 9 月新增受让的 50,651,685 股股份中的12,823,344 股公司股票质押给公司指定方东科数字，用于担保债务人在主合同项下的义务和责任的履行。"
+    }
+  ],
+  "cumulative": [],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'质押公告'与记录类型{新增质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽",
+      "passed": true,
+      "detail": "该公告未披露累计质押情况(预告/拟签署类),勾稽校验不适用",
+      "expected": "N/A",
+      "computed": "N/A"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "80% 的已提取字段在原文中找到证据（4 项命中）；未溯源字段: pledge_end_date（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "80.00%"
+    }
+  ]
+}

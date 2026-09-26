@@ -1,0 +1,141 @@
+{
+  "doc_meta": {
+    "file_name": "603880_南卫股份_南卫股份：南卫股份关于控股股东部分股份解除质押的.pdf",
+    "doc_type": "解除质押公告",
+    "sec_code": "603880",
+    "sec_name": "南卫股份",
+    "announcement_no": "2026-034",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "解除质押",
+      "pledgor": "李平",
+      "is_controller": true,
+      "pledgee": "",
+      "shares": 7000000,
+      "pct_of_held": 8.06,
+      "pct_of_total": 2.42,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "",
+      "pledge_end_date": "",
+      "original_end_date": null,
+      "release_date": "2026-09-23",
+      "purpose": "",
+      "evidence": "股东名称 李平 本次解除质押股份 7,000,000 股 占其所持股份比例 8.06% 占公司总股本比例 2.42% 解除质押时间 2026 年 9 月 23 日 持股数量 86,841,048 股 持股比例 30.04% 剩余被质押股份数量 52,400,000 股 剩余被质押股份数量占其所持股份比例 60.34% 剩余被质押股份数量占公司总股本比例 18.13%"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "李平",
+      "holding_shares": 86841048,
+      "holding_pct": 30.04,
+      "pre_pledge_shares": 59400000,
+      "post_pledge_shares": 52400000,
+      "pct_of_held": 60.34,
+      "pct_of_total": 18.13,
+      "evidence": "李平 86,841,048 30.04% 59,400,000 52,400,000 60.34% 18.13% 0 52,400,000 0 0"
+    },
+    {
+      "shareholder": "李永平",
+      "holding_shares": 9639338,
+      "holding_pct": 3.33,
+      "pre_pledge_shares": 9639338,
+      "post_pledge_shares": 9639338,
+      "pct_of_held": 100.0,
+      "pct_of_total": 3.33,
+      "evidence": "李永平 9,639,338 3.33% 9,639,338 9,639,338 100% 3.33% 0 9,639,338 0 0"
+    },
+    {
+      "shareholder": "李永中",
+      "holding_shares": 8080029,
+      "holding_pct": 2.8,
+      "pre_pledge_shares": 0,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "李永中 8,080,029 2.80% 0 0 0 0 0 0 0 0"
+    }
+  ],
+  "risk_items": [
+    {
+      "horizon": "未来半年内",
+      "shares": 26400000,
+      "finance_balance": 53000000,
+      "evidence": "控股股东及其一致行动人未来半年到期的质押股份数量为 2,640 万股，占公司总股本的 9.13%，占控股股东及一致行动人所持公司股份的 25.25%,上述股权质押融资余额为 5,300 万元。"
+    },
+    {
+      "horizon": "未来一年内",
+      "shares": 0,
+      "finance_balance": null,
+      "evidence": "控股股东及其一致行动人未来一年到期（不含半年内到期部分）的质押股份数量为 0 股，占公司总股本的 0%，占控股股东及一致行动人所持公司股份的 0%。"
+    }
+  ],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'解除质押公告'与记录类型{解除质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-李平",
+      "passed": true,
+      "detail": "59,400,000 − 7,000,000(解除) + 0(新增) = 52,400,000，公告披露为 52,400,000",
+      "expected": "52400000",
+      "computed": "52400000"
+    },
+    {
+      "name": "占其所持勾稽-李平",
+      "passed": true,
+      "detail": "解除质押 7,000,000股 ÷ 持股 86,841,048股 = 8.0607%，公告披露 8.06%（误差 0.01%）",
+      "expected": "8.06",
+      "computed": "8.0607%"
+    },
+    {
+      "name": "占总股本勾稽-李平",
+      "passed": true,
+      "detail": "解除质押 7,000,000股 ÷ 总股本 289,084,714股（由持股比例反推） = 2.4214%，公告披露 2.42%",
+      "expected": "2.42",
+      "computed": "2.4214%"
+    },
+    {
+      "name": "累计勾稽-李永平",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 9,639,338 == 本次质押后 9,639,338",
+      "expected": "9639338",
+      "computed": "9639338"
+    },
+    {
+      "name": "累计勾稽-李永中",
+      "passed": true,
+      "detail": "无新增/解除记录，本次质押前 0 == 本次质押后 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "风险提示勾稽-未来半年内",
+      "passed": true,
+      "detail": "未来半年内到期 26,400,000股 ≤ 累计质押后最大值 52,400,000股（半年到期应为累计质押的子集）",
+      "expected": "≤52,400,000",
+      "computed": "26400000"
+    },
+    {
+      "name": "风险提示勾稽-李永中",
+      "passed": true,
+      "detail": "未来一年内到期 0股 与 累计质押后 0股一致",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "88% 的已提取字段在原文中找到证据（15 项命中）；未溯源字段: shares、finance_balance（多为单位换算或表述差异，需人工复核）",
+      "expected": "≥80%",
+      "computed": "88.24%"
+    }
+  ]
+}

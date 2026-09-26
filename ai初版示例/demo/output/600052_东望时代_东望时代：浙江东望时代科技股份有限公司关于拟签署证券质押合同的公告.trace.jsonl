@@ -1,0 +1,1 @@
+{"seq": 1, "ts": "2026-09-27 01:07:17", "event": "run_start", "input": "data/eval_set/600052_东望时代_东望时代：浙江东望时代科技股份有限公司关于拟签署证券质押合同的公告.pdf", "env": {"llm_enabled": true, "model": "deepseek-chat", "base_url": "https://api.deepseek.com"}}

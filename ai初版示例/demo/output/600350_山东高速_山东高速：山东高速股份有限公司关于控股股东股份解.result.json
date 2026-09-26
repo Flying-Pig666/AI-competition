@@ -1,0 +1,80 @@
+{
+  "doc_meta": {
+    "file_name": "600350_山东高速_山东高速：山东高速股份有限公司关于控股股东股份解.pdf",
+    "doc_type": "解除质押公告",
+    "sec_code": "600350",
+    "sec_name": "山东高速",
+    "announcement_no": "2026-062",
+    "announcement_date": "2026-09-25",
+    "parse_method": "text_layer"
+  },
+  "records": [
+    {
+      "record_type": "解除质押",
+      "pledgor": "山东高速集团有限公司",
+      "is_controller": true,
+      "pledgee": "",
+      "shares": 977000000,
+      "pct_of_held": 31.79,
+      "pct_of_total": 20.21,
+      "is_restricted": false,
+      "is_supplementary": false,
+      "pledge_start_date": "",
+      "pledge_end_date": "",
+      "original_end_date": null,
+      "release_date": "2026-09-22",
+      "purpose": "",
+      "evidence": "股东名称 山东高速集团有限公司 本次解除质押股份 977,000,000 占其所持股份比例 31.79% 占公司总股本比例 20.21% 解除质押时间 2026 年 9 月 22 日 持股数量 3,073,206,902 持股比例 63.57% 剩余被质押股份数量 0"
+    }
+  ],
+  "cumulative": [
+    {
+      "shareholder": "山东高速集团有限公司",
+      "holding_shares": 3073206902,
+      "holding_pct": 63.57,
+      "pre_pledge_shares": 977000000,
+      "post_pledge_shares": 0,
+      "pct_of_held": 0.0,
+      "pct_of_total": 0.0,
+      "evidence": "山东高速股份有限公司（以下简称“公司”）控股股东山东高速集团有限公司持有公司股份 3,073,206,902 股，持股比例为 63.57%，本次办理解除质押手续后，山东高速集团有限公司累计质押公司股份 0 股。"
+    }
+  ],
+  "risk_items": [],
+  "checks": [
+    {
+      "name": "完整性-记录类型",
+      "passed": true,
+      "detail": "公告类型'解除质押公告'与记录类型{解除质押}匹配",
+      "expected": null,
+      "computed": null
+    },
+    {
+      "name": "累计勾稽-山东高速集团有限公司",
+      "passed": true,
+      "detail": "977,000,000 − 977,000,000(解除) + 0(新增) = 0，公告披露为 0",
+      "expected": "0",
+      "computed": "0"
+    },
+    {
+      "name": "占其所持勾稽-山东高速集团有限公司",
+      "passed": true,
+      "detail": "解除质押 977,000,000股 ÷ 持股 3,073,206,902股 = 31.7909%，公告披露 31.79%（误差 0.00%）",
+      "expected": "31.79",
+      "computed": "31.7909%"
+    },
+    {
+      "name": "占总股本勾稽-山东高速集团有限公司",
+      "passed": true,
+      "detail": "解除质押 977,000,000股 ÷ 总股本 4,834,366,686股（由持股比例反推） = 20.2095%，公告披露 20.21%",
+      "expected": "20.21",
+      "computed": "20.2095%"
+    },
+    {
+      "name": "原文溯源覆盖率",
+      "passed": true,
+      "detail": "100% 的已提取字段在原文中找到证据（8 项命中）",
+      "expected": "≥80%",
+      "computed": "100.00%"
+    }
+  ]
+}

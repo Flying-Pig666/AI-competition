@@ -1,0 +1,131 @@
+{
+  "eval_time": "2026-09-27T01:03:57.140882",
+  "total_docs": 10,
+  "results": [
+    {
+      "file": "300054_鼎龙股份_鼎龙股份：关于控股股东部分股份质押及解除质押的公.pdf",
+      "sec_code": "300054",
+      "sec_name": "鼎龙股份",
+      "doc_type": "质押及解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 7,
+      "checks_total": 8,
+      "grounding_coverage": "86.96%",
+      "records": 2
+    },
+    {
+      "file": "300552_万集科技_万集科技：关于控股股东、实际控制人部分股份质押的.pdf",
+      "sec_code": "300552",
+      "sec_name": "万集科技",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 11,
+      "checks_total": 12,
+      "grounding_coverage": "82.35%",
+      "records": 3
+    },
+    {
+      "file": "600052_东望时代_东望时代：浙江东望时代科技股份有限公司关于拟签署.pdf",
+      "sec_code": "600052",
+      "sec_name": "东望时代",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 1,
+      "checks_total": 5,
+      "grounding_coverage": "60.00%",
+      "records": 1
+    },
+    {
+      "file": "600246_万通发展_万通发展：关于控股股东股份解质押的公告.pdf",
+      "sec_code": "600246",
+      "sec_name": "万通发展",
+      "doc_type": "解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 3,
+      "checks_total": 5,
+      "grounding_coverage": "77.78%",
+      "records": 1
+    },
+    {
+      "file": "600350_山东高速_山东高速：山东高速股份有限公司关于控股股东股份解.pdf",
+      "sec_code": "600350",
+      "sec_name": "山东高速",
+      "doc_type": "解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "grounding_coverage": "100.00%",
+      "records": 1
+    },
+    {
+      "file": "600885_宏发股份_宏发股份：宏发股份：关于控股股东部分股份质押及解.pdf",
+      "sec_code": "600885",
+      "sec_name": "宏发股份",
+      "doc_type": "质押及解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 6,
+      "checks_total": 7,
+      "grounding_coverage": "96.43%",
+      "records": 4
+    },
+    {
+      "file": "603499_翔港科技_翔港科技：关于控股股东、实际控制人及其一致行动人.pdf",
+      "sec_code": "603499",
+      "sec_name": "翔港科技",
+      "doc_type": "质押及解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 10,
+      "checks_total": 11,
+      "grounding_coverage": "86.67%",
+      "records": 3
+    },
+    {
+      "file": "603536_惠发食品_惠发食品：惠发食品关于控股股东部分股份解除质押并.pdf",
+      "sec_code": "603536",
+      "sec_name": "惠发食品",
+      "doc_type": "质押及解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 9,
+      "checks_total": 11,
+      "grounding_coverage": "100.00%",
+      "records": 2
+    },
+    {
+      "file": "603826_坤彩科技_坤彩科技：关于控股股东部分股份质押的公告.pdf",
+      "sec_code": "603826",
+      "sec_name": "坤彩科技",
+      "doc_type": "质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 13,
+      "checks_total": 13,
+      "grounding_coverage": "100.00%",
+      "records": 1
+    },
+    {
+      "file": "603880_南卫股份_南卫股份：南卫股份关于控股股东部分股份解除质押的.pdf",
+      "sec_code": "603880",
+      "sec_name": "南卫股份",
+      "doc_type": "解除质押公告",
+      "parse_method": "text_layer",
+      "extract_source": "llm",
+      "checks_passed": 9,
+      "checks_total": 9,
+      "grounding_coverage": "88.24%",
+      "records": 1
+    }
+  ],
+  "stats": {
+    "ran_ok": 10,
+    "llm_source": 10,
+    "full_checks_pass": 3
+  }
+}
