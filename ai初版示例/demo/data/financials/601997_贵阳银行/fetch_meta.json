@@ -1,0 +1,20 @@
+{
+  "code": "601997",
+  "name": "贵阳银行",
+  "fetch_time": "2026-09-27T00:32:57.999465+08:00",
+  "sources": [
+    {
+      "name": "同花顺财务摘要",
+      "file": "abstract_ths.csv",
+      "rows": 57,
+      "status": "ok"
+    },
+    {
+      "name": "新浪财务指标",
+      "file": "indicators_sina.csv",
+      "rows": 30,
+      "cols": 86,
+      "status": "ok"
+    }
+  ]
+}

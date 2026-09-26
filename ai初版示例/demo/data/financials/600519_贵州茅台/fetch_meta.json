@@ -1,0 +1,20 @@
+{
+  "code": "600519",
+  "name": "贵州茅台",
+  "fetch_time": "2026-09-27T00:33:00.506691+08:00",
+  "sources": [
+    {
+      "name": "同花顺财务摘要",
+      "file": "abstract_ths.csv",
+      "rows": 103,
+      "status": "ok"
+    },
+    {
+      "name": "新浪财务指标",
+      "file": "indicators_sina.csv",
+      "rows": 30,
+      "cols": 86,
+      "status": "ok"
+    }
+  ]
+}
