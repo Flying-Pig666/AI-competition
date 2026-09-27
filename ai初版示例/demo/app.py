@@ -2,17 +2,19 @@
 """
 app.py —— 驼研·信鉴 演示网页(Streamlit)
 
-三个页面:
-  ① 公告提取演示:选样本/上传 PDF → 跑管线 → 展示结构化结果+校验+审查卷宗
-  ② 信用风险预警:四家公司红旗规则触发情况与综合评级
-  ③ 评测总览:30 份评测集结果 + LLM/规则消融对照
+流程式界面:
+  步骤1  输入股票代码/公司名 → 自动上巨潮资讯网搜索公告(或手动上传 PDF)
+  步骤2  一键数据结构化提取 → 结构化字段 + 校验 + 审查卷宗 → 下载 JSON
+  步骤3  一键信用风险分析 → 红旗规则引擎 → FinSight 风格风险评估报告
 
 运行:streamlit run app.py
 """
 import glob
 import json
 import os
+import re
 import sys
+from datetime import datetime, timedelta
 
 import pandas as pd
 import streamlit as st
@@ -20,279 +22,330 @@ import streamlit as st
 DEMO_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, DEMO_DIR)
 OUT_DIR = os.path.join(DEMO_DIR, "output")
-EVAL_DIR = os.path.join(DEMO_DIR, "data", "eval_set")
+UPLOAD_DIR = os.path.join(OUT_DIR, "uploads")
+LOGO = os.path.join(DEMO_DIR, "..", "..", "图片", "首经贸校徽加校名.png")
 
 st.set_page_config(page_title="驼研·信鉴", page_icon="🐫", layout="wide")
 
 # ---------------------------------------------------------------------------
-# 数据加载(有缓存,秒开)
+# 红色主题(FinSight 风格:深红主色 + 米白底 + 卡片红边)
 # ---------------------------------------------------------------------------
+st.markdown("""
+<style>
+.stApp { background: linear-gradient(180deg, #fdf3f0 0%, #ffffff 40%); }
+.hero {
+  background: linear-gradient(135deg, #8f1414 0%, #c0392b 60%, #d35450 100%);
+  border-radius: 14px; padding: 26px 30px; margin-bottom: 18px;
+  color: #fff; box-shadow: 0 4px 18px rgba(143,20,20,.25);
+}
+.hero h1 { color:#fff; margin:0; font-size: 34px; letter-spacing: 2px; }
+.hero p  { color:#f6dcd8; margin:6px 0 0 0; font-size: 15px; }
+.step-card {
+  background:#fff; border-left:5px solid #c0392b; border-radius:10px;
+  padding:14px 18px; margin:14px 0; box-shadow:0 1px 6px rgba(0,0,0,.06);
+}
+.step-card h3 { color:#8f1414; margin:0 0 4px 0; }
+div.stButton > button[kind="primary"] {
+  background:#c0392b; border-color:#c0392b;
+}
+div.stButton > button[kind="primary"]:hover { background:#a93226; }
+.badge-red   { background:#c0392b; color:#fff; border-radius:8px;
+               padding:6px 14px; font-size:20px; font-weight:700; }
+.badge-green { background:#27ae60; color:#fff; border-radius:8px;
+               padding:6px 14px; font-size:20px; font-weight:700; }
+.badge-orange{ background:#e67e22; color:#fff; border-radius:8px;
+               padding:6px 14px; font-size:20px; font-weight:700; }
+.flag-card {
+  background:#fff; border:1px solid #f0d5d0; border-left:5px solid #c0392b;
+  border-radius:8px; padding:10px 14px; margin:8px 0;
+}
+.flag-card.orange { border-left-color:#e67e22; }
+</style>
+""", unsafe_allow_html=True)
 
-@st.cache_data
-def load_result(path):
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
+# 顶部横幅:校徽 + 标题
+c_logo, c_title = st.columns([1, 5])
+with c_logo:
+    if os.path.isfile(LOGO):
+        st.image(LOGO, use_container_width=True)
+with c_title:
+    st.markdown("""
+    <div class="hero">
+      <h1>🐫 驼研·信鉴</h1>
+      <p>基于公告与财报多源结构化提取的上市公司信用风险预警智能体
+      —— 三重把关:程序验算 · 原文溯源 · 多智能体互相监督</p>
+    </div>""", unsafe_allow_html=True)
 
-
-@st.cache_data
-def load_review(stem):
-    p = os.path.join(OUT_DIR, stem + ".review.json")
-    if os.path.isfile(p):
-        with open(p, encoding="utf-8") as f:
-            return json.load(f)
-    return None
-
+# ---------------------------------------------------------------------------
+# 工具函数
+# ---------------------------------------------------------------------------
 
 def fmt_int(v):
     return f"{v:,}" if isinstance(v, (int, float)) else "—"
 
 
+def safe_name(s):
+    return re.sub(r'[\\/:*?"<>|]', "_", s or "")
+
+
 # ---------------------------------------------------------------------------
-# 页面 1:公告提取演示
+# 步骤 1:搜索公告 / 上传文件
 # ---------------------------------------------------------------------------
+st.markdown('<div class="step-card"><h3>步骤 ① 选择分析对象</h3>'
+            '<div>输入股票代码或公司名,自动从巨潮资讯网(证监会指定披露平台)'
+            '搜索质押公告;也可以直接上传公告/研报 PDF。</div></div>',
+            unsafe_allow_html=True)
 
-def page_extract():
-    st.header("📄 公告结构化提取演示")
-    st.caption("上传或选择一份质押公告,系统自动完成:解析 → AI 提取 → "
-               "程序验算 → 原文溯源 → 多智能体互相监督审查")
+if "files" not in st.session_state:
+    st.session_state.files = []      # 待提取文件路径列表
+if "company" not in st.session_state:
+    st.session_state.company = {}    # {"code": ..., "name": ...}
 
-    samples = sorted(glob.glob(os.path.join(DEMO_DIR, "data", "*.pdf")) +
-                     glob.glob(os.path.join(EVAL_DIR, "*.pdf")))
-    names = [os.path.basename(p) for p in samples]
+c1, c2, c3 = st.columns([2, 1, 1])
+with c1:
+    query = st.text_input("股票代码 / 公司名", placeholder="如 000863 或 三湘印象")
+with c2:
+    months = st.selectbox("搜索范围", [3, 6, 12], format_func=lambda x: f"近 {x} 个月")
+with c3:
+    st.write("")
+    do_search = st.button("🔍 上网搜索公告", type="primary")
 
-    col1, col2 = st.columns([2, 1])
-    with col1:
-        choice = st.selectbox("选择内置样本(含 30 份评测集公告)", names)
-    with col2:
-        uploaded = st.file_uploader("或上传自己的 PDF", type=["pdf"])
-
-    if uploaded:
-        tmp = os.path.join(OUT_DIR, "_upload_" + uploaded.name)
-        os.makedirs(OUT_DIR, exist_ok=True)
-        with open(tmp, "wb") as f:
-            f.write(uploaded.getbuffer())
-        path, stem = tmp, "_upload_" + os.path.splitext(uploaded.name)[0]
+if do_search and query.strip():
+    import eval_collect
+    edate = datetime.now()
+    sdate = edate - timedelta(days=30 * months)
+    kw = query.strip()
+    with st.spinner(f"正在巨潮资讯网搜索「{kw}」相关公告……"):
+        try:
+            anns = eval_collect.search(kw, sdate.strftime("%Y-%m-%d"),
+                                       edate.strftime("%Y-%m-%d"))
+        except Exception as e:
+            anns = []
+            st.error(f"搜索失败:{e}")
+    # 过滤:质押类公告、去掉年报等长文档
+    hits = []
+    for a in anns:
+        title = eval_collect.clean_title(a.get("announcementTitle"))
+        if "质押" not in title or any(k in title for k in ("年度报告", "半年度报告", "季度报告", "英文")):
+            continue
+        hits.append({"code": a.get("secCode"), "name": a.get("secName"),
+                     "title": title, "url": a.get("adjunctUrl"),
+                     "time": (a.get("announcementTime") or 0)})
+    st.session_state.hits = hits
+    if hits:
+        st.session_state.company = {"code": hits[0]["code"], "name": hits[0]["name"]}
+        st.success(f"找到 {len(hits)} 份质押类公告(公司:{hits[0]['name']} {hits[0]['code']})")
     else:
-        path = samples[names.index(choice)]
-        stem = os.path.splitext(os.path.basename(path))[0]
+        st.warning("没有找到匹配的质押公告,可换个关键词或手动上传文件。")
 
-    result_path = os.path.join(OUT_DIR, stem + ".result.json")
-    has_cache = os.path.isfile(result_path)
+if st.session_state.get("hits"):
+    st.markdown("**搜索结果(勾选要分析的公告):**")
+    picks = []
+    for i, h in enumerate(st.session_state.hits[:10]):
+        date = datetime.fromtimestamp(h["time"] / 1000).strftime("%Y-%m-%d") if h["time"] else "—"
+        if st.checkbox(f"{h['title']}({date})", key=f"hit{i}",
+                       value=(i == 0)):
+            picks.append(h)
+    if st.button("⬇️ 下载选中公告"):
+        import requests
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
+        for h in picks:
+            fname = safe_name(f"{h['code']}_{h['name']}_{h['title'][:24]}.pdf")
+            fpath = os.path.join(UPLOAD_DIR, fname)
+            if not os.path.isfile(fpath):
+                try:
+                    r = requests.get(eval_collect.DOWNLOAD_BASE + h["url"],
+                                     headers=eval_collect.HEADERS, timeout=60)
+                    r.raise_for_status()
+                    with open(fpath, "wb") as f:
+                        f.write(r.content)
+                except Exception as e:
+                    st.error(f"{h['title'][:20]} 下载失败:{e}")
+                    continue
+            if fpath not in st.session_state.files:
+                st.session_state.files.append(fpath)
+        st.success(f"已就绪 {len(picks)} 份公告")
 
-    c1, c2 = st.columns([1, 3])
-    with c1:
-        run_live = st.button("▶️ 现场重新运行(调用大模型)", type="primary")
-    with c2:
-        if has_cache:
-            st.info("检测到已有结果,默认加载缓存(秒开);点左侧按钮可现场重跑。")
-        else:
-            st.warning("该文件还没有跑过,请点击左侧按钮现场运行。")
+uploaded = st.file_uploader("📎 或手动上传公告/研报 PDF(可多选)",
+                            type=["pdf"], accept_multiple_files=True)
+if uploaded:
+    os.makedirs(UPLOAD_DIR, exist_ok=True)
+    for uf in uploaded:
+        fpath = os.path.join(UPLOAD_DIR, safe_name(uf.name))
+        with open(fpath, "wb") as f:
+            f.write(uf.getbuffer())
+        if fpath not in st.session_state.files:
+            st.session_state.files.append(fpath)
+    st.success(f"已添加 {len(uploaded)} 个文件")
 
-    if run_live:
+# ---------------------------------------------------------------------------
+# 步骤 2:数据结构化提取
+# ---------------------------------------------------------------------------
+st.markdown('<div class="step-card"><h3>步骤 ② 数据结构化提取</h3>'
+            '<div>AI 提取字段 → 程序勾稽验算 → 原文溯源 → 多智能体互相监督审查,'
+            '全程留痕,可下载 JSON。</div></div>', unsafe_allow_html=True)
+
+if st.session_state.files:
+    st.write("待处理文件:" + "、".join(os.path.basename(p) for p in st.session_state.files))
+    if st.button("🗑️ 清空文件列表"):
+        st.session_state.files = []
+        st.rerun()
+
+    if st.button("▶️ 开始数据结构化提取", type="primary"):
         import run as pipeline
         from tracing import Trace
-        trace = Trace(os.path.join(OUT_DIR, stem + ".trace.jsonl"))
-        with st.spinner("管线运行中:解析 → 提取 → 校验 → 溯源 → 多智能体审查……"):
+        bar = st.progress(0.0, text="管线运行中……")
+        for i, path in enumerate(st.session_state.files):
+            stem = os.path.splitext(os.path.basename(path))[0]
+            bar.progress(i / len(st.session_state.files),
+                         text=f"正在处理:{stem[:30]}……(提取→校验→溯源→审查)")
+            trace = Trace(os.path.join(OUT_DIR, stem + ".trace.jsonl"))
             try:
                 pipeline.run_document(path, trace)
-                st.cache_data.clear()
-                st.success("运行完成!")
             except Exception as e:
-                st.error(f"运行失败:{e}")
-                return
+                st.error(f"{stem} 处理失败:{e}")
+        bar.progress(1.0, text="全部完成!")
+        st.success("提取完成,结果如下。")
 
-    if not os.path.isfile(result_path):
-        return
-    d = load_result(result_path)
+    for path in st.session_state.files:
+        stem = os.path.splitext(os.path.basename(path))[0]
+        rp = os.path.join(OUT_DIR, stem + ".result.json")
+        if not os.path.isfile(rp):
+            continue
+        d = json.load(open(rp, encoding="utf-8"))
+        m = d["doc_meta"]
+        n_pass = sum(1 for c in d["checks"] if c["passed"])
+        with st.expander(f"📄 {m.get('sec_name') or stem}({m.get('doc_type','—')})"
+                         f" — 校验 {n_pass}/{len(d['checks'])} 通过", expanded=True):
+            cols = st.columns(5)
+            cols[0].metric("证券代码", m.get("sec_code") or "—")
+            cols[1].metric("公告日期", m.get("announcement_date") or "—")
+            cols[2].metric("提取记录", f"{len(d.get('records', []))} 条")
+            cols[3].metric("校验通过", f"{n_pass}/{len(d['checks'])}")
+            cov = next((c for c in d["checks"] if c["name"] == "原文溯源覆盖率"), None)
+            cols[4].metric("溯源覆盖率", cov["computed"] if cov else "—")
 
-    # ---- 文档信息 ----
-    m = d["doc_meta"]
-    st.subheader("📋 文档信息")
-    cols = st.columns(5)
-    cols[0].metric("证券简称", m.get("sec_name") or "—")
-    cols[1].metric("证券代码", m.get("sec_code") or "—")
-    cols[2].metric("公告类型", m.get("doc_type") or "—")
-    cols[3].metric("公告日期", m.get("announcement_date") or "—")
-    cols[4].metric("解析方式", m.get("parse_method") or "—")
+            if d.get("records"):
+                st.markdown("**质押 / 解押 / 展期记录**")
+                st.dataframe(pd.DataFrame([{
+                    "类型": r.get("record_type"), "出质人": r.get("pledgor"),
+                    "股数": fmt_int(r.get("shares")),
+                    "占其所持%": r.get("pct_of_held"),
+                    "占总股本%": r.get("pct_of_total"),
+                    "质权人": r.get("pledgee") or "—",
+                    "用途": r.get("purpose") or "—",
+                } for r in d["records"]]), use_container_width=True)
+            if d.get("cumulative"):
+                st.markdown("**累计质押情况**")
+                st.dataframe(pd.DataFrame([{
+                    "股东": c.get("shareholder"),
+                    "质押前": fmt_int(c.get("pre_pledge_shares")),
+                    "质押后": fmt_int(c.get("post_pledge_shares")),
+                    "占其所持%": c.get("pct_of_held"),
+                    "占总股本%": c.get("pct_of_total"),
+                } for c in d["cumulative"]]), use_container_width=True)
 
-    # ---- 提取记录 ----
-    if d.get("records"):
-        st.subheader("📑 质押 / 解押 / 展期记录")
-        rows = [{
-            "类型": r.get("record_type"), "出质人": r.get("pledgor"),
-            "股数": fmt_int(r.get("shares")),
-            "占其所持%": r.get("pct_of_held"), "占总股本%": r.get("pct_of_total"),
-            "质权人": r.get("pledgee") or "—",
-            "起始": r.get("pledge_start_date") or "—",
-            "到期/解除": r.get("release_date") or r.get("pledge_end_date") or "—",
-            "用途": r.get("purpose") or "—",
-        } for r in d["records"]]
-        st.dataframe(pd.DataFrame(rows), use_container_width=True)
+            with st.expander("✅ 校验与审查明细"):
+                for c in d["checks"]:
+                    st.write(("🟢 " if c["passed"] else "🔴 ") + c["name"] + ":" + c["detail"])
+                rvp = os.path.join(OUT_DIR, stem + ".review.json")
+                if os.path.isfile(rvp):
+                    rv = json.load(open(rvp, encoding="utf-8"))
+                    label = {"clean": "✅ 多智能体审查:未发现错误",
+                             "corrected": "🔧 多智能体审查:发现并修正了错误",
+                             "needs_human_review": "⚠️ 多智能体审查:有争议项,转人工复核"
+                             }.get(rv["final_status"], rv["final_status"])
+                    st.write(label)
+                    for rnd in rv["rounds"]:
+                        for v in rnd.get("verdicts", []):
+                            st.write(f"· `{v['field_path']}` {v['verdict']}:{v.get('reason') or v.get('claim')}")
 
-    if d.get("cumulative"):
-        st.subheader("📊 累计质押情况")
-        rows = [{
-            "股东": c.get("shareholder"), "持股数": fmt_int(c.get("holding_shares")),
-            "持股比例%": c.get("holding_pct"),
-            "质押前": fmt_int(c.get("pre_pledge_shares")),
-            "质押后": fmt_int(c.get("post_pledge_shares")),
-            "占其所持%": c.get("pct_of_held"), "占总股本%": c.get("pct_of_total"),
-        } for c in d["cumulative"]]
-        st.dataframe(pd.DataFrame(rows), use_container_width=True)
+            st.download_button("⬇️ 下载结构化 JSON",
+                               data=json.dumps(d, ensure_ascii=False, indent=2),
+                               file_name=stem + ".json", mime="application/json",
+                               key="dl_" + stem)
+else:
+    st.info("还没有待处理文件——请先搜索下载公告或上传 PDF。")
 
-    if d.get("risk_items"):
-        st.subheader("⚠️ 风险提示(到期质押)")
-        rows = [{"区间": i.get("horizon"), "到期股数": fmt_int(i.get("shares")),
-                 "融资余额(元)": fmt_int(i.get("finance_balance"))}
-                for i in d["risk_items"]]
-        st.dataframe(pd.DataFrame(rows), use_container_width=True)
+# ---------------------------------------------------------------------------
+# 步骤 3:信用风险分析
+# ---------------------------------------------------------------------------
+st.markdown('<div class="step-card"><h3>步骤 ③ 信用风险分析</h3>'
+            '<div>红旗规则引擎 R1-R9(财报指标纯代码计算 + 公告质押数据联动),'
+            '生成信用风险评估报告。</div></div>', unsafe_allow_html=True)
 
-    # ---- 一致性校验 ----
-    st.subheader("✅ 一致性校验(勾稽验算 + 原文溯源)")
-    n_pass = sum(1 for c in d["checks"] if c["passed"])
-    st.progress(n_pass / max(len(d["checks"]), 1),
-                text=f"通过 {n_pass}/{len(d['checks'])} 项")
-    for c in d["checks"]:
-        icon = "🟢" if c["passed"] else "🔴"
-        with st.expander(f"{icon} {c['name']}", expanded=not c["passed"]):
-            st.write(c["detail"])
-            st.caption(f"期望:{c.get('expected','—')} | 实测:{c.get('computed','—')}")
+cc1, cc2, cc3 = st.columns([2, 1, 1])
+with cc1:
+    def_code = st.session_state.company.get("code", "")
+    risk_code = st.text_input("分析对象(股票代码)", value=def_code,
+                              placeholder="如 000863")
+with cc2:
+    risk_name = st.text_input("公司名", value=st.session_state.company.get("name", ""),
+                              placeholder="如 三湘印象")
+with cc3:
+    is_bank = st.checkbox("银行业(启用口径豁免)")
 
-    # ---- 多智能体审查卷宗 ----
-    st.subheader("🤖 多智能体审查(质疑-裁决对抗)")
-    rv = load_review(stem)
-    if rv is None:
-        st.caption("该结果生成时未开启审查(或缓存较旧),点击「现场重新运行」即可体验。")
+if st.button("🚩 开始信用风险分析", type="primary"):
+    import fin_analysis
+    risk_json = os.path.join(OUT_DIR, "risk", f"{risk_code}_{risk_name}_risk.json")
+    if os.path.isfile(risk_json) and risk_name:
+        d = json.load(open(risk_json, encoding="utf-8"))
+        st.session_state.risk_report = d
+        st.success("已加载本地分析结果(财报数据此前已落盘)。")
+    elif risk_code and risk_name:
+        with st.spinner("正在采集财报数据(akshare 公开接口)并运行红旗规则……"):
+            try:
+                import fin_data
+                import fin_analysis
+                # 新公司:注册元信息(行业决定豁免口径)并现场采集财报落盘
+                fin_analysis.COMPANY_META[risk_code] = {
+                    "name": risk_name,
+                    "industry": "银行" if is_bank else "综合"}
+                if not os.path.isfile(risk_json):
+                    fin_data.fetch_one(risk_code, risk_name)
+                d = fin_analysis.analyze(risk_code)  # 规则引擎+落盘 risk json
+                if d is None:
+                    st.error("财报数据采集失败,请检查网络后重试。")
+                else:
+                    st.session_state.risk_report = d
+                    st.success("分析完成!")
+            except Exception as e:
+                st.error(f"分析失败:{e}")
     else:
-        status_map = {"clean": ("✅ 未发现错误", "green"),
-                      "corrected": ("🔧 发现并已修正错误", "orange"),
-                      "needs_human_review": ("⚠️ 有争议项,需人工复核", "red")}
-        label, color = status_map.get(rv["final_status"], (rv["final_status"], "gray"))
-        st.markdown(f"**最终结论:: {label}**")
-        for rnd in rv["rounds"]:
-            st.markdown(f"**第 {rnd['round']} 轮** — 质疑员 `{rnd.get('critic_model','?')}` "
-                        f"/ 裁决员 `{rnd.get('adjudicator_model','-')}`")
-            if rnd.get("n_criticisms") == 0:
-                st.write("质疑员未提出质疑,审查通过。")
-            for v in rnd.get("verdicts", []):
-                mark = {"sustained": "🔴 质疑成立", "rejected": "⚪ 质疑驳回",
-                        "sustained_not_applied": "🟡 成立但未自动采纳(转人工)"}.get(
-                            v["verdict"], v["verdict"])
-                with st.expander(f"{mark} `{v['field_path']}`"):
-                    st.write("**质疑理由**:", v.get("claim"))
-                    st.write("**裁决理由**:", v.get("reason"))
-                    if v.get("critic_evidence"):
-                        st.caption("质疑证据:" + str(v["critic_evidence"])[:300])
-                    if v.get("adjudicator_evidence"):
-                        st.caption("裁决证据:" + str(v["adjudicator_evidence"])[:300])
-                    if v.get("applied"):
-                        st.success(f"已修正:{v.get('old_value')} → {v.get('corrected_value')}")
+        st.warning("请填写股票代码和公司名。")
 
-    with st.expander("🔍 查看原始 JSON"):
-        st.json(d)
-
-
-# ---------------------------------------------------------------------------
-# 页面 2:信用风险预警
-# ---------------------------------------------------------------------------
-
-def page_risk():
-    st.header("🚩 信用风险预警(红旗规则引擎 R1-R9)")
-    risk_files = sorted(glob.glob(os.path.join(OUT_DIR, "risk", "*_risk.json")))
-    if not risk_files:
-        st.warning("未找到预警结果,请先运行 fin_analysis.py")
-        return
-    opts = {}
-    for p in risk_files:
-        with open(p, encoding="utf-8") as f:
-            d = json.load(f)
-        opts[f"{d['name']}({d['code']})"] = d
-    sel = st.selectbox("选择公司", list(opts.keys()))
-    d = opts[sel]
-
-    verdict_color = {"高风险": "red", "关注": "orange", "稳健": "green"}.get(
-        d["verdict"], "gray")
-    cols = st.columns(3)
-    cols[0].markdown(f"### 综合评级: :{verdict_color}[{d['verdict']}]")
-    cols[1].metric("🔴 红色警报", d["red_count"])
-    cols[2].metric("🟠 橙色提示", d["orange_count"])
+if st.session_state.get("risk_report"):
+    d = st.session_state.risk_report
+    st.divider()
+    badge = {"高风险": "badge-red", "关注": "badge-orange",
+             "稳健": "badge-green"}.get(d["verdict"], "badge-orange")
+    st.markdown(f"## 📊 信用风险评估报告:{d['name']}({d['code']})")
+    st.markdown(f'<span class="{badge}">综合评级:{d["verdict"]}</span>'
+                f'&nbsp;&nbsp; 🔴 红色警报 {d["red_count"]} 项'
+                f'&nbsp;&nbsp; 🟠 橙色提示 {d["orange_count"]} 项'
+                f'&nbsp;&nbsp; <small>分析时间:{str(d.get("analysis_time",""))[:19]}</small>',
+                unsafe_allow_html=True)
     if d["code"] == "600518":
-        st.error("康美药业:系统在 2017-2018 年报即发出红色预警,"
-                 "比 2019 年造假曝光早 1-2 年。")
+        st.error("📌 回溯验证:系统在 2017-2018 年报即发出红色预警,比康美造假曝光早 1-2 年。")
     if d["code"] == "600519":
-        st.success("贵州茅台:健康对照组,零红色警报——不乱喊狼来了。")
+        st.success("📌 健康对照:贵州茅台零红色警报——不误报。")
 
-    rows = []
+    st.markdown("#### 红旗信号明细")
     for f in d["red_flags"]:
-        rows.append({"规则": f["rule_id"] + " " + f["rule"],
-                     "级别": "🔴" if f["severity"] == "red" else "🟠",
-                     "期间": f["period"], "说明": f["explanation"]})
-    df = pd.DataFrame(rows)
-    st.dataframe(df, use_container_width=True, height=420)
+        cls = "flag-card" if f["severity"] == "red" else "flag-card orange"
+        icon = "🔴" if f["severity"] == "red" else "🟠"
+        st.markdown(f"""<div class="{cls}">{icon} <b>{f['rule_id']} {f['rule']}</b>
+        · {f['period']}<br/><small>{f['explanation']}</small><br/>
+        <small style="color:#999">证据:{json.dumps(f['evidence'], ensure_ascii=False)} |
+        来源:{os.path.basename(f.get('source','—'))}</small></div>""",
+        unsafe_allow_html=True)
 
-    with st.expander("查看预警证据明细(全部可回溯至落盘财报数据)"):
-        for f in d["red_flags"]:
-            st.markdown(f"**{f['rule_id']} {f['rule']}** · {f['period']} · "
-                        f"{'🔴' if f['severity']=='red' else '🟠'}")
-            st.json(f["evidence"])
-            st.caption("数据来源:" + f.get("source", "—"))
+    # 按年份排个时间线视图
+    years = sorted({re.sub(r"\D", "", f["period"])[:4] for f in d["red_flags"] if re.sub(r"\D", "", f["period"])})
+    if years:
+        st.markdown("#### 信号时间线")
+        st.markdown(" → ".join(f"**{y}**" for y in years))
 
-
-# ---------------------------------------------------------------------------
-# 页面 3:评测总览
-# ---------------------------------------------------------------------------
-
-def page_eval():
-    st.header("📈 评测总览(30 份未见公告盲测)")
-    sp = os.path.join(OUT_DIR, "eval", "eval_summary.json")
-    cp = os.path.join(OUT_DIR, "eval", "compare_llm_vs_rules.json")
-    if not os.path.isfile(sp):
-        st.warning("未找到评测汇总,请先运行 eval_run.py")
-        return
-    s = json.load(open(sp, encoding="utf-8"))
-
-    cols = st.columns(4)
-    cols[0].metric("跑通率", f"{s['stats']['ran_ok']}/{s['total_docs']}")
-    cols[1].metric("校验全过", f"{s['stats']['full_checks_pass']} 份")
-    tot_p = sum(r["checks_passed"] for r in s["results"])
-    tot_c = sum(r["checks_total"] for r in s["results"])
-    cols[2].metric("校验项通过率", f"{tot_p}/{tot_c}({tot_p/tot_c:.1%})")
-    covs = [float(r["grounding_coverage"].rstrip("%")) for r in s["results"]]
-    cols[3].metric("平均溯源覆盖率", f"{sum(covs)/len(covs):.1f}%")
-
-    rows = [{"公司": r["sec_name"], "代码": r["sec_code"], "类型": r["doc_type"],
-             "校验": f"{r['checks_passed']}/{r['checks_total']}",
-             "溯源": r["grounding_coverage"], "记录数": r["records"]}
-            for r in s["results"]]
-    st.dataframe(pd.DataFrame(rows), use_container_width=True, height=400)
-
-    if os.path.isfile(cp):
-        c = json.load(open(cp, encoding="utf-8"))["summary"]
-        st.subheader("消融对照:AI 提取 vs 纯规则提取")
-        df = pd.DataFrame({
-            "指标": ["校验全过(文档级)", "平均每份提取记录", "平均每份累计表条目"],
-            "AI 提取(本系统)": [f"{c['llm']['check_full_pass']}/{c['n_docs']}",
-                          c["llm"]["avg_records"], c["llm"]["avg_cumulative"]],
-            "纯规则提取": [f"{c['rules']['check_full_pass']}/{c['n_docs']}",
-                        c["rules"]["avg_records"], c["rules"]["avg_cumulative"]],
-        })
-        st.table(df)
-        st.caption("结论:AI 负责「提得出」,校验体系负责「提得对」,二者缺一不可。")
-
-
-# ---------------------------------------------------------------------------
-# 入口
-# ---------------------------------------------------------------------------
-
-def main():
-    st.sidebar.title("🐫 驼研·信鉴")
-    st.sidebar.caption("公告与财报多源结构化提取的\n上市公司信用风险预警智能体")
-    page = st.sidebar.radio("功能", ["公告提取演示", "信用风险预警", "评测总览"])
-    st.sidebar.divider()
-    st.sidebar.caption("DeepSeek(提取/裁决)+ Kimi(质疑)\n数据均已落盘,离线可演示")
-    {"公告提取演示": page_extract, "信用风险预警": page_risk,
-     "评测总览": page_eval}[page]()
-
-
-if __name__ == "__main__":
-    main()
+st.divider()
+st.caption("🐫 驼研·信鉴 · 首都经济贸易大学 · 2026 年北京市大学生金融人工智能竞赛参赛作品"
+           " | DeepSeek + Kimi 国产大模型 | 数据均已落盘,过程可追溯")
