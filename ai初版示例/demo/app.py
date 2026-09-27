@@ -110,6 +110,7 @@ _HL_COLORS = {  # 字段 → (颜色, 图例名)
     "date": ("#7b1fa2", "日期/期限"),
     "pledgee": ("#e65100", "质权人"),
     "purpose": ("#795548", "用途"),
+    "money": ("#ad1457", "融资金额"),
 }
 
 
@@ -122,7 +123,8 @@ def _value_variants(v):
     if isinstance(v, float):
         vs = [f"{v}%", str(v)]
         if float(v).is_integer():
-            vs.append(str(int(v)))
+            # 公告里 70.0% 常写作 70% / 70,两种写法都要能命中
+            vs += [f"{int(v)}%", str(int(v))]
         return vs
     s = str(v).strip()
     if not s:
@@ -135,25 +137,43 @@ def _value_variants(v):
     return vs
 
 
-def annotate_evidence(evidence, record):
-    """把 evidence 原文里出现的字段值替换为彩色 <mark>,返回安全 HTML。
+def _iter_all_fields(d):
+    """遍历提取结果(records+cumulative+risk_items)的全部字段 → (类别, 原始值)"""
+    for r in d.get("records", []):
+        yield ("pledgor", r.get("pledgor"))
+        yield ("shares", r.get("shares"))
+        yield ("pct_of_held", r.get("pct_of_held"))
+        yield ("pct_of_total", r.get("pct_of_total"))
+        yield ("date", r.get("pledge_start_date"))
+        yield ("date", r.get("pledge_end_date"))
+        yield ("date", r.get("release_date"))
+        yield ("pledgee", r.get("pledgee"))
+        yield ("purpose", r.get("purpose"))
+    for c in d.get("cumulative", []):
+        yield ("pledgor", c.get("shareholder"))
+        yield ("shares", c.get("pre_pledge_shares"))
+        yield ("shares", c.get("post_pledge_shares"))
+        yield ("pct_of_held", c.get("pct_of_held"))
+        yield ("pct_of_total", c.get("pct_of_total"))
+    for it in d.get("risk_items", []):
+        yield ("shares", it.get("shares"))
+        yield ("money", it.get("finance_balance"))
 
-    用占位符两阶段替换:先命中→占位符,最后统一渲染,避免长短值嵌套标注重叠。
+
+def annotate_fulltext(text, d):
+    """在公告【完整原文】里高亮全部提取字段,返回 (安全HTML, 标注处数)。
+
+    占位符两阶段替换:先命中→占位符,最后统一渲染,避免长短值嵌套标注重叠。
+    全文范围大,对「70」这类短纯数字变体会误伤一片,故纯数字变体至少 4 位才标。
     """
-    text = evidence or ""
     jobs = []
-    for fkey, val in [("pledgor", record.get("pledgor")),
-                      ("shares", record.get("shares")),
-                      ("pct_of_held", record.get("pct_of_held")),
-                      ("pct_of_total", record.get("pct_of_total")),
-                      ("date", record.get("pledge_start_date")),
-                      ("date", record.get("pledge_end_date")),
-                      ("date", record.get("release_date")),
-                      ("pledgee", record.get("pledgee")),
-                      ("purpose", record.get("purpose"))]:
+    for fkey, val in _iter_all_fields(d):
         for var in _value_variants(val):
-            if len(var) >= 2:
-                jobs.append((fkey, var))
+            if len(var) < 2:
+                continue
+            if var.isdigit() and len(var) < 4:
+                continue  # 短纯数字在全文里噪声太大(如 "70"、"3"),跳过
+            jobs.append((fkey, var))
     jobs.sort(key=lambda x: -len(x[1]))  # 长值优先,防短值把长值切碎
     marks = []
     for fkey, var in jobs:
@@ -168,7 +188,17 @@ def annotate_evidence(evidence, record):
     out = _html.escape(text)
     for i, mk in enumerate(marks):
         out = out.replace(f"\x00{i}\x00", mk)
-    return out
+    return out, len(marks)
+
+
+@st.cache_data(show_spinner=False)
+def _load_fulltext(path, _mtime):
+    """解析公告 PDF 拿完整原文(带缓存;_mtime 仅为缓存失效钥匙)"""
+    import parser as doc_parser
+    try:
+        return "\n\n".join(doc_parser.parse_pdf(path)["pages"])
+    except Exception:
+        return ""
 
 
 def legend_html():
@@ -304,9 +334,17 @@ if st.session_state.get("hits"):
         picks = []
         for i, h in enumerate(_hits[:10]):
             date = datetime.fromtimestamp(h["time"] / 1000).strftime("%Y-%m-%d") if h["time"] else "—"
-            if st.checkbox(f"{h['title']}({date})", key=f"hit{i}",
-                           value=(i == 0)):
-                picks.append(h)
+            hc1, hc2 = st.columns([6, 1])
+            with hc1:
+                if st.checkbox(f"{h['title']}({date})", key=f"hit{i}",
+                               value=(i == 0)):
+                    picks.append(h)
+            with hc2:
+                # 在线预览巨潮原文(static 域名支持 https,云端部署也能内嵌)
+                purl = "https://static.cninfo.com.cn/" + (h["url"] or "")
+                if st.button("👁️ 原文", key=f"pv{i}"):
+                    st.session_state.preview = (
+                        None if st.session_state.get("preview") == purl else purl)
         if st.button("⬇️ 下载选中公告"):
             import requests
             import eval_collect  # 注意:必须在按钮分支内重新导入——
@@ -328,6 +366,19 @@ if st.session_state.get("hits"):
                 if fpath not in st.session_state.files:
                     st.session_state.files.append(fpath)
             st.success(f"已就绪 {len(picks)} 份公告")
+    # 预览区放在详情 expander 外:点「👁️ 原文」后即使详情收起也能看
+    if st.session_state.get("preview"):
+        pvc1, pvc2 = st.columns([5, 1])
+        with pvc1:
+            st.markdown("**📕 公告原文预览**(来源:巨潮资讯网 static.cninfo.com.cn)")
+        with pvc2:
+            if st.button("✕ 关闭预览"):
+                st.session_state.preview = None
+                st.rerun()
+        st.markdown(f'<iframe src="{st.session_state.preview}" width="100%" height="640" '
+                    f'style="border:1px solid #e0d8cc;border-radius:8px"></iframe>',
+                    unsafe_allow_html=True)
+        st.link_button("🔗 预览加载失败?点此在新标签页打开巨潮原文", st.session_state.preview)
 
 # 一键演示:载入预置案例,免搜索免上传(防现场翻车)
 if st.button("⚡ 一键演示:载入三湘印象质押公告(免搜索)"):
@@ -411,21 +462,29 @@ if st.session_state.files:
                     "用途": r.get("purpose") or "—",
                 } for r in d["records"]])
                 st.dataframe(rec_df, width="stretch")
-                st.caption("表中每个数字都直接来自公告原文——点开下方对照,"
-                           "彩色高亮部分就是 AI 提取出来的字段:")
-                with st.expander("🔍 原文标注对照(来源文字 + 彩色字段标注)"):
+                st.caption("表中每个数字都直接来自公告原文——点开下方完整原文,"
+                           "彩色高亮部分就是 AI 提取出来的字段,可逐个亲眼核对:")
+                with st.expander("📜 公告完整原文(全文字段彩色标注)"):
                     st.markdown("图例:" + legend_html(), unsafe_allow_html=True)
-                    for r in d["records"]:
-                        st.markdown(f"**{r.get('pledgor', '—')} · {r.get('record_type', '—')}**")
-                        ev = r.get("evidence")
-                        if ev:
-                            st.markdown(
-                                f'<div style="background:#faf7f2;border-left:4px solid #8f1414;'
-                                f'padding:8px 12px;border-radius:6px;margin:2px 0 12px;'
-                                f'line-height:2.0;font-size:14px">{annotate_evidence(ev, r)}</div>',
-                                unsafe_allow_html=True)
-                        else:
-                            st.caption("(该记录无原文证据片段)")
+                    st.caption("这是公告的【完整原文】,不是片段——所有彩色高亮 = "
+                               "AI 提取出的全部字段(含记录、累计质押、到期压力三块数据)。")
+                    full = _load_fulltext(path, os.path.getmtime(path))
+                    if full:
+                        hl_html, n_marks = annotate_fulltext(full, d)
+                        st.markdown(
+                            f'<div style="background:#faf7f2;border-left:4px solid #8f1414;'
+                            f'padding:10px 14px;border-radius:6px;margin:2px 0 8px;'
+                            f'line-height:2.0;font-size:14px;white-space:pre-wrap;'
+                            f'max-height:520px;overflow-y:auto">{hl_html}</div>',
+                            unsafe_allow_html=True)
+                        st.caption(f"全文共标注 {n_marks} 处;上下滚动可查看完整公告。")
+                    else:
+                        st.caption("(原文解析失败,可改用下方 PDF 原件预览)")
+                with st.expander("📕 公告 PDF 原件(在线翻阅)"):
+                    try:
+                        st.pdf(path, height=620)
+                    except Exception:
+                        st.caption("内置 PDF 预览组件不可用,请用下方下载按钮获取原件。")
             if d.get("cumulative"):
                 st.markdown("**累计质押情况**(股东总体风险敞口)")
                 st.dataframe(pd.DataFrame([{
@@ -599,6 +658,19 @@ if st.session_state.get("risk_report"):
                                                        indent=2).encode("utf-8"),
                                    file_name=f"{d['code']}_{d['name']}_财报.json",
                                    mime="application/json", key="fin_json")
+            # 原始数据文件:akshare 采集落盘的源文件,网页内直接可看
+            st.markdown("**📁 原始数据文件**(公开接口采集后原样落盘,红旗规则就算自这两个文件)")
+            fin_dir = os.path.dirname(fin_csv)
+            raw_tabs = st.tabs(["同花顺摘要 abstract_ths.csv", "新浪指标 indicators_sina.csv"])
+            for tab, raw_name in zip(raw_tabs, ["abstract_ths.csv", "indicators_sina.csv"]):
+                with tab:
+                    raw_path = os.path.join(fin_dir, raw_name)
+                    if os.path.isfile(raw_path):
+                        with open(raw_path, encoding="utf-8-sig", errors="replace") as rf:
+                            st.code(rf.read(), language="csv")
+                        st.caption(f"本地路径:data/financials/{d['code']}_{d['name']}/{raw_name}")
+                    else:
+                        st.caption("该公司无此文件(采集时该源可能不可用,另一源已兜底)。")
 
 # ---------------------------------------------------------------------------
 # 评测结果:30 份系统未见过的真实公告(数据说话)
