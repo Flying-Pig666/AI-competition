@@ -110,18 +110,52 @@ with c3:
     st.write("")
     do_search = st.button("🔍 上网搜索公告", type="primary")
 
+def parse_query(q):
+    """把「哈药股份(600664.SH)」「600664.SH」「sh600664」等输入解析为 (名称, 6位代码)。
+
+    巨潮全文检索不认带括号/市场后缀的复合输入,必须先拆干净再搜。
+    """
+    q = q.strip()
+    name, code = q, ""
+    # 括号里若是代码,拆出来:哈药股份(600664.SH) → 哈药股份 + 600664
+    m = re.search(r"[(（]([0-9A-Za-z.]+)[)）]", q)
+    if m:
+        name, code = (q[:m.start()] + q[m.end():]).strip(), m.group(1)
+    # 名称部分本身就是代码:600664 / 600664.SH / sh600664
+    m2 = re.fullmatch(r"(?i)(?:sh|sz|bj)?(\d{6})(?:\.(?:sh|sz|bj))?", name)
+    if m2:
+        name, code = "", m2.group(1)
+    # 「000863 三湘印象」这类"代码+空格+名称"的输入
+    m2b = re.fullmatch(r"(\d{6})\s+(.+)", name)
+    if m2b:
+        code, name = m2b.group(1), m2b.group(2).strip()
+    # 代码部分规范化:sh600664 / 600664.SH → 600664
+    m3 = re.search(r"(\d{6})", code)
+    code = m3.group(1) if m3 else ""
+    return name, code
+
+
 if do_search and query.strip():
     import eval_collect
     edate = datetime.now()
     sdate = edate - timedelta(days=30 * months)
-    kw = query.strip()
-    with st.spinner(f"正在巨潮资讯网搜索「{kw}」相关公告……"):
-        try:
-            anns = eval_collect.search(kw, sdate.strftime("%Y-%m-%d"),
-                                       edate.strftime("%Y-%m-%d"))
-        except Exception as e:
-            anns = []
-            st.error(f"搜索失败:{e}")
+    name, code = parse_query(query)
+    # 巨潮对公司名检索效果最好:先搜名称,搜不到再退到纯代码
+    tries = [kw for kw in (name, code) if kw] or [query.strip()]
+    anns, used_kw, err = [], tries[0], None
+    for kw in tries:
+        used_kw = kw
+        with st.spinner(f"正在巨潮资讯网搜索「{kw}」相关公告……"):
+            try:
+                anns = eval_collect.search(kw, sdate.strftime("%Y-%m-%d"),
+                                           edate.strftime("%Y-%m-%d"))
+            except Exception as e:
+                err = e
+                anns = []
+        if anns:
+            break
+    if err is not None and not anns:
+        st.error(f"搜索失败:{err}")
     # 过滤:质押类公告、去掉年报等长文档
     hits = []
     for a in anns:
@@ -135,8 +169,17 @@ if do_search and query.strip():
     if hits:
         st.session_state.company = {"code": hits[0]["code"], "name": hits[0]["name"]}
         st.success(f"找到 {len(hits)} 份质押类公告(公司:{hits[0]['name']} {hits[0]['code']})")
+    elif anns:
+        # 无质押公告≠死胡同:把搜到的公司带入步骤③,仍可直接做财报风险分析
+        st.session_state.company = {"code": anns[0].get("secCode", ""),
+                                    "name": anns[0].get("secName", "")}
+        st.info(f"「{used_kw}」近 {months} 个月有公告发布,但其中没有质押类公告"
+                "——该公司股东近期大概率没有质押行为,本身就是低风险信号。"
+                "可直接到步骤 ③ 对该公司做信用风险分析(代码已自动带入),"
+                "或换一家(如三湘印象 000863)体验提取流程,也可手动上传质押公告 PDF。")
     else:
-        st.warning("没有找到匹配的质押公告,可换个关键词或手动上传文件。")
+        st.warning(f"巨潮资讯网没有搜到「{used_kw}」的任何公告,请检查名称/代码是否正确,"
+                   "或直接手动上传文件。")
 
 if st.session_state.get("hits"):
     st.markdown("**搜索结果(勾选要分析的公告):**")
