@@ -282,6 +282,8 @@ if st.session_state.get("hits"):
                 picks.append(h)
         if st.button("⬇️ 下载选中公告"):
             import requests
+            import eval_collect  # 注意:必须在按钮分支内重新导入——
+            # Streamlit 每次交互都整页重跑,搜索分支的 import 在下载这次重跑中不存在
             os.makedirs(UPLOAD_DIR, exist_ok=True)
             for h in picks:
                 fname = safe_name(f"{h['code']}_{h['name']}_{h['title'][:24]}.pdf")
