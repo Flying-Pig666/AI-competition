@@ -1,0 +1,556 @@
+{
+  "code": "000560",
+  "name": "我爱我家",
+  "industry": "综合",
+  "analysis_time": "2026-09-27T21:30:18.985447+08:00",
+  "verdict": "高风险",
+  "red_count": 22,
+  "orange_count": 21,
+  "red_flags": [
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "orange",
+      "period": "1995年报",
+      "evidence": {
+        "上年净利润": 29779800.0,
+        "本年净利润": 17918700.0,
+        "同比": "-40%"
+      },
+      "explanation": "1995 年净利润同比 -40%(上年 2977.98 万 → 本年 1791.87 万)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "orange",
+      "period": "1996年报",
+      "evidence": {
+        "上年净利润": 17918700.0,
+        "本年净利润": 12259600.0,
+        "同比": "-32%"
+      },
+      "explanation": "1996 年净利润同比 -32%(上年 1791.87 万 → 本年 1225.96 万)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "1998年报",
+      "evidence": {
+        "上年净利润": 11004200.0,
+        "本年净利润": -46974399.99999999,
+        "同比": "-527%"
+      },
+      "explanation": "1998 年净利润同比 -527%(上年 1100.42 万 → 本年 -4697.44 万)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2000年报",
+      "evidence": {
+        "上年净利润": 11812900.0,
+        "本年净利润": -80143700.0,
+        "同比": "-778%"
+      },
+      "explanation": "2000 年净利润同比 -778%(上年 1181.29 万 → 本年 -8014.37 万)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "orange",
+      "period": "2002年报",
+      "evidence": {
+        "净利润": -210000000.0,
+        "扣非净利润": -134000000.00000001,
+        "差异率": "36%"
+      },
+      "explanation": "2002 年净利润与扣非净利润差异率达 36%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2003年报",
+      "evidence": {
+        "净利润": 37576000.0,
+        "每股经营现金流": -0.22
+      },
+      "explanation": "2003 年账面净利润 3757.60 万，但每股经营现金流 -0.22 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2003年报",
+      "evidence": {
+        "基本每股收益": 0.2796,
+        "每股经营现金流": -0.22,
+        "比值": "-0.79"
+      },
+      "explanation": "2003 年每股经营现金流仅为每股收益的 -0.79 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2005年报",
+      "evidence": {
+        "净利润": 35271700.0,
+        "每股经营现金流": -1.18
+      },
+      "explanation": "2005 年账面净利润 3527.17 万，但每股经营现金流 -1.18 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2005年报",
+      "evidence": {
+        "基本每股收益": 0.2624,
+        "每股经营现金流": -1.18,
+        "比值": "-4.50"
+      },
+      "explanation": "2005 年每股经营现金流仅为每股收益的 -4.50 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "orange",
+      "period": "2006年报",
+      "evidence": {
+        "上年净利润": 35271700.0,
+        "本年净利润": 23479100.0,
+        "同比": "-33%"
+      },
+      "explanation": "2006 年净利润同比 -33%(上年 3527.17 万 → 本年 2347.91 万)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2007年报",
+      "evidence": {
+        "净利润": 417000000.0,
+        "扣非净利润": 65635900.0,
+        "差异率": "84%"
+      },
+      "explanation": "2007 年净利润与扣非净利润差异率达 84%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R3",
+      "rule": "营收与利润背离",
+      "severity": "orange",
+      "period": "2007年报",
+      "evidence": {
+        "营收同比": "-5%",
+        "净利润同比": "1676%"
+      },
+      "explanation": "2007 年营收下降 -5% 但净利润增长 1676%，利润增长缺乏收入支撑",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2008年报",
+      "evidence": {
+        "净利润": 36918900.0,
+        "每股经营现金流": -1.71
+      },
+      "explanation": "2008 年账面净利润 3691.89 万，但每股经营现金流 -1.71 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2008年报",
+      "evidence": {
+        "基本每股收益": 0.2747,
+        "每股经营现金流": -1.71,
+        "比值": "-6.22"
+      },
+      "explanation": "2008 年每股经营现金流仅为每股收益的 -6.22 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2008年报",
+      "evidence": {
+        "上年净利润": 417000000.0,
+        "本年净利润": 36918900.0,
+        "同比": "-91%"
+      },
+      "explanation": "2008 年净利润同比 -91%(上年 4.17 亿 → 本年 3691.89 万)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2011年报",
+      "evidence": {
+        "净利润": 82937400.0,
+        "每股经营现金流": -0.02
+      },
+      "explanation": "2011 年账面净利润 8293.74 万，但每股经营现金流 -0.02 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2011年报",
+      "evidence": {
+        "净利润": 82937400.0,
+        "扣非净利润": 26593200.0,
+        "差异率": "68%"
+      },
+      "explanation": "2011 年净利润与扣非净利润差异率达 68%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2011年报",
+      "evidence": {
+        "基本每股收益": 0.5041,
+        "每股经营现金流": -0.02,
+        "比值": "-0.04"
+      },
+      "explanation": "2011 年每股经营现金流仅为每股收益的 -0.04 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2012年报",
+      "evidence": {
+        "净利润": 103000000.0,
+        "每股经营现金流": -1.32
+      },
+      "explanation": "2012 年账面净利润 1.03 亿，但每股经营现金流 -1.32 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2012年报",
+      "evidence": {
+        "净利润": 103000000.0,
+        "扣非净利润": 49585500.0,
+        "差异率": "52%"
+      },
+      "explanation": "2012 年净利润与扣非净利润差异率达 52%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2012年报",
+      "evidence": {
+        "基本每股收益": 0.6285,
+        "每股经营现金流": -1.32,
+        "比值": "-2.10"
+      },
+      "explanation": "2012 年每股经营现金流仅为每股收益的 -2.10 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2013年报",
+      "evidence": {
+        "净利润": 74998100.0,
+        "每股经营现金流": -0.17
+      },
+      "explanation": "2013 年账面净利润 7499.81 万，但每股经营现金流 -0.17 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2013年报",
+      "evidence": {
+        "基本每股收益": 0.4464,
+        "每股经营现金流": -0.17,
+        "比值": "-0.38"
+      },
+      "explanation": "2013 年每股经营现金流仅为每股收益的 -0.38 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2014年报",
+      "evidence": {
+        "净利润": 71062700.0,
+        "每股经营现金流": -0.18
+      },
+      "explanation": "2014 年账面净利润 7106.27 万，但每股经营现金流 -0.18 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "orange",
+      "period": "2014年报",
+      "evidence": {
+        "净利润": 71062700.0,
+        "扣非净利润": 47267900.0,
+        "差异率": "33%"
+      },
+      "explanation": "2014 年净利润与扣非净利润差异率达 33%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2014年报",
+      "evidence": {
+        "基本每股收益": 0.1651,
+        "每股经营现金流": -0.18,
+        "比值": "-1.09"
+      },
+      "explanation": "2014 年每股经营现金流仅为每股收益的 -1.09 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2015年报",
+      "evidence": {
+        "净利润": 30827500.0,
+        "每股经营现金流": -0.02
+      },
+      "explanation": "2015 年账面净利润 3082.75 万，但每股经营现金流 -0.02 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2015年报",
+      "evidence": {
+        "基本每股收益": 0.0333,
+        "每股经营现金流": -0.02,
+        "比值": "-0.60"
+      },
+      "explanation": "2015 年每股经营现金流仅为每股收益的 -0.60 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2015年报",
+      "evidence": {
+        "上年净利润": 71062700.0,
+        "本年净利润": 30827500.0,
+        "同比": "-57%"
+      },
+      "explanation": "2015 年净利润同比 -57%(上年 7106.27 万 → 本年 3082.75 万)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2016年报",
+      "evidence": {
+        "净利润": 79165800.0,
+        "扣非净利润": 21276800.0,
+        "差异率": "73%"
+      },
+      "explanation": "2016 年净利润与扣非净利润差异率达 73%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2017年报",
+      "evidence": {
+        "基本每股收益": 0.0479,
+        "每股经营现金流": 0.0003,
+        "比值": "0.01"
+      },
+      "explanation": "2017 年每股经营现金流仅为每股收益的 0.01 倍(<0.3)，利润含金量低",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2020年报",
+      "evidence": {
+        "上年净利润": 827000000.0,
+        "本年净利润": 312000000.0,
+        "同比": "-62%"
+      },
+      "explanation": "2020 年净利润同比 -62%(上年 8.27 亿 → 本年 3.12 亿)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "orange",
+      "period": "2021年报",
+      "evidence": {
+        "上年净利润": 312000000.0,
+        "本年净利润": 166000000.0,
+        "同比": "-47%"
+      },
+      "explanation": "2021 年净利润同比 -47%(上年 3.12 亿 → 本年 1.66 亿)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2022年报",
+      "evidence": {
+        "上年净利润": 166000000.0,
+        "本年净利润": -310000000.0,
+        "同比": "-287%"
+      },
+      "explanation": "2022 年净利润同比 -287%(上年 1.66 亿 → 本年 -3.10 亿)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "orange",
+      "period": "2024年报",
+      "evidence": {
+        "净利润": 73412300.0,
+        "扣非净利润": 41422000.0,
+        "差异率": "44%"
+      },
+      "explanation": "2024 年净利润与扣非净利润差异率达 44%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2025年报",
+      "evidence": {
+        "净利润": -96631000.0,
+        "扣非净利润": -44595700.0,
+        "差异率": "54%"
+      },
+      "explanation": "2025 年净利润与扣非净利润差异率达 54%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "red",
+      "period": "2025年报",
+      "evidence": {
+        "上年净利润": 73412300.0,
+        "本年净利润": -96631000.0,
+        "同比": "-232%"
+      },
+      "explanation": "2025 年净利润同比 -232%(上年 7341.23 万 → 本年 -9663.10 万)",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R5",
+      "rule": "持续亏损",
+      "severity": "red",
+      "period": "2000-2001年报",
+      "evidence": {
+        "前两年净利润": -80143700.0,
+        "前一年净利润": -146000000.0
+      },
+      "explanation": "连续两年亏损(-8014.37 万、-1.46 亿)，存在 ST 风险",
+      "source": "data/financials/000560_我爱我家/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "orange",
+      "period": "2021年报",
+      "evidence": {
+        "资产负债率": "67.5%"
+      },
+      "explanation": "2021 年资产负债率 67.5%",
+      "source": "data/financials/000560_我爱我家/indicators_sina.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "orange",
+      "period": "2022年报",
+      "evidence": {
+        "资产负债率": "68.1%"
+      },
+      "explanation": "2022 年资产负债率 68.1%",
+      "source": "data/financials/000560_我爱我家/indicators_sina.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "red",
+      "period": "2023年报",
+      "evidence": {
+        "资产负债率": "70.5%"
+      },
+      "explanation": "2023 年资产负债率 70.5%",
+      "source": "data/financials/000560_我爱我家/indicators_sina.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "orange",
+      "period": "2024年报",
+      "evidence": {
+        "资产负债率": "68.8%"
+      },
+      "explanation": "2024 年资产负债率 68.8%",
+      "source": "data/financials/000560_我爱我家/indicators_sina.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "orange",
+      "period": "2025年报",
+      "evidence": {
+        "资产负债率": "62.2%"
+      },
+      "explanation": "2025 年资产负债率 62.2%",
+      "source": "data/financials/000560_我爱我家/indicators_sina.csv"
+    }
+  ],
+  "data_sources": [
+    "abstract_ths.csv(同花顺)",
+    "indicators_sina.csv(新浪)",
+    "output/*.result.json(选题一提取结果)"
+  ],
+  "note": "全部指标由代码对落盘数据计算,未经 LLM 口算;银行业现金流/杠杆口径特殊已豁免 R1/R6/R7"
+}

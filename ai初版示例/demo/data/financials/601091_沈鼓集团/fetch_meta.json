@@ -1,0 +1,20 @@
+{
+  "code": "601091",
+  "name": "沈鼓集团",
+  "fetch_time": "2026-09-27T20:01:16.775893+08:00",
+  "sources": [
+    {
+      "name": "同花顺财务摘要",
+      "file": "abstract_ths.csv",
+      "rows": 13,
+      "status": "ok"
+    },
+    {
+      "name": "新浪财务指标",
+      "file": "indicators_sina.csv",
+      "rows": 7,
+      "cols": 86,
+      "status": "ok"
+    }
+  ]
+}

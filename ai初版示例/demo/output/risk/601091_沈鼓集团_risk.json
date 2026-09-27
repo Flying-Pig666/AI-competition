@@ -1,0 +1,151 @@
+{
+  "code": "601091",
+  "name": "沈鼓集团",
+  "industry": "综合",
+  "analysis_time": "2026-09-27T20:01:20.634324+08:00",
+  "verdict": "高风险",
+  "red_count": 6,
+  "orange_count": 5,
+  "red_flags": [
+    {
+      "rule_id": "R1",
+      "rule": "利润与现金流背离",
+      "severity": "red",
+      "period": "2011年报",
+      "evidence": {
+        "净利润": 298000000.0,
+        "每股经营现金流": -0.41
+      },
+      "explanation": "2011 年账面净利润 2.98 亿，但每股经营现金流 -0.41 元为负——利润没有现金支撑，是财务造假/资金链紧张的教科书信号",
+      "source": "data/financials/601091_沈鼓集团/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R7",
+      "rule": "利润含金量不足",
+      "severity": "orange",
+      "period": "2011年报",
+      "evidence": {
+        "基本每股收益": 0.2004,
+        "每股经营现金流": -0.41,
+        "比值": "-2.05"
+      },
+      "explanation": "2011 年每股经营现金流仅为每股收益的 -2.05 倍(<0.3)，利润含金量低",
+      "source": "data/financials/601091_沈鼓集团/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "orange",
+      "period": "2013年报",
+      "evidence": {
+        "净利润": 118000000.0,
+        "扣非净利润": 78814900.0,
+        "差异率": "33%"
+      },
+      "explanation": "2013 年净利润与扣非净利润差异率达 33%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/601091_沈鼓集团/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R4",
+      "rule": "业绩变脸",
+      "severity": "orange",
+      "period": "2013年报",
+      "evidence": {
+        "上年净利润": 234000000.0,
+        "本年净利润": 118000000.0,
+        "同比": "-50%"
+      },
+      "explanation": "2013 年净利润同比 -50%(上年 2.34 亿 → 本年 1.18 亿)",
+      "source": "data/financials/601091_沈鼓集团/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "red",
+      "period": "2022年报",
+      "evidence": {
+        "净利润": 181000000.0,
+        "扣非净利润": 47198900.0,
+        "差异率": "74%"
+      },
+      "explanation": "2022 年净利润与扣非净利润差异率达 74%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/601091_沈鼓集团/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "orange",
+      "period": "2023年报",
+      "evidence": {
+        "净利润": 355000000.0,
+        "扣非净利润": 241000000.0,
+        "差异率": "32%"
+      },
+      "explanation": "2023 年净利润与扣非净利润差异率达 32%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/601091_沈鼓集团/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R2",
+      "rule": "非经常性损益占比异常",
+      "severity": "orange",
+      "period": "2025年报",
+      "evidence": {
+        "净利润": 739000000.0,
+        "扣非净利润": 458000000.0,
+        "差异率": "38%"
+      },
+      "explanation": "2025 年净利润与扣非净利润差异率达 38%，利润成色存疑(竞赛考点:非经常性损益识别)",
+      "source": "data/financials/601091_沈鼓集团/abstract_ths.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "red",
+      "period": "2022年报",
+      "evidence": {
+        "资产负债率": "82.9%"
+      },
+      "explanation": "2022 年资产负债率 82.9%",
+      "source": "data/financials/601091_沈鼓集团/indicators_sina.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "red",
+      "period": "2023年报",
+      "evidence": {
+        "资产负债率": "81.4%"
+      },
+      "explanation": "2023 年资产负债率 81.4%",
+      "source": "data/financials/601091_沈鼓集团/indicators_sina.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "red",
+      "period": "2024年报",
+      "evidence": {
+        "资产负债率": "80.1%"
+      },
+      "explanation": "2024 年资产负债率 80.1%",
+      "source": "data/financials/601091_沈鼓集团/indicators_sina.csv"
+    },
+    {
+      "rule_id": "R6",
+      "rule": "高杠杆(资产负债率)",
+      "severity": "red",
+      "period": "2025年报",
+      "evidence": {
+        "资产负债率": "78.5%"
+      },
+      "explanation": "2025 年资产负债率 78.5%",
+      "source": "data/financials/601091_沈鼓集团/indicators_sina.csv"
+    }
+  ],
+  "data_sources": [
+    "abstract_ths.csv(同花顺)",
+    "indicators_sina.csv(新浪)",
+    "output/*.result.json(选题一提取结果)"
+  ],
+  "note": "全部指标由代码对落盘数据计算,未经 LLM 口算;银行业现金流/杠杆口径特殊已豁免 R1/R6/R7"
+}
