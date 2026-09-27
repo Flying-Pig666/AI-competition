@@ -67,7 +67,7 @@ div.stButton > button[kind="primary"]:hover { background:#a93226; }
 c_logo, c_title = st.columns([1, 5])
 with c_logo:
     if os.path.isfile(LOGO):
-        st.image(LOGO, use_container_width=True)
+        st.image(LOGO, width="stretch")
 with c_title:
     st.markdown("""
     <div class="hero">
@@ -168,7 +168,8 @@ if do_search and query.strip():
     st.session_state.hits = hits
     if hits:
         st.session_state.company = {"code": hits[0]["code"], "name": hits[0]["name"]}
-        st.success(f"找到 {len(hits)} 份质押类公告(公司:{hits[0]['name']} {hits[0]['code']})")
+        st.success(f"搜索到 {len(hits)} 份质押类公告(公司:{hits[0]['name']} {hits[0]['code']})"
+                   "——点下方「显示详情」查看并勾选")
     elif anns:
         # 无质押公告≠死胡同:把搜到的公司带入步骤③,仍可直接做财报风险分析
         st.session_state.company = {"code": anns[0].get("secCode", ""),
@@ -182,32 +183,45 @@ if do_search and query.strip():
                    "或直接手动上传文件。")
 
 if st.session_state.get("hits"):
-    st.markdown("**搜索结果(勾选要分析的公告):**")
-    picks = []
-    for i, h in enumerate(st.session_state.hits[:10]):
-        date = datetime.fromtimestamp(h["time"] / 1000).strftime("%Y-%m-%d") if h["time"] else "—"
-        if st.checkbox(f"{h['title']}({date})", key=f"hit{i}",
-                       value=(i == 0)):
-            picks.append(h)
-    if st.button("⬇️ 下载选中公告"):
-        import requests
-        os.makedirs(UPLOAD_DIR, exist_ok=True)
-        for h in picks:
-            fname = safe_name(f"{h['code']}_{h['name']}_{h['title'][:24]}.pdf")
-            fpath = os.path.join(UPLOAD_DIR, fname)
-            if not os.path.isfile(fpath):
-                try:
-                    r = requests.get(eval_collect.DOWNLOAD_BASE + h["url"],
-                                     headers=eval_collect.HEADERS, timeout=60)
-                    r.raise_for_status()
-                    with open(fpath, "wb") as f:
-                        f.write(r.content)
-                except Exception as e:
-                    st.error(f"{h['title'][:20]} 下载失败:{e}")
-                    continue
-            if fpath not in st.session_state.files:
-                st.session_state.files.append(fpath)
-        st.success(f"已就绪 {len(picks)} 份公告")
+    _hits = st.session_state.hits
+    with st.expander(f"📄 显示详情(共 {len(_hits)} 份,点击展开勾选)", expanded=False):
+        picks = []
+        for i, h in enumerate(_hits[:10]):
+            date = datetime.fromtimestamp(h["time"] / 1000).strftime("%Y-%m-%d") if h["time"] else "—"
+            if st.checkbox(f"{h['title']}({date})", key=f"hit{i}",
+                           value=(i == 0)):
+                picks.append(h)
+        if st.button("⬇️ 下载选中公告"):
+            import requests
+            os.makedirs(UPLOAD_DIR, exist_ok=True)
+            for h in picks:
+                fname = safe_name(f"{h['code']}_{h['name']}_{h['title'][:24]}.pdf")
+                fpath = os.path.join(UPLOAD_DIR, fname)
+                if not os.path.isfile(fpath):
+                    try:
+                        r = requests.get(eval_collect.DOWNLOAD_BASE + h["url"],
+                                         headers=eval_collect.HEADERS, timeout=60)
+                        r.raise_for_status()
+                        with open(fpath, "wb") as f:
+                            f.write(r.content)
+                    except Exception as e:
+                        st.error(f"{h['title'][:20]} 下载失败:{e}")
+                        continue
+                if fpath not in st.session_state.files:
+                    st.session_state.files.append(fpath)
+            st.success(f"已就绪 {len(picks)} 份公告")
+
+# 一键演示:载入预置案例,免搜索免上传(防现场翻车)
+if st.button("⚡ 一键演示:载入三湘印象质押公告(免搜索)"):
+    demo_pdf = os.path.join(DEMO_DIR, "data", "000863_三湘印象_质押和解除质押.pdf")
+    if os.path.isfile(demo_pdf):
+        if demo_pdf not in st.session_state.files:
+            st.session_state.files.append(demo_pdf)
+        st.session_state.company = {"code": "000863", "name": "三湘印象"}
+        st.success("已载入演示案例:三湘印象质押公告(巨潮真实公告,本地已落盘)。"
+                   "请直接到步骤 ② 点击「开始数据结构化提取」。")
+    else:
+        st.error("演示公告文件缺失,请改用搜索或手动上传。")
 
 uploaded = st.file_uploader("📎 或手动上传公告/研报 PDF(可多选)",
                             type=["pdf"], accept_multiple_files=True)
@@ -388,6 +402,45 @@ if st.session_state.get("risk_report"):
     if years:
         st.markdown("#### 信号时间线")
         st.markdown(" → ".join(f"**{y}**" for y in years))
+
+# ---------------------------------------------------------------------------
+# 评测结果:30 份系统未见过的真实公告(数据说话)
+# ---------------------------------------------------------------------------
+st.divider()
+with st.expander("📈 评测结果:30 份真实公告批量评测(点击展开)", expanded=False):
+    eval_json = os.path.join(OUT_DIR, "eval", "eval_summary.json")
+    cmp_json = os.path.join(OUT_DIR, "eval", "compare_llm_vs_rules.json")
+    if os.path.isfile(eval_json):
+        es = json.load(open(eval_json, encoding="utf-8"))
+        results = es.get("results", [])
+        stats = es.get("stats", {})
+        ct = sum(r.get("checks_total", 0) for r in results)
+        cp = sum(r.get("checks_passed", 0) for r in results)
+        covs = [float(r["grounding_coverage"].rstrip("%")) for r in results
+                if r.get("grounding_coverage", "").rstrip("%").replace(".", "").isdigit()]
+        m1, m2, m3, m4 = st.columns(4)
+        m1.metric("跑通率", f"{stats.get('ran_ok', 0)}/{es.get('total_docs', 0)}")
+        m2.metric("校验项通过率", f"{cp}/{ct}",
+                  f"{cp / ct * 100:.1f}%" if ct else "—")
+        m3.metric("校验全过(文档级)", f"{stats.get('full_checks_pass', 0)}/{es.get('total_docs', 0)}")
+        m4.metric("平均原文溯源覆盖率", f"{sum(covs) / len(covs):.1f}%" if covs else "—")
+        st.caption(f"评测时间:{str(es.get('eval_time', ''))[:19]} · 评测集为 2026 年 6-9 月"
+                   "巨潮真实公告,系统从未见过 · 明细:output/eval/eval_summary.json")
+    else:
+        st.info("评测数据未找到——请先运行 python eval_run.py 生成。")
+    if os.path.isfile(cmp_json):
+        cd = json.load(open(cmp_json, encoding="utf-8")).get("summary", {})
+        llm, rules = cd.get("llm", {}), cd.get("rules", {})
+        n = cd.get("n_docs", "—")
+        st.markdown("**消融对照:AI 路径 vs 纯规则路径(同一评测集)**")
+        st.table(pd.DataFrame({
+            "路径": ["AI 提取 + 校验闭环", "纯规则(无 AI)"],
+            "校验全过(文档级)": [f"{llm.get('check_full_pass', '—')}/{n}",
+                               f"{rules.get('check_full_pass', '—')}/{n}"],
+            "平均每份提取记录数": [llm.get("avg_records", "—"), rules.get("avg_records", "—")],
+        }))
+        st.caption("结论:LLM 提供提取召回的主体能力(纯规则在 24/30 份公告上提不到质押记录),"
+                   "校验-重试闭环提供正确性保证——二者缺一不可。")
 
 st.divider()
 st.caption("🐫 驼研·信鉴 · 首都经济贸易大学 · 2026 年北京市大学生金融人工智能竞赛参赛作品"
