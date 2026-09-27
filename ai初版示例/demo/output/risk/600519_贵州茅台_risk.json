@@ -2,25 +2,11 @@
   "code": "600519",
   "name": "贵州茅台",
   "industry": "白酒",
-  "analysis_time": "2026-09-27T00:54:19.535134+08:00",
+  "analysis_time": "2026-09-27T21:47:06.575799+08:00",
   "verdict": "稳健",
   "red_count": 0,
-  "orange_count": 1,
-  "red_flags": [
-    {
-      "rule_id": "R7",
-      "rule": "利润含金量不足",
-      "severity": "orange",
-      "period": "2001年报",
-      "evidence": {
-        "基本每股收益": 1.59,
-        "每股经营现金流": 0.17,
-        "比值": "0.11"
-      },
-      "explanation": "2001 年每股经营现金流仅为每股收益的 0.11 倍(<0.3)，利润含金量低",
-      "source": "data/financials/600519_贵州茅台/abstract_ths.csv"
-    }
-  ],
+  "orange_count": 0,
+  "red_flags": [],
   "data_sources": [
     "abstract_ths.csv(同花顺)",
     "indicators_sina.csv(新浪)",

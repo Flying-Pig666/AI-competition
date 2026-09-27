@@ -2,50 +2,11 @@
   "code": "600518",
   "name": "康美药业",
   "industry": "医药",
-  "analysis_time": "2026-09-27T00:54:19.526423+08:00",
+  "analysis_time": "2026-09-27T21:47:06.561451+08:00",
   "verdict": "高风险",
   "red_count": 12,
-  "orange_count": 11,
+  "orange_count": 8,
   "red_flags": [
-    {
-      "rule_id": "R7",
-      "rule": "利润含金量不足",
-      "severity": "orange",
-      "period": "2008年报",
-      "evidence": {
-        "基本每股收益": 0.193,
-        "每股经营现金流": 0.004,
-        "比值": "0.02"
-      },
-      "explanation": "2008 年每股经营现金流仅为每股收益的 0.02 倍(<0.3)，利润含金量低",
-      "source": "data/financials/600518_康美药业/abstract_ths.csv"
-    },
-    {
-      "rule_id": "R7",
-      "rule": "利润含金量不足",
-      "severity": "orange",
-      "period": "2009年报",
-      "evidence": {
-        "基本每股收益": 0.309,
-        "每股经营现金流": 0.07,
-        "比值": "0.23"
-      },
-      "explanation": "2009 年每股经营现金流仅为每股收益的 0.23 倍(<0.3)，利润含金量低",
-      "source": "data/financials/600518_康美药业/abstract_ths.csv"
-    },
-    {
-      "rule_id": "R7",
-      "rule": "利润含金量不足",
-      "severity": "orange",
-      "period": "2015年报",
-      "evidence": {
-        "基本每股收益": 0.623,
-        "每股经营现金流": 0.12,
-        "比值": "0.19"
-      },
-      "explanation": "2015 年每股经营现金流仅为每股收益的 0.19 倍(<0.3)，利润含金量低",
-      "source": "data/financials/600518_康美药业/abstract_ths.csv"
-    },
     {
       "rule_id": "R2",
       "rule": "非经常性损益占比异常",
