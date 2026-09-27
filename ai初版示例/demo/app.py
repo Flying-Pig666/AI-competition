@@ -89,6 +89,86 @@ def safe_name(s):
 
 
 # ---------------------------------------------------------------------------
+# 原文标注:把公告原文里的关键字段值用彩色高亮标出(NER 标注视图)
+# ---------------------------------------------------------------------------
+import html as _html
+
+_HL_COLORS = {  # 字段 → (颜色, 图例名)
+    "pledgor": ("#1f6feb", "出质人/股东"),
+    "shares": ("#d32f2f", "股数"),
+    "pct_of_held": ("#2e7d32", "占其所持%"),
+    "pct_of_total": ("#00838f", "占总股本%"),
+    "date": ("#7b1fa2", "日期/期限"),
+    "pledgee": ("#e65100", "质权人"),
+    "purpose": ("#795548", "用途"),
+}
+
+
+def _value_variants(v):
+    """同一字段值在公告原文中的常见写法(与 grounding 溯源变体逻辑一致)"""
+    if v is None or isinstance(v, bool):
+        return []
+    if isinstance(v, int):
+        return [f"{v:,}", str(v)]
+    if isinstance(v, float):
+        vs = [f"{v}%", str(v)]
+        if float(v).is_integer():
+            vs.append(str(int(v)))
+        return vs
+    s = str(v).strip()
+    if not s:
+        return []
+    vs = [s]
+    m = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})", s)
+    if m:
+        y, mo, dd = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        vs += [f"{y}.{mo}.{dd}", f"{y}年{mo}月{dd}日"]
+    return vs
+
+
+def annotate_evidence(evidence, record):
+    """把 evidence 原文里出现的字段值替换为彩色 <mark>,返回安全 HTML。
+
+    用占位符两阶段替换:先命中→占位符,最后统一渲染,避免长短值嵌套标注重叠。
+    """
+    text = evidence or ""
+    jobs = []
+    for fkey, val in [("pledgor", record.get("pledgor")),
+                      ("shares", record.get("shares")),
+                      ("pct_of_held", record.get("pct_of_held")),
+                      ("pct_of_total", record.get("pct_of_total")),
+                      ("date", record.get("pledge_start_date")),
+                      ("date", record.get("pledge_end_date")),
+                      ("date", record.get("release_date")),
+                      ("pledgee", record.get("pledgee")),
+                      ("purpose", record.get("purpose"))]:
+        for var in _value_variants(val):
+            if len(var) >= 2:
+                jobs.append((fkey, var))
+    jobs.sort(key=lambda x: -len(x[1]))  # 长值优先,防短值把长值切碎
+    marks = []
+    for fkey, var in jobs:
+        color = _HL_COLORS[fkey][0]
+
+        def _sub(m, c=color):
+            marks.append(f'<mark style="background:{c}26;color:{c};font-weight:600;'
+                         f'border-radius:3px;padding:0 2px">{_html.escape(m.group(0))}</mark>')
+            return f"\x00{len(marks) - 1}\x00"
+
+        text = re.sub(re.escape(var), _sub, text)
+    out = _html.escape(text)
+    for i, mk in enumerate(marks):
+        out = out.replace(f"\x00{i}\x00", mk)
+    return out
+
+
+def legend_html():
+    return " ".join(
+        f'<mark style="background:{c}26;color:{c};font-weight:600;border-radius:3px;'
+        f'padding:0 2px">{label}</mark>' for c, label in _HL_COLORS.values())
+
+
+# ---------------------------------------------------------------------------
 # 步骤 1:搜索公告 / 上传文件
 # ---------------------------------------------------------------------------
 st.markdown('<div class="step-card"><h3>步骤 ① 选择分析对象</h3>'
@@ -283,15 +363,31 @@ if st.session_state.files:
             cols[4].metric("溯源覆盖率", cov["computed"] if cov else "—")
 
             if d.get("records"):
-                st.markdown("**质押 / 解押 / 展期记录**")
-                st.dataframe(pd.DataFrame([{
+                st.markdown("**质押 / 解押 / 展期记录**(Excel 式表格)")
+                rec_df = pd.DataFrame([{
                     "类型": r.get("record_type"), "出质人": r.get("pledgor"),
                     "股数": fmt_int(r.get("shares")),
                     "占其所持%": r.get("pct_of_held"),
                     "占总股本%": r.get("pct_of_total"),
                     "质权人": r.get("pledgee") or "—",
                     "用途": r.get("purpose") or "—",
-                } for r in d["records"]]), use_container_width=True)
+                } for r in d["records"]])
+                st.dataframe(rec_df, width="stretch")
+                st.caption("表中每个数字都直接来自公告原文——点开下方对照,"
+                           "彩色高亮部分就是 AI 提取出来的字段:")
+                with st.expander("🔍 原文标注对照(来源文字 + 彩色字段标注)"):
+                    st.markdown("图例:" + legend_html(), unsafe_allow_html=True)
+                    for r in d["records"]:
+                        st.markdown(f"**{r.get('pledgor', '—')} · {r.get('record_type', '—')}**")
+                        ev = r.get("evidence")
+                        if ev:
+                            st.markdown(
+                                f'<div style="background:#faf7f2;border-left:4px solid #8f1414;'
+                                f'padding:8px 12px;border-radius:6px;margin:2px 0 12px;'
+                                f'line-height:2.0;font-size:14px">{annotate_evidence(ev, r)}</div>',
+                                unsafe_allow_html=True)
+                        else:
+                            st.caption("(该记录无原文证据片段)")
             if d.get("cumulative"):
                 st.markdown("**累计质押情况**")
                 st.dataframe(pd.DataFrame([{
@@ -300,7 +396,7 @@ if st.session_state.files:
                     "质押后": fmt_int(c.get("post_pledge_shares")),
                     "占其所持%": c.get("pct_of_held"),
                     "占总股本%": c.get("pct_of_total"),
-                } for c in d["cumulative"]]), use_container_width=True)
+                } for c in d["cumulative"]]), width="stretch")
 
             with st.expander("✅ 校验与审查明细"):
                 for c in d["checks"]:
@@ -317,10 +413,29 @@ if st.session_state.files:
                         for v in rnd.get("verdicts", []):
                             st.write(f"· `{v['field_path']}` {v['verdict']}:{v.get('reason') or v.get('claim')}")
 
-            st.download_button("⬇️ 下载结构化 JSON",
-                               data=json.dumps(d, ensure_ascii=False, indent=2),
-                               file_name=stem + ".json", mime="application/json",
-                               key="dl_" + stem)
+            dl1, dl2 = st.columns(2)
+            with dl1:
+                st.download_button("⬇️ 下载结构化 JSON",
+                                   data=json.dumps(d, ensure_ascii=False, indent=2),
+                                   file_name=stem + ".json", mime="application/json",
+                                   key="dl_" + stem)
+            with dl2:
+                if d.get("records"):
+                    csv_df = pd.DataFrame([{
+                        "类型": r.get("record_type"), "出质人": r.get("pledgor"),
+                        "股数": r.get("shares"),
+                        "占其所持%": r.get("pct_of_held"),
+                        "占总股本%": r.get("pct_of_total"),
+                        "质权人": r.get("pledgee") or "",
+                        "质押起始日": r.get("pledge_start_date") or "",
+                        "用途": r.get("purpose") or "",
+                        "原文证据": r.get("evidence") or "",
+                    } for r in d["records"]])
+                    # utf-8-sig 让 Excel 打开中文不乱码
+                    st.download_button("⬇️ 下载记录 CSV(Excel 打开)",
+                                       data=csv_df.to_csv(index=False).encode("utf-8-sig"),
+                                       file_name=stem + "_记录.csv", mime="text/csv",
+                                       key="csv_" + stem)
 else:
     st.info("还没有待处理文件——请先搜索下载公告或上传 PDF。")
 
