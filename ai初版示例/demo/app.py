@@ -177,6 +177,31 @@ def legend_html():
         f'padding:0 2px">{label}</mark>' for c, label in _HL_COLORS.values())
 
 
+# 红旗规则 R1-R9 的外行解读与触发阈值(与 fin_analysis.py 的规则逻辑逐条对应)
+_RULE_INFO = {
+    "R1": ("利润可以造假,现金流难造假。账面盈利但经营现金流为负,"
+           "是财务造假/资金链紧张的教科书信号(康美药业正是如此)。",
+           "净利润 > 1000 万元 且 每股经营现金流 < 0 → 🔴高风险(银行业口径特殊,豁免)"),
+    "R2": ("「非经常性损益」=卖楼、补贴等一次性收入。靠它撑利润不可持续——主业其实没那么赚钱。",
+           "|净利润−扣非净利润| ÷ |净利润| > 30% → 🟠关注;> 50% → 🔴高风险(净利润≥5000万才评估)"),
+    "R3": ("货越卖越少、利润反而变多,违反常识——利润可能来自压货或会计调节。",
+           "营收同比下降 且 净利润同比增长 且 增速差 > 30 个百分点 → 🟠关注"),
+    "R4": ("净利润同比暴跌,经营急剧恶化;降幅超一半是重大警报。",
+           "净利润同比降幅 > 30% → 🟠关注;> 50% → 🔴高风险"),
+    "R5": ("连续两年净利润为负,按交易所规则将被实施 ST(退市风险警示)。",
+           "连续两年净利润 < 0 → 🔴高风险(一家公司报一次)"),
+    "R6": ("借的钱占资产比例过高,抗风险能力差;超过 100% 意味着资不抵债。",
+           "资产负债率 > 60% → 🟠关注;> 70% → 🔴高风险(银行业天然高杠杆,豁免)"),
+    "R7": ("每 1 元账面利润对应的真实现金流入太少,利润「含金量」低。",
+           "每股经营现金流 ÷ 基本每股收益 < 0.3 → 🟠关注(银行业豁免)"),
+    "R8": ("大股东把大半股票押出去借钱,说明其资金链紧张;股价下跌触及平仓线会被强制抛售,"
+           "引发股价崩盘、控制权易主的恶性循环。",
+           "股东质押占其所持股份 > 50% → 🟠关注;> 70% → 🔴高风险(数据来自选题一公告提取)"),
+    "R9": ("近期有大额质押融资到期须偿还,还不上将被强制平仓——短期流动性风险的「定时炸弹」。",
+           "未来半年内到期质押 且 对应融资余额 > 0 → 🟠关注(数据来自选题一公告提取)"),
+}
+
+
 # ---------------------------------------------------------------------------
 # 步骤 1:搜索公告 / 上传文件
 # ---------------------------------------------------------------------------
@@ -524,21 +549,56 @@ if st.session_state.get("risk_report"):
     if d["code"] == "600519":
         st.success("📌 健康对照:贵州茅台零红色警报——不误报。")
 
-    st.markdown("#### 红旗信号明细")
+    st.markdown("#### 红旗信号明细(点击每条查看推断依据)")
     for f in d["red_flags"]:
-        cls = "flag-card" if f["severity"] == "red" else "flag-card orange"
         icon = "🔴" if f["severity"] == "red" else "🟠"
-        st.markdown(f"""<div class="{cls}">{icon} <b>{f['rule_id']} {f['rule']}</b>
-        · {f['period']}<br/><small>{f['explanation']}</small><br/>
-        <small style="color:#999">证据:{json.dumps(f['evidence'], ensure_ascii=False)} |
-        来源:{os.path.basename(f.get('source','—'))}</small></div>""",
-        unsafe_allow_html=True)
+        level = "高风险" if f["severity"] == "red" else "需关注"
+        with st.expander(f"{icon} {f['rule_id']} {f['rule']} · {f['period']} —— 判定:{level}"):
+            why, threshold = _RULE_INFO.get(f["rule_id"], ("", ""))
+            if why:
+                st.markdown(f"**这条规则在查什么**:{why}")
+            st.markdown(f"**本案判定依据**:{f['explanation']}")
+            if threshold:
+                st.markdown(f"**触发阈值**:{threshold}")
+            if f.get("evidence"):
+                st.markdown("**关键数据**:")
+                st.json(f["evidence"], expanded=False)
+            st.caption(f"数据来源:{os.path.basename(f.get('source', '—'))}"
+                       " · 指标由代码对落盘数据计算,未经大模型口算")
 
     # 按年份排个时间线视图
     years = sorted({re.sub(r"\D", "", f["period"])[:4] for f in d["red_flags"] if re.sub(r"\D", "", f["period"])})
     if years:
         st.markdown("#### 信号时间线")
         st.markdown(" → ".join(f"**{y}**" for y in years))
+
+    # 财报数据总览:外行友好的完整年报表(中文列名+亿万单位),可下载 CSV/JSON
+    fin_csv = os.path.join(DEMO_DIR, "data", "financials",
+                           f"{d['code']}_{d['name']}", "abstract_ths.csv")
+    if os.path.isfile(fin_csv):
+        with st.expander("📊 财报数据总览(近年完整年报 · 可下载)", expanded=False):
+            fin_df = pd.read_csv(fin_csv)
+            fin_df = fin_df[fin_df["报告期"].astype(str).str.endswith("12-31")]
+            keep = [c for c in ["报告期", "营业总收入", "净利润", "扣非净利润",
+                                "净利润同比增长率", "基本每股收益", "每股经营现金流",
+                                "每股净资产"] if c in fin_df.columns]
+            show_df = fin_df[keep].tail(10).iloc[::-1].copy()  # 近10个年报,最新在前
+            show_df["报告期"] = show_df["报告期"].astype(str).str[:4] + "年报"
+            st.dataframe(show_df.reset_index(drop=True), width="stretch")
+            st.caption("金额自动以「亿/万」显示,每股指标单位为元;"
+                       "页面展示近 10 个年报,下载文件为上市以来全量。")
+            dl_a, dl_b = st.columns(2)
+            with dl_a:
+                st.download_button("⬇️ 下载财报 CSV(全量,Excel 打开)",
+                                   data=fin_df.to_csv(index=False).encode("utf-8-sig"),
+                                   file_name=f"{d['code']}_{d['name']}_财报.csv",
+                                   mime="text/csv", key="fin_csv")
+            with dl_b:
+                st.download_button("⬇️ 下载财报 JSON(全量)",
+                                   data=fin_df.to_json(orient="records", force_ascii=False,
+                                                       indent=2).encode("utf-8"),
+                                   file_name=f"{d['code']}_{d['name']}_财报.json",
+                                   mime="application/json", key="fin_json")
 
 # ---------------------------------------------------------------------------
 # 评测结果:30 份系统未见过的真实公告(数据说话)

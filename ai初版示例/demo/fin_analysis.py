@@ -83,6 +83,13 @@ def _annual(df, date_col):
 
 
 # ----------------------------------------------------------------- 数据加载
+# 评估窗口:只用 2016 年及以后的年报。
+# 同花顺摘要数据可回溯到 19xx 年(公司上市起),但太久远的经营状况
+# 对当下信用判断意义极小,还会产生"远古信号"噪声;窗口起点固定 2016,
+# 确保康美 2017-2018 回溯验证信号始终在窗口内,不随年份漂移。
+YEAR_MIN = 2016
+
+
 def load_company(code):
     meta = COMPANY_META.get(code, {"name": "未知", "industry": "综合"})
     base = os.path.join(FIN_DIR, f"{code}_{meta['name']}")
@@ -90,9 +97,11 @@ def load_company(code):
     p = os.path.join(base, "abstract_ths.csv")
     if os.path.isfile(p):
         ths = _annual(pd.read_csv(p), "报告期")
+        ths = ths[ths["year"] >= YEAR_MIN].reset_index(drop=True)
     p = os.path.join(base, "indicators_sina.csv")
     if os.path.isfile(p):
         sin = _annual(pd.read_csv(p), _col(pd.read_csv(p), "日期") or "日期")
+        sin = sin[sin["year"] >= YEAR_MIN].reset_index(drop=True)
     return meta, ths, sin
 
 
