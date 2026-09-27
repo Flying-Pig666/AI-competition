@@ -1,0 +1,42 @@
+{
+  "rounds": [
+    {
+      "round": 1,
+      "critic_model": "kimi-for-coding",
+      "adjudicator_model": "deepseek-chat",
+      "criticisms": [
+        {
+          "field_path": "cumulative.0.pre_pledge_shares",
+          "current_value": 15700000,
+          "claim": 50700000,
+          "evidence": "本次解除质押股份 35,000,000 股；剩余被质押股份数量 15,700,000 股",
+          "severity": "high"
+        }
+      ],
+      "verdicts": [
+        {
+          "field_path": "cumulative.0.pre_pledge_shares",
+          "claim": 50700000,
+          "critic_evidence": "本次解除质押股份 35,000,000 股；剩余被质押股份数量 15,700,000 股",
+          "severity": "high",
+          "verdict": "rejected",
+          "reason": "公告累计质押情况表明确列示惠发投资本次质押前累计质押数量为15,700,000股，审计师主张的50,700,000股无原文依据。",
+          "adjudicator_evidence": "股东名称 惠发投资 持股数量 69,507,573 股 持股比例 28.90% 本次质押前累计质押数量（股）15,700,000 本次质押后累计质押数量（股）51,700,000"
+        }
+      ]
+    }
+  ],
+  "corrections": [],
+  "rejected": [
+    {
+      "field_path": "cumulative.0.pre_pledge_shares",
+      "claim": 50700000,
+      "critic_evidence": "本次解除质押股份 35,000,000 股；剩余被质押股份数量 15,700,000 股",
+      "severity": "high",
+      "verdict": "rejected",
+      "reason": "公告累计质押情况表明确列示惠发投资本次质押前累计质押数量为15,700,000股，审计师主张的50,700,000股无原文依据。",
+      "adjudicator_evidence": "股东名称 惠发投资 持股数量 69,507,573 股 持股比例 28.90% 本次质押前累计质押数量（股）15,700,000 本次质押后累计质押数量（股）51,700,000"
+    }
+  ],
+  "final_status": "clean"
+}

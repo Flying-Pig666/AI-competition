@@ -8,17 +8,20 @@
 ```
 demo/
 ├── run.py            # 编排入口（智能体编排模块）
+├── app.py            # Streamlit 演示网页（提取演示/风险预警/评测总览）
 ├── schema.py         # 标准数据结构定义（pydantic 强校验）
 ├── parser.py         # 文档解析层：文本层 PDF / 扫描件 OCR
 ├── ocr_tables.py     # 扫描件表格重建（OCR 行框坐标 → 表格结构）
 ├── extractor.py      # 提取层：LLM 提取 + 校验-重试闭环 + 规则兜底
 ├── llm_client.py     # LLM 客户端：DeepSeek 主力 / Kimi 备用，端点差异自适应
 ├── grounding.py      # 原文溯源：逐字段回原文搜索证据（抗幻觉）
+├── review_agents.py  # 多智能体审查层：质疑员(异构模型挑刺)→裁决员(回原文裁决)→共享卷宗
 ├── validator.py      # 校验层：格式规范化 + 勾稽一致性校验
 ├── fin_data.py       # 数据层：akshare 双源财报采集（留痕可核验）
 ├── fin_analysis.py   # 分析+预警层：红旗规则引擎 R1-R9（驼研·信鉴）
 ├── eval_collect.py   # 评测集采集：巨潮公告检索下载（元数据留痕）
 ├── eval_run.py       # 批量评测：校验通过率/溯源覆盖率汇总
+├── eval_compare.py   # 消融对照：LLM 路径 vs 纯规则路径
 ├── tracing.py        # 可追溯日志（JSONL）
 ├── prompts/
 │   └── pledge_extract.md   # LLM 提取 Prompt（比赛要求的 Prompt 模块）
@@ -27,8 +30,8 @@ demo/
 │   ├── 扫描件_三湘印象/      # 由 PDF 渲染成的扫描件（逐页 PNG）
 │   ├── financials/          # 四家案例公司财报 CSV + 采集元数据
 │   └── eval_set/            # 评测集（30 份未见公告 + eval_meta.jsonl）
-└── output/           # 运行产物：.result.json + .trace.jsonl + risk/ 预警报告
-                      # + eval/ 批量评测汇总
+└── output/           # 运行产物：.result.json + .trace.jsonl + .review.json/md 审查卷宗
+                      # + risk/ 预警报告 + eval/ 批量评测汇总
 ```
 
 ## 运行方式
@@ -38,6 +41,7 @@ cd demo
 python run.py data\000863_三湘印象_质押和解除质押.pdf   # 文本层 PDF
 python run.py data\601997_贵阳银行_质押展期.pdf
 python run.py data\扫描件_三湘印象                      # 扫描件目录（逐页 OCR）
+streamlit run app.py                                   # 演示网页(浏览器打开 localhost:8501)
 ```
 
 ### 启用 LLM 提取路径（推荐）
@@ -64,6 +68,32 @@ python run.py data\000863_三湘印象_质押和解除质押.pdf
    最多 3 轮，全程留痕。
 2. **端点差异自适应**：自动探测端点特殊限制（如 kimi-for-coding 仅允许
    temperature=1），无需手工配置。
+
+**多智能体审查层**（2026-09-27 新增，`review_agents.py`，默认开启，
+`MULTI_AGENT_REVIEW=0` 关闭）：
+
+借鉴 FinSight 批评循环的"质疑-裁决"对抗机制，三个 AI 角色互相监督：
+
+| 角色 | 模型 | 职责 |
+|---|---|---|
+| 提取员 | DeepSeek | 读公告、提字段 |
+| 质疑员 | Kimi（异构模型，独立会话） | 只许挑毛病；每条质疑必须逐字引用原文证据；程序校验的失败项会作为线索提供给它 |
+| 裁决员 | DeepSeek | 对每条质疑回原文亲自核对：成立→给修正值，不成立→驳回给理由 |
+
+四道防线：① 质疑员引用的证据可能是编的 → 裁决员不得偏信；② 裁决引用的
+原文片段由程序核验真实存在，否则不予采纳；③ 修正只能落在数据字段
+（records/cumulative/risk_items/doc_meta 的叶子字段），非法路径自动拒绝；
+④ 修正生效后自动重跑勾稽验算与原文溯源。
+
+智能体之间不直接对话，而是读写同一份**审查卷宗**（`output/*.review.json`
++ 人类可读的 `.review.md`）——共享黑板模式，卷宗即单一事实来源与留痕。
+
+实测（惠发食品公告）：程序勾稽发现公告自身表格与文字口径矛盾
+（质押前 15,700,000 − 解除 35,000,000 + 新增 36,000,000 ≠ 质押后 51,700,000），
+质疑员主张修正为推算值 50,700,000，裁决员回原文核对发现该数字在公告中
+不存在（公告表格印的就是 15,700,000），裁决"驳回修正、忠于原文、转人工
+复核"——三层机制合力发现了**公告本身的数据矛盾**。对正确样本（三湘印象）
+质疑员零质疑，无误报。
 
 ## 输出说明
 

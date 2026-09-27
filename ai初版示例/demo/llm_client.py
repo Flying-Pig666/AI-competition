@@ -18,7 +18,7 @@ _ENV_CANDIDATES = [
                  "..", "..", "FinSight-main", ".env"),
 ]
 
-_temp_override = None  # 会话级记忆：端点强制要求的 temperature
+_temp_override = {}  # 端点级记忆：base_url → 该端点强制要求的 temperature
 
 
 def _load_env_file() -> dict:
@@ -56,11 +56,24 @@ def get_config():
     return key, base or "https://api.deepseek.com", model or "deepseek-chat"
 
 
-def chat_json(messages: list, trace=None, timeout: int = 240) -> str:
+def get_alt_config():
+    """返回备用线路 (api_key, base_url, model)，供多智能体审查的"质疑员"
+    使用异构模型（与提取员不同模型，幻觉模式不同,互相覆盖盲区）。
+    无备用配置时退回主力线路（角色对抗仍然成立，只是同模型）。"""
+    cfg = _load_env_file()
+    key = cfg.get("DS_API_KEY", "")
+    if key:
+        return (key, cfg.get("DS_BASE_URL", "") or "https://api.moonshot.cn/v1",
+                cfg.get("DS_MODEL_NAME", "") or "kimi-for-coding")
+    return get_config()
+
+
+def chat_json(messages: list, trace=None, timeout: int = 240, cfg=None) -> str:
     """调用 chat/completions（JSON 输出模式），返回文本内容。
+    cfg 可指定 (key, base, model) 覆盖默认线路（多智能体异构交叉用）。
     自动适配端点 temperature 限制；失败抛异常由上层回退规则路径。"""
     global _temp_override
-    key, base, model = get_config()
+    key, base, model = cfg if cfg else get_config()
     if not key:
         raise RuntimeError("未配置 LLM API Key（DEEPSEEK_API_KEY 或 .env 的 DS_API_KEY）")
     url = f"{base.rstrip('/')}/chat/completions"
@@ -73,14 +86,16 @@ def chat_json(messages: list, trace=None, timeout: int = 240) -> str:
             body["temperature"] = temp
         return requests.post(url, headers=headers, json=body, timeout=timeout)
 
-    resp = _send(_temp_override if _temp_override is not None else 0)
+    resp = _send(_temp_override.get(base, 0))
     if resp.status_code == 400 and "temperature" in resp.text:
         # 端点只允许特定 temperature（如 kimi-for-coding 仅允许 1）
         m = re.search(r"only ([\d.]+) is allowed", resp.text)
-        _temp_override = float(m.group(1)) if m else 1.0
+        forced = float(m.group(1)) if m else 1.0
+        _temp_override[base] = forced
         if trace:
-            trace.log("llm_quirk_adapt", quirk="temperature", forced=_temp_override)
-        resp = _send(_temp_override)
+            trace.log("llm_quirk_adapt", quirk="temperature", forced=forced,
+                      base_url=base)
+        resp = _send(forced)
     resp.raise_for_status()
     data = resp.json()
     content = data["choices"][0]["message"]["content"]

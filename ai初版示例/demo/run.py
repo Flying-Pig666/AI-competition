@@ -19,11 +19,29 @@ sys.stdout.reconfigure(encoding="utf-8")
 import extractor
 import grounding
 import parser as docparser
+import review_agents
 import validator
 from schema import CheckResult
 from tracing import Trace
 
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
+
+
+def _validate_and_ground(result, tables, pages, trace, full_text):
+    """程序校验(勾稽等) + 原文溯源,并把溯源覆盖率登记为校验项。
+    多智能体审查修正字段后需重跑本函数,保证报告与最终数据一致。"""
+    result.checks = []
+    validator.run_checks(result, tables, trace, full_text=full_text)
+    report = grounding.run_grounding(result, pages, trace)
+    cov = report["coverage"]
+    miss = [list(m.keys())[0] for it in report["items"] for m in it["missing"]]
+    result.checks.append(CheckResult(
+        name="原文溯源覆盖率",
+        passed=cov >= 0.8,
+        detail=(f"{cov:.0%} 的已提取字段在原文中找到证据（{report['found']} 项命中）"
+                + (f"；未溯源字段: {'、'.join(miss[:6])}（多为单位换算或表述差异，需人工复核）"
+                   if miss else "")),
+        expected="≥80%", computed=f"{cov:.2%}"))
 
 
 def run_document(path, trace):
@@ -54,29 +72,33 @@ def run_document(path, trace):
 
     result = extractor.build_result(raw, os.path.basename(path),
                                     parsed["method"])
-    validator.run_checks(result, tables, trace, full_text=full_text)
+    _validate_and_ground(result, tables, parsed["pages"], trace, full_text)
 
-    # 原文溯源（对应"结果一致性"）：逐字段回原文搜索证据，幻觉字段无所遁形
-    report = grounding.run_grounding(result, parsed["pages"], trace)
-    cov = report["coverage"]
-    miss = [list(m.keys())[0] for it in report["items"] for m in it["missing"]]
-    result.checks.append(CheckResult(
-        name="原文溯源覆盖率",
-        passed=cov >= 0.8,
-        detail=(f"{cov:.0%} 的已提取字段在原文中找到证据（{report['found']} 项命中）"
-                + (f"；未溯源字段: {'、'.join(miss[:6])}（多为单位换算或表述差异，需人工复核）"
-                   if miss else "")),
-        expected="≥80%", computed=f"{cov:.2%}"))
+    # 多智能体审查(质疑-裁决对抗机制):质疑员(异构模型,只挑毛病)→
+    # 裁决员(回原文逐条裁决)→ 修正生效则重跑程序校验与溯源,全程写入审查卷宗。
+    # 默认开启,环境变量 MULTI_AGENT_REVIEW=0 可关闭;仅 LLM 路径有意义。
+    dossier = None
+    if source == "llm" and os.environ.get("MULTI_AGENT_REVIEW", "1") != "0":
+        try:
+            dossier = review_agents.review_extraction(result, full_text, trace)
+            if dossier["corrections"]:
+                _validate_and_ground(result, tables, parsed["pages"], trace,
+                                     full_text)
+            jpath, mpath = review_agents.save_dossier(dossier, path, OUT_DIR)
+            trace.log("review_done", status=dossier["final_status"],
+                      corrections=len(dossier["corrections"]), dossier=jpath)
+        except Exception as e:
+            trace.log("review_error", error=str(e)[:200])
 
     os.makedirs(OUT_DIR, exist_ok=True)
     out_json = os.path.join(OUT_DIR, stem + ".result.json")
     with open(out_json, "w", encoding="utf-8") as f:
         f.write(result.to_json())
     trace.log("output_written", file=out_json, extract_source=source)
-    return result, source, out_json
+    return result, source, out_json, dossier
 
 
-def print_report(result, source, out_json, trace_path):
+def print_report(result, source, out_json, trace_path, dossier=None):
     m = result.doc_meta
     bar = "=" * 68
     print(bar)
@@ -107,13 +129,26 @@ def print_report(result, source, out_json, trace_path):
     if result.risk_items:
         print("【风险提示 · 到期质押】")
         for i in result.risk_items:
-            print(f"  · {i.horizon}：{i.shares:,} 股，对应融资余额 {i.finance_balance:,} 元")
+            shares = f"{i.shares:,}" if i.shares is not None else "-"
+            bal = f"{i.finance_balance:,}" if i.finance_balance is not None else "-"
+            print(f"  · {i.horizon}：{shares} 股，对应融资余额 {bal} 元")
     print(bar)
     print("【一致性校验】")
     n_pass = sum(1 for c in result.checks if c.passed)
     for c in result.checks:
         print(f"  {'✓' if c.passed else '✗'} {c.name}：{c.detail}")
     print(f"  通过 {n_pass}/{len(result.checks)} 项")
+    if dossier:
+        status_zh = {"clean": "未发现错误", "corrected": "发现并修正了错误",
+                     "needs_human_review": "有争议项待人工复核"}
+        print(bar)
+        print("【多智能体审查(质疑-裁决对抗)】")
+        print(f"  结论:{status_zh.get(dossier['final_status'], dossier['final_status'])}"
+              f" | 修正 {len(dossier['corrections'])} 处"
+              f" | 驳回/存疑 {len(dossier['rejected'])} 条")
+        for c in dossier["corrections"][:5]:
+            print(f"  🔧 {c['field_path']}: {c.get('old_value')} → {c.get('corrected_value')}"
+                  f" ({c.get('reason') or ''})")
     print(bar)
     print(f"结构化结果：{out_json}")
     print(f"可追溯日志：{trace_path}")
@@ -134,8 +169,8 @@ def main():
         _key, _base, _model = get_config()
         trace.log("run_start", input=path, env={
             "llm_enabled": bool(_key), "model": _model, "base_url": _base})
-        result, source, out_json = run_document(path, trace)
-        print_report(result, source, out_json, trace_path)
+        result, source, out_json, dossier = run_document(path, trace)
+        print_report(result, source, out_json, trace_path, dossier)
         print()
 
 

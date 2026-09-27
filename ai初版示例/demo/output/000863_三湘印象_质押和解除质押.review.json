@@ -1,0 +1,12 @@
+{
+  "rounds": [
+    {
+      "round": 1,
+      "critic_model": "kimi-for-coding",
+      "n_criticisms": 0
+    }
+  ],
+  "corrections": [],
+  "rejected": [],
+  "final_status": "clean"
+}
