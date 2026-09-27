@@ -84,6 +84,15 @@ def fmt_int(v):
     return f"{v:,}" if isinstance(v, (int, float)) else "—"
 
 
+def fmt_yi(v):
+    """大额数字附带亿元换算,符合金融阅读习惯:127,000,000(约 1.27 亿)"""
+    if not isinstance(v, (int, float)):
+        return "—"
+    if abs(v) >= 1e8:
+        return f"{v:,.0f}(约 {v / 1e8:.2f} 亿)"
+    return f"{v:,.0f}"
+
+
 def safe_name(s):
     return re.sub(r'[\\/:*?"<>|]', "_", s or "")
 
@@ -389,7 +398,7 @@ if st.session_state.files:
                         else:
                             st.caption("(该记录无原文证据片段)")
             if d.get("cumulative"):
-                st.markdown("**累计质押情况**")
+                st.markdown("**累计质押情况**(股东总体风险敞口)")
                 st.dataframe(pd.DataFrame([{
                     "股东": c.get("shareholder"),
                     "质押前": fmt_int(c.get("pre_pledge_shares")),
@@ -397,6 +406,15 @@ if st.session_state.files:
                     "占其所持%": c.get("pct_of_held"),
                     "占总股本%": c.get("pct_of_total"),
                 } for c in d["cumulative"]]), width="stretch")
+            if d.get("risk_items"):
+                st.markdown("**⚠️ 质押到期压力**(公告风险提示章节)"
+                            "——到期须偿还融资,还不上将被强制平仓,"
+                            "这是 R9 风险规则的直接输入数据")
+                st.dataframe(pd.DataFrame([{
+                    "到期窗口": it.get("horizon"),
+                    "到期质押股数": fmt_yi(it.get("shares")),
+                    "对应融资余额": fmt_yi(it.get("finance_balance")),
+                } for it in d["risk_items"]]), width="stretch")
 
             with st.expander("✅ 校验与审查明细"):
                 for c in d["checks"]:
