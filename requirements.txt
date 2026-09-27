@@ -1,0 +1,11 @@
+# 驼研·信鉴 演示网页依赖(Streamlit Cloud 部署用)
+streamlit>=1.44
+streamlit-pdf
+pandas
+requests
+pydantic>=2
+pypdf
+pdfplumber
+PyMuPDF
+rapidocr-onnxruntime
+akshare
