@@ -237,7 +237,8 @@ _RULE_INFO = {
 # ---------------------------------------------------------------------------
 st.markdown('<div class="step-card"><h3>步骤 ① 选择分析对象</h3>'
             '<div>输入股票代码或公司名,自动从巨潮资讯网(证监会指定披露平台)'
-            '搜索质押公告;也可以直接上传公告/研报 PDF。</div></div>',
+            '搜索该公司的全部公告——🔖质押类可勾选下载做结构化提取,'
+            '📊财报类(年报/季报)可在线查阅;也可以直接上传公告/研报 PDF。</div></div>',
             unsafe_allow_html=True)
 
 if "files" not in st.session_state:
@@ -253,6 +254,16 @@ with c2:
 with c3:
     st.write("")
     do_search = st.button("🔍 上网搜索公告", type="primary")
+
+def categorize(title):
+    """公告分类:质押类(可进步骤②结构化提取)/ 财报类(年报等长文档,在线查阅)
+    / 其他公告。搜索不再只保留质押公告——随便搜哪家公司都不会是空白页。"""
+    if any(k in title for k in ("年度报告", "半年度报告", "季度报告")):
+        return "财报"
+    if "质押" in title:
+        return "质押"
+    return "其他"
+
 
 def parse_query(q):
     """把「哈药股份(600664.SH)」「600664.SH」「sh600664」等输入解析为 (名称, 6位代码)。
@@ -291,8 +302,10 @@ if do_search and query.strip():
         used_kw = kw
         with st.spinner(f"正在巨潮资讯网搜索「{kw}」相关公告……"):
             try:
-                anns = eval_collect.search(kw, sdate.strftime("%Y-%m-%d"),
-                                           edate.strftime("%Y-%m-%d"))
+                # 抓前 2 页(每页约 10 条),兼顾质押公告与财报公告的覆盖
+                for pg in (1, 2):
+                    anns += eval_collect.search(kw, sdate.strftime("%Y-%m-%d"),
+                                                edate.strftime("%Y-%m-%d"), page=pg)
             except Exception as e:
                 err = e
                 anns = []
@@ -300,52 +313,89 @@ if do_search and query.strip():
             break
     if err is not None and not anns:
         st.error(f"搜索失败:{err}")
-    # 过滤:质押类公告、去掉年报等长文档
-    hits = []
+    # 全类型公告分类展示:质押类可进提取流程,财报类/其他类在线查阅
+    hits, _seen = [], set()
     for a in anns:
         title = eval_collect.clean_title(a.get("announcementTitle"))
-        if "质押" not in title or any(k in title for k in ("年度报告", "半年度报告", "季度报告", "英文")):
+        if "英文" in title:  # 英文版为重复内容,过滤
             continue
+        key = (a.get("secCode"), title)
+        if key in _seen:  # 翻页可能带回重复条目
+            continue
+        _seen.add(key)
         hits.append({"code": a.get("secCode"), "name": a.get("secName"),
                      "title": title, "url": a.get("adjunctUrl"),
-                     "time": (a.get("announcementTime") or 0)})
+                     "time": (a.get("announcementTime") or 0),
+                     "category": categorize(title)})
     st.session_state.hits = hits
     if hits:
+        n_pledge = sum(1 for h in hits if h["category"] == "质押")
+        n_fin = sum(1 for h in hits if h["category"] == "财报")
         st.session_state.company = {"code": hits[0]["code"], "name": hits[0]["name"]}
-        st.success(f"搜索到 {len(hits)} 份质押类公告(公司:{hits[0]['name']} {hits[0]['code']})"
-                   "——点下方「显示详情」查看并勾选")
+        st.success(f"搜索到 {len(hits)} 份公告(公司:{hits[0]['name']} {hits[0]['code']}):"
+                   f"🔖 质押类 {n_pledge} 份 / 📊 财报类 {n_fin} 份 / "
+                   f"📄 其他 {len(hits) - n_pledge - n_fin} 份——点下方「显示详情」查看并勾选")
+        if not n_pledge:
+            st.info(f"「{used_kw}」近 {months} 个月没有质押类公告——该公司股东近期"
+                    "大概率没有质押行为,本身就是低风险信号。财报类公告可在线查阅;"
+                    "也可以直接到步骤 ③ 做信用风险分析(代码已自动带入,"
+                    "财报数据由系统自动采集,不依赖上面的 PDF)。")
     elif anns:
-        # 无质押公告≠死胡同:把搜到的公司带入步骤③,仍可直接做财报风险分析
         st.session_state.company = {"code": anns[0].get("secCode", ""),
                                     "name": anns[0].get("secName", "")}
-        st.info(f"「{used_kw}」近 {months} 个月有公告发布,但其中没有质押类公告"
-                "——该公司股东近期大概率没有质押行为,本身就是低风险信号。"
-                "可直接到步骤 ③ 做信用风险分析(代码已自动带入):"
-                "9 条红旗规则中 R1-R7 全靠财报数据、照常评估;"
-                "仅 R8/R9 两条质押规则因无质押数据而跳过——「无质押」本身就是结论。"
-                "或换一家(如三湘印象 000863)体验提取流程,也可手动上传质押公告 PDF。")
+        st.info("搜索结果均为英文版重复公告,已过滤。可直接到步骤 ③ 做信用风险分析。")
     else:
         st.warning(f"巨潮资讯网没有搜到「{used_kw}」的任何公告,请检查名称/代码是否正确,"
                    "或直接手动上传文件。")
 
 if st.session_state.get("hits"):
     _hits = st.session_state.hits
-    with st.expander(f"📄 显示详情(共 {len(_hits)} 份,点击展开勾选)", expanded=False):
+    _pledge = [h for h in _hits if h["category"] == "质押"]
+    _fin = [h for h in _hits if h["category"] == "财报"]
+    _other = [h for h in _hits if h["category"] == "其他"]
+    with st.expander(f"📄 显示详情(🔖质押 {len(_pledge)} / 📊财报 {len(_fin)} / "
+                     f"📄其他 {len(_other)},点击展开)", expanded=False):
         picks = []
-        for i, h in enumerate(_hits[:10]):
-            date = datetime.fromtimestamp(h["time"] / 1000).strftime("%Y-%m-%d") if h["time"] else "—"
-            hc1, hc2 = st.columns([6, 1])
-            with hc1:
-                if st.checkbox(f"{h['title']}({date})", key=f"hit{i}",
-                               value=(i == 0)):
-                    picks.append(h)
-            with hc2:
-                # 在线预览巨潮原文(static 域名支持 https,云端部署也能内嵌)
-                purl = "https://static.cninfo.com.cn/" + (h["url"] or "")
-                if st.button("👁️ 原文", key=f"pv{i}"):
-                    st.session_state.preview = (
-                        None if st.session_state.get("preview") == purl else purl)
-        if st.button("⬇️ 下载选中公告"):
+
+        def _preview_btn(h, key):
+            """在线预览巨潮原文(static 域名支持 https,云端部署也能内嵌)"""
+            purl = "https://static.cninfo.com.cn/" + (h["url"] or "")
+            if st.button("👁️ 原文", key=key):
+                st.session_state.preview = (
+                    None if st.session_state.get("preview") == purl else purl)
+
+        if _pledge:
+            st.markdown("**🔖 质押类公告**——勾选后点「下载选中公告」,进入步骤 ② 结构化提取")
+            for i, h in enumerate(_pledge[:10]):
+                date = datetime.fromtimestamp(h["time"] / 1000).strftime("%Y-%m-%d") if h["time"] else "—"
+                hc1, hc2 = st.columns([6, 1])
+                with hc1:
+                    if st.checkbox(f"{h['title']}({date})", key=f"hit{i}",
+                                   value=(i == 0)):
+                        picks.append(h)
+                with hc2:
+                    _preview_btn(h, f"pv{i}")
+        if _fin:
+            st.markdown("**📊 财报类公告**(年度报告/半年报/季报)——数百页长文档,"
+                        "在线查阅即可;财报指标分析请走步骤 ③(系统自动采集接口数据,"
+                        "无需解析这些 PDF)")
+            for i, h in enumerate(_fin[:5]):
+                date = datetime.fromtimestamp(h["time"] / 1000).strftime("%Y-%m-%d") if h["time"] else "—"
+                fc1, fc2 = st.columns([6, 1])
+                with fc1:
+                    st.markdown(f"· {h['title']}({date})")
+                with fc2:
+                    _preview_btn(h, f"pvf{i}")
+        if _other:
+            with st.expander(f"📄 其他公告({len(_other)} 份)", expanded=False):
+                for i, h in enumerate(_other[:10]):
+                    date = datetime.fromtimestamp(h["time"] / 1000).strftime("%Y-%m-%d") if h["time"] else "—"
+                    oc1, oc2 = st.columns([6, 1])
+                    with oc1:
+                        st.markdown(f"· {h['title']}({date})")
+                    with oc2:
+                        _preview_btn(h, f"pvo{i}")
+        if _pledge and st.button("⬇️ 下载选中公告"):
             import requests
             import eval_collect  # 注意:必须在按钮分支内重新导入——
             # Streamlit 每次交互都整页重跑,搜索分支的 import 在下载这次重跑中不存在
@@ -408,8 +458,9 @@ if uploaded:
 # 步骤 2:数据结构化提取
 # ---------------------------------------------------------------------------
 st.markdown('<div class="step-card"><h3>步骤 ② 数据结构化提取</h3>'
-            '<div>AI 提取字段 → 程序勾稽验算 → 原文溯源 → 多智能体互相监督审查,'
-            '全程留痕,可下载 JSON。</div></div>', unsafe_allow_html=True)
+            '<div>AI 提取字段 → 程序勾稽验算 → 原文溯源 → 多智能体互相监督审查 → '
+            '<b>🙋人工复核</b>(机器拿不准的问题由你最终拍板),全程留痕,可下载 JSON。</div></div>',
+            unsafe_allow_html=True)
 
 if st.session_state.files:
     st.write("待处理文件:" + "、".join(os.path.basename(p) for p in st.session_state.files))
@@ -518,6 +569,83 @@ if st.session_state.files:
                     for rnd in rv["rounds"]:
                         for v in rnd.get("verdicts", []):
                             st.write(f"· `{v['field_path']}` {v['verdict']}:{v.get('reason') or v.get('claim')}")
+
+            # ---------------- 人工复核(第四道关:机器拿不准,人来拍板) ----------------
+            import human_review
+            _rv = None
+            _rvp = os.path.join(OUT_DIR, stem + ".review.json")
+            if os.path.isfile(_rvp):
+                _rv = json.load(open(_rvp, encoding="utf-8"))
+            _questions = human_review.collect_questions(d, _rv)
+            if d.get("human_review"):
+                _hr = d["human_review"]
+                st.info(f"🙋 已完成人工复核({str(_hr.get('reviewed_at', ''))[:19]}):"
+                        f"{_hr.get('summary', '')}——重新提取或修正后会自动更新此处。")
+            if _questions:
+                with st.expander(f"🙋 人工复核:{len(_questions)} 个疑点需要你确认"
+                                 "(机器已自动查到这一步,请你最终拍板)",
+                                 expanded=not d.get("human_review")):
+                    st.caption("以下疑点来自:程序勾稽报警 / 原文溯源未命中 / 多智能体审查存疑。"
+                               "对照上方原文高亮逐题判定,结论连同时间戳写入结果 JSON 留痕。")
+                    _fields = human_review.editable_fields(d)
+                    for qi, q in enumerate(_questions):
+                        st.markdown(f"**{qi + 1}. {q['title']}**")
+                        st.caption(q["detail"])
+                        if q.get("hint"):
+                            st.caption("💡 " + q["hint"])
+                        _ch = st.radio("你的判定", [
+                            "✅ 确认无误(以当前提取值为准)",
+                            "🏳️ 公告本身有误/矛盾(保留原文值,记录存疑)",
+                            "✏️ 我来修正(填入原文中的正确值)"],
+                            key=f"hr_{stem}_{qi}", label_visibility="collapsed")
+                        if _ch.startswith("✏️"):
+                            if _fields:
+                                _sel = st.selectbox(
+                                    "要修正的字段", range(len(_fields)),
+                                    format_func=lambda i: f"{_fields[i][1]}"
+                                                          f"(当前值:{_fields[i][2]})",
+                                    key=f"hr_field_{stem}_{qi}")
+                                st.text_input("正确值(数字可直接带千分位逗号)",
+                                              key=f"hr_val_{stem}_{qi}")
+                            else:
+                                st.warning("该公告暂无可修正字段(未提取到任何记录)。")
+                        st.text_input("备注(可选)", key=f"hr_note_{stem}_{qi}")
+                        st.divider()
+                    if st.button("📥 提交人工复核结论", key=f"hr_go_{stem}",
+                                 type="primary"):
+                        import run as _pipeline
+                        from tracing import Trace as _Trace
+                        _decisions = []
+                        for qi, q in enumerate(_questions):
+                            ch = st.session_state.get(f"hr_{stem}_{qi}", "")
+                            action = ("confirm" if ch.startswith("✅")
+                                      else "doc_flaw" if ch.startswith("🏳️")
+                                      else "correct")
+                            dec = {"question": q["title"], "kind": q["kind"],
+                                   "action": action,
+                                   "note": st.session_state.get(
+                                       f"hr_note_{stem}_{qi}", "")}
+                            if action == "correct":
+                                si = st.session_state.get(f"hr_field_{stem}_{qi}", 0)
+                                nv = st.session_state.get(f"hr_val_{stem}_{qi}", "")
+                                if not _fields or not str(nv).strip():
+                                    dec["action"] = "confirm"
+                                    dec["note"] = (dec["note"] or "") + "(未填修正值,按确认处理)"
+                                else:
+                                    fp, _lbl, old = _fields[si]
+                                    dec.update({"field_path": fp,
+                                                "new_value": human_review.parse_human_value(nv, old)})
+                            _decisions.append(dec)
+                        _trace = _Trace(os.path.join(OUT_DIR, stem + ".trace.jsonl"))
+                        pipeline_res = _pipeline.apply_human_review(
+                            d, _decisions, path, _trace)
+                        n_fix = sum(1 for x in _decisions if x.get("applied"))
+                        st.success(f"人工复核结论已写入 JSON 留痕"
+                                   + (f",{n_fix} 处修正已生效并自动重跑全部校验"
+                                      if n_fix else ""))
+                        st.rerun()
+            elif not d.get("human_review"):
+                st.caption("🙋 人工复核:程序校验与多智能体审查均无疑点,无需人工介入。")
 
             dl1, dl2 = st.columns(2)
             with dl1:

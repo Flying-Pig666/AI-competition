@@ -98,6 +98,68 @@ def run_document(path, trace):
     return result, source, out_json, dossier
 
 
+def apply_human_review(result_dict, decisions, doc_path, trace):
+    """人工复核(第四道关):应用人工修正 → 重跑校验+溯源 → 落盘留痕。
+
+    decisions: [{"question", "action": confirm|doc_flaw|correct,
+                 "field_path", "new_value", "note"}, ...]
+    修正走与多智能体审查完全相同的安全通道(字段路径白名单 + 类型对齐);
+    有实际修正则自动重跑全部勾稽校验与原文溯源,保证报告与最终数据一致。
+    返回更新后的结果 dict(含 human_review 留痕段)。"""
+    import json as _json
+    from datetime import datetime, timezone, timedelta
+    from schema import ExtractionResult
+
+    # 重建 pydantic 对象(剔除旧的 human_review 段,避免嵌套累积)
+    data = {k: v for k, v in result_dict.items() if k != "human_review"}
+    result = ExtractionResult(**data)
+
+    n_applied = 0
+    for dec in decisions:
+        if dec.get("action") != "correct" or not dec.get("field_path"):
+            dec["applied"] = False
+            continue
+        parsed_path = review_agents._parse_field_path(dec["field_path"])
+        if not parsed_path:
+            dec["applied"] = False
+            dec["reject_reason"] = "非法字段路径"
+            continue
+        sec, idx, fld = parsed_path
+        tgt = getattr(result, sec)
+        tgt = tgt[idx] if idx is not None else tgt
+        dec["old_value"] = getattr(tgt, fld, None)
+        dec["applied"] = review_agents._apply_value(result, parsed_path,
+                                                    dec["new_value"])
+        if dec["applied"]:
+            n_applied += 1
+            trace.log("human_correction", field=dec["field_path"],
+                      old=dec["old_value"], new=dec["new_value"])
+
+    if n_applied and os.path.isfile(doc_path):
+        # 有实际修正 → 重跑程序校验与原文溯源(与审查修正后的处理一致)
+        parsed = docparser.parse_pdf(doc_path, trace)
+        tables = docparser.extract_tables(doc_path, trace)
+        full_text = "\n".join(parsed["pages"])
+        _validate_and_ground(result, tables, parsed["pages"], trace, full_text)
+
+    out = _json.loads(result.to_json())
+    out["human_review"] = {
+        "reviewed_at": datetime.now(timezone(timedelta(hours=8))).isoformat(),
+        "decisions": decisions,
+        "summary": (f"人工复核 {len(decisions)} 项:"
+                    f"修正 {n_applied} 处,"
+                    f"确认无误 {sum(1 for d in decisions if d['action'] == 'confirm')} 项,"
+                    f"认定公告自身问题 {sum(1 for d in decisions if d['action'] == 'doc_flaw')} 项"),
+    }
+    stem = os.path.splitext(os.path.basename(str(doc_path)))[0]
+    out_json = os.path.join(OUT_DIR, stem + ".result.json")
+    with open(out_json, "w", encoding="utf-8") as f:
+        _json.dump(out, f, ensure_ascii=False, indent=2)
+    trace.log("human_review_done", n_decisions=len(decisions),
+              n_corrections=n_applied, output=out_json)
+    return out
+
+
 def print_report(result, source, out_json, trace_path, dossier=None):
     m = result.doc_meta
     bar = "=" * 68
