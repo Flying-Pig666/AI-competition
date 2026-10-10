@@ -644,8 +644,63 @@ if st.session_state.files:
                                    + (f",{n_fix} 处修正已生效并自动重跑全部校验"
                                       if n_fix else ""))
                         st.rerun()
-            elif not d.get("human_review"):
-                st.caption("🙋 人工复核:程序校验与多智能体审查均无疑点,无需人工介入。")
+            else:  # 无疑点:主动抽检入口始终可用(已复核过也可再来一轮)
+                if not d.get("human_review"):
+                    st.success("🙋 人工复核:程序校验与多智能体审查均无疑点——"
+                               "但机器说没问题不等于你可以不看,下面可以主动抽检。")
+                with st.expander("✍️ 主动抽检 / 修正(可选):对照上方原文高亮,"
+                                 "抽查任意字段是否与公告一致", expanded=True):
+                    _fields = human_review.editable_fields(d)
+                    if _fields:
+                        st.caption(f"该公告共提取 {len(_fields)} 个可核对字段。"
+                                   "发现哪个数抄错了,选中它、填原文里的正确值即可;"
+                                   "全部抽查没问题,点「我确认全部无误」完成人工把关。")
+                        st.selectbox(
+                            "要修正的字段", range(len(_fields)),
+                            format_func=lambda i: f"{_fields[i][1]}"
+                                                  f"(当前值:{_fields[i][2]})",
+                            key=f"hr_man_field_{stem}")
+                        st.text_input("正确值(数字可直接带千分位逗号)",
+                                      key=f"hr_man_val_{stem}")
+                        st.text_input("备注(可选)", key=f"hr_man_note_{stem}")
+                        _c1, _c2 = st.columns(2)
+                        with _c1:
+                            _go_fix = st.button("📥 提交修正", key=f"hr_man_fix_{stem}",
+                                                type="primary")
+                        with _c2:
+                            _go_ok = st.button("✅ 我确认全部无误",
+                                               key=f"hr_man_ok_{stem}")
+                        if _go_fix or _go_ok:
+                            import run as _pipeline
+                            from tracing import Trace as _Trace
+                            if _go_ok:
+                                _decisions = [{"question": "主动抽检:整体确认",
+                                               "kind": "manual", "action": "confirm",
+                                               "note": st.session_state.get(
+                                                   f"hr_man_note_{stem}", "")}]
+                            else:
+                                _nv = st.session_state.get(f"hr_man_val_{stem}", "")
+                                if not str(_nv).strip():
+                                    st.warning("未填修正值——请填入原文中的正确值,"
+                                               "或改点「我确认全部无误」。")
+                                    st.stop()
+                                _si = st.session_state.get(f"hr_man_field_{stem}", 0)
+                                _fp, _lbl, _old = _fields[_si]
+                                _decisions = [{
+                                    "question": f"主动抽检:{_lbl}", "kind": "manual",
+                                    "action": "correct", "field_path": _fp,
+                                    "new_value": human_review.parse_human_value(_nv, _old),
+                                    "note": st.session_state.get(
+                                        f"hr_man_note_{stem}", "")}]
+                            _trace = _Trace(os.path.join(OUT_DIR,
+                                                         stem + ".trace.jsonl"))
+                            _pipeline.apply_human_review(d, _decisions, path, _trace)
+                            st.success("人工复核结论已写入 JSON 留痕"
+                                       + (",修正已生效并自动重跑全部校验"
+                                          if _go_fix else ""))
+                            st.rerun()
+                    else:
+                        st.caption("该公告未提取到任何记录,暂无可抽检字段。")
 
             dl1, dl2 = st.columns(2)
             with dl1:
