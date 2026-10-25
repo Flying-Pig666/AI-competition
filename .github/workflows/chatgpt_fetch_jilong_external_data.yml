@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: chatgpt-data-fetch-20261025
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -39,5 +40,6 @@ jobs:
             echo "No generated changes to commit"
           else
             git commit -m "Generate Jilong external data package"
+            git pull --rebase origin chatgpt-data-fetch-20261025
             git push origin HEAD:chatgpt-data-fetch-20261025
           fi
