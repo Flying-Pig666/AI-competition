@@ -1,0 +1,16 @@
+{
+  "status": "not included as numeric input",
+  "reason": "The public historical ensemble endpoint did not return a valid target-period table. No synthetic replacement was generated.",
+  "attempts": [
+    {
+      "run": "2026-08-25T00:00",
+      "status": "failed",
+      "error": "Failed after 2 attempts: https://single-runs-api.open-meteo.com/v1/forecast?latitude=27.98&longitude=85.95&run=2026-08-25T00:00&hourly=temperature_2m,precipitation,wind_speed_10m,surface_pressure&models=ecmwf_ifs025_ensemble_mean&spread=true&timezone=Asia/Shanghai&forecast_days=10\nHTTP Error 400: Bad Request"
+    },
+    {
+      "run": "2026-08-24T00:00",
+      "status": "failed",
+      "error": "Failed after 2 attempts: https://single-runs-api.open-meteo.com/v1/forecast?latitude=27.98&longitude=85.95&run=2026-08-24T00:00&hourly=temperature_2m,precipitation,wind_speed_10m,surface_pressure&models=ecmwf_ifs025_ensemble_mean&spread=true&timezone=Asia/Shanghai&forecast_days=10\nHTTP Error 400: Bad Request"
+    }
+  ]
+}

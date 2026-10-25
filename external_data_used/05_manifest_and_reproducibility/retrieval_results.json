@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "dataset": "era5_hourly_20260820_20260827_Jilong_event_point",
+      "rows": 192,
+      "url": "https://archive-api.open-meteo.com/v1/archive?latitude=28.3&longitude=85.4&start_date=2026-08-20&end_date=2026-08-27&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,precipitation,rain,snowfall,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&timezone=Asia/Shanghai&models=era5",
+      "status": "ok"
+    },
+    {
+      "dataset": "era5_hourly_20260820_20260827_Nepal_near_source",
+      "rows": 192,
+      "url": "https://archive-api.open-meteo.com/v1/archive?latitude=27.98&longitude=85.95&start_date=2026-08-20&end_date=2026-08-27&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,precipitation,rain,snowfall,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&timezone=Asia/Shanghai&models=era5",
+      "status": "ok"
+    },
+    {
+      "dataset": "ecmwf_ifs_previous_runs_d1_d7_20260826_Jilong_event_point",
+      "rows_full": 24,
+      "rows_08_18": 11,
+      "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=28.3&longitude=85.4&start_date=2026-08-26&end_date=2026-08-26&hourly=temperature_2m_previous_day1,temperature_2m_previous_day2,temperature_2m_previous_day3,temperature_2m_previous_day4,temperature_2m_previous_day5,temperature_2m_previous_day6,temperature_2m_previous_day7,precipitation_previous_day1,precipitation_previous_day2,precipitation_previous_day3,precipitation_previous_day4,precipitation_previous_day5,precipitation_previous_day6,precipitation_previous_day7,wind_speed_10m_previous_day1,wind_speed_10m_previous_day2,wind_speed_10m_previous_day3,wind_speed_10m_previous_day4,wind_speed_10m_previous_day5,wind_speed_10m_previous_day6,wind_speed_10m_previous_day7,surface_pressure_previous_day1,surface_pressure_previous_day2,surface_pressure_previous_day3,surface_pressure_previous_day4,surface_pressure_previous_day5,surface_pressure_previous_day6,surface_pressure_previous_day7&timezone=Asia/Shanghai&models=ecmwf_ifs025",
+      "status": "ok"
+    },
+    {
+      "dataset": "ecmwf_ifs_previous_runs_d1_d7_20260826_Nepal_near_source",
+      "rows_full": 24,
+      "rows_08_18": 11,
+      "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=27.98&longitude=85.95&start_date=2026-08-26&end_date=2026-08-26&hourly=temperature_2m_previous_day1,temperature_2m_previous_day2,temperature_2m_previous_day3,temperature_2m_previous_day4,temperature_2m_previous_day5,temperature_2m_previous_day6,temperature_2m_previous_day7,precipitation_previous_day1,precipitation_previous_day2,precipitation_previous_day3,precipitation_previous_day4,precipitation_previous_day5,precipitation_previous_day6,precipitation_previous_day7,wind_speed_10m_previous_day1,wind_speed_10m_previous_day2,wind_speed_10m_previous_day3,wind_speed_10m_previous_day4,wind_speed_10m_previous_day5,wind_speed_10m_previous_day6,wind_speed_10m_previous_day7,surface_pressure_previous_day1,surface_pressure_previous_day2,surface_pressure_previous_day3,surface_pressure_previous_day4,surface_pressure_previous_day5,surface_pressure_previous_day6,surface_pressure_previous_day7&timezone=Asia/Shanghai&models=ecmwf_ifs025",
+      "status": "ok"
+    },
+    {
+      "dataset": "era5_land_soil_hourly_20260820_20260826_Jilong_event_point",
+      "rows_hourly": 168,
+      "rows_daily": 7,
+      "url": "https://archive-api.open-meteo.com/v1/archive?latitude=28.3&longitude=85.4&start_date=2026-08-20&end_date=2026-08-26&hourly=soil_temperature_0_to_7cm,soil_temperature_7_to_28cm,soil_temperature_28_to_100cm,soil_temperature_100_to_255cm,soil_moisture_0_to_7cm,soil_moisture_7_to_28cm,soil_moisture_28_to_100cm,soil_moisture_100_to_255cm&timezone=Asia/Shanghai&models=era5_land",
+      "status": "ok"
+    },
+    {
+      "dataset": "nasa_power_hourly_20260820_20260827_NASA_POWER_validation_point",
+      "rows": 192,
+      "url": "https://power.larc.nasa.gov/api/temporal/hourly/point?parameters=T2M,RH2M,PRECTOTCORR,WS10M,PS&community=AG&longitude=85.45&latitude=28.4&start=20260820&end=20260827&format=JSON&time-standard=UTC",
+      "status": "ok"
+    },
+    {
+      "dataset": "ecmwf_ensemble_Jilong_event_point",
+      "status": "unavailable",
+      "attempts": [
+        {
+          "run": "2026-08-25T00:00",
+          "status": "failed",
+          "error": "Failed after 2 attempts: https://single-runs-api.open-meteo.com/v1/forecast?latitude=28.3&longitude=85.4&run=2026-08-25T00:00&hourly=temperature_2m,precipitation,wind_speed_10m,surface_pressure&models=ecmwf_ifs025_ensemble_mean&spread=true&timezone=Asia/Shanghai&forecast_days=10\nHTTP Error 400: Bad Request"
+        },
+        {
+          "run": "2026-08-24T00:00",
+          "status": "failed",
+          "error": "Failed after 2 attempts: https://single-runs-api.open-meteo.com/v1/forecast?latitude=28.3&longitude=85.4&run=2026-08-24T00:00&hourly=temperature_2m,precipitation,wind_speed_10m,surface_pressure&models=ecmwf_ifs025_ensemble_mean&spread=true&timezone=Asia/Shanghai&forecast_days=10\nHTTP Error 400: Bad Request"
+        }
+      ]
+    },
+    {
+      "dataset": "ecmwf_ensemble_Nepal_near_source",
+      "status": "unavailable",
+      "attempts": [
+        {
+          "run": "2026-08-25T00:00",
+          "status": "failed",
+          "error": "Failed after 2 attempts: https://single-runs-api.open-meteo.com/v1/forecast?latitude=27.98&longitude=85.95&run=2026-08-25T00:00&hourly=temperature_2m,precipitation,wind_speed_10m,surface_pressure&models=ecmwf_ifs025_ensemble_mean&spread=true&timezone=Asia/Shanghai&forecast_days=10\nHTTP Error 400: Bad Request"
+        },
+        {
+          "run": "2026-08-24T00:00",
+          "status": "failed",
+          "error": "Failed after 2 attempts: https://single-runs-api.open-meteo.com/v1/forecast?latitude=27.98&longitude=85.95&run=2026-08-24T00:00&hourly=temperature_2m,precipitation,wind_speed_10m,surface_pressure&models=ecmwf_ifs025_ensemble_mean&spread=true&timezone=Asia/Shanghai&forecast_days=10\nHTTP Error 400: Bad Request"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
