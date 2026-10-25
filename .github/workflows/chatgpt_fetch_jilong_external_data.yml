@@ -1,0 +1,42 @@
+name: Fetch Jilong external data package
+
+on:
+  push:
+    branches:
+      - chatgpt-data-fetch-20261025
+    paths:
+      - .github/workflows/chatgpt_fetch_jilong_external_data.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: chatgpt-data-fetch-20261025
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch public datasets and build ZIP
+        shell: bash
+        run: |
+          python tools/fetch_jilong_external_data.py || true
+          test -f jilong_external_data_used_20261025.zip
+      - name: Commit generated data package to temporary branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add external_data_used jilong_external_data_used_20261025.zip
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit"
+          else
+            git commit -m "Generate Jilong external data package"
+            git push origin HEAD:chatgpt-data-fetch-20261025
+          fi
