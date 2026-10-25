@@ -22,5 +22,5 @@
     "soil_moisture_100_to_255cm": "m³/m³"
   },
   "daily_summary": "Arithmetic mean/min/max of valid hourly values; not a separate source product.",
-  "retrieved_utc": "2026-10-25T06:56:25Z"
+  "retrieved_utc": "2026-10-25T06:58:28Z"
 }
