@@ -1,3 +1,4 @@
+# Temporary workflow used to rebuild the public external-data package requested in ChatGPT.
 name: Fetch Jilong external data package
 
 on:
