@@ -1,0 +1,32 @@
+name: Upload Jilong external data ZIP
+
+on:
+  push:
+    branches:
+      - chatgpt-data-fetch-20261025
+    paths:
+      - .github/workflows/chatgpt_upload_jilong_zip.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  upload-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: chatgpt-data-fetch-20261025
+      - name: Verify package
+        run: |
+          test -s jilong_external_data_used_20261025.zip
+          unzip -t jilong_external_data_used_20261025.zip
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: jilong-external-data-used-20261025
+          path: jilong_external_data_used_20261025.zip
+          if-no-files-found: error
+          retention-days: 1
