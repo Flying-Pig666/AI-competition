@@ -33,7 +33,7 @@ jobs:
       - name: Download and crop minimal imagery
         env:
           GDAL_DISABLE_READDIR_ON_OPEN: EMPTY_DIR
-          CPL_VSIL_CURL_ALLOWED_EXTENSIONS: .tif,.TIF
+          CPL_VSIL_CURL_ALLOWED_EXTENSIONS: .tif,.TIF,.tiff,.TIFF
           VSI_CACHE: TRUE
           VSI_CACHE_SIZE: '50000000'
         run: python tools/fetch_jilong_remote_sensing_minimal.py
