@@ -1,3 +1,4 @@
+# Minimal event-focused imagery workflow; no full-scene duplicates are retained.
 name: Fetch minimal Jilong remote sensing
 
 on:
